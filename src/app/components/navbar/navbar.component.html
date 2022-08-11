@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!--BOTON DE LOGO-->
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['/inicio']">
+            <img src="../../../assets/Sharky.png" alt="" width="55" height="54" class="d-inline-block align-text-top">
+        </a>
+
+        <div class="" id="navbarColor01">
+            <ul class="navbar-nav mb-2 mb-lg-0 list-group-horizontal" id="navbar">
+
+                <!--boton de Inicio-->
+                <li class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/inicio']">Inicio</a>
+                </li>
+
+                <!--boton de Productos-->
+                <li *ngIf="flag" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/productos']">Productos</a>
+                </li>
+
+                <!--boton de Proveedores-->
+                <li *ngIf="flag" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/proveedores']">Proveedores</a>
+                </li>
+
+                <!--boton de Ventas-->
+                <li *ngIf="flag" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                    <a class="nav-link active" [routerLink]="['/ventas']">Ventas</a>
+                </li>
+
+                <!--boton de Gastos-->
+                <li *ngIf="flag" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                    <a class="nav-link active" [routerLink]="['/gastos']">Gastos</a>
+                </li>
+
+                <!--Usuario-->
+                <li *ngIf="flag" class="nav-item">
+                    <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
+                        <img src="../../../assets/Sharky.png" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
+                    </a>
+                </li>
+
+                <!--boton de Ingreso-->
+                <li *ngIf="!flag" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                    <a class="nav-link active" [routerLink]="['/ingreso']">Ingresar</a>
+                </li>
+
+                <!--boton de Registro-->
+                <li *ngIf="!flag" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                    <a class="nav-link active" [routerLink]="['/registro']">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,24 @@
+<div id="ingresar" class="card bg-primary text-white" style="width: 25rem;margin:4% 35%;">
+    <div class="card-body">
+        <h5 class="Ingresar text-center">Inicar sesión</h5>
+
+        <!-- <form action=""> -->
+            <!-- imput de Usuario -->
+            <div id="usuario">
+                <input type="text" class="form-control" placeholder="UsuarioCognito" [(ngModel)]="usuario">
+                <p class="card-text">Usuario</p>
+            </div>
+
+            <!-- imput de contraseña -->
+            <div id="clave">
+                <input type="password" class="form-control" placeholder="ej: *123PassworD456*" [(ngModel)]="clave">
+                <p class="card-text">Contraseña</p>
+            </div>
+
+            <!-- Boton de aceptar -->
+            <div class="text-center">
+                <button type="button" class="btn btn-dark bg-gradient">Ingresar</button>
+            </div>
+    </div>
+</div>
+
