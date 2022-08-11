@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  flag:boolean = false;
+  flag:boolean = true;
 
   constructor() { }
 

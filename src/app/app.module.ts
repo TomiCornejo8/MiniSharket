@@ -13,6 +13,7 @@ import { IngresoScreenComponent } from './screens/ingreso-screen/ingreso-screen.
 import { RegistroScreenComponent } from './screens/registro-screen/registro-screen.component';
 import { InicioScreenComponent } from './screens/inicio-screen/inicio-screen.component';
 import { FormsModule } from '@angular/forms';
+import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-producto.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     GastosScreenComponent,
     IngresoScreenComponent,
     RegistroScreenComponent,
-    InicioScreenComponent
+    InicioScreenComponent,
+    TarjetaProductoComponent
   ],
   imports: [
     BrowserModule,
