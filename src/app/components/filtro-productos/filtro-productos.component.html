@@ -1,0 +1,24 @@
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="filtroProductos"
+  aria-labelledby="filtroProductosLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><b>Filtros</b></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <!-- Filtros normales -->
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="">
+      <label class="form-check-label" for="flexCheckDefault">Ranking📈</label>
+    </div>
+
+    <!-- Filtros por categoria -->
+    <br>
+    <h5><b>Categorias </b><button class="btn btn-dark bg-gradient border-dark p-1" type="button">Categoria➕</button></h5>
+    <div class="form-check d-flex flex-column d-grid gap-2">
+      <!-- Aqui se agregan las categorias -->
+      <app-categoria-producto></app-categoria-producto>
+      <app-categoria-producto></app-categoria-producto>
+      <app-categoria-producto></app-categoria-producto>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,29 @@
-<div class="d-flex flex-wrap mt-3 ms-4">
-    <app-tarjeta-producto></app-tarjeta-producto>
-    <app-tarjeta-producto></app-tarjeta-producto>
-    <app-tarjeta-producto></app-tarjeta-producto>
+<!-- Boton de filtros -->
+<button class="btn btn-dark bg-gradient border-dark rounded-circle p-2 position-absolute top-50 start-0 ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtroProductos" aria-controls="filtroProductos">
+⚙
+</button>
+
+<!-- Boton de filtros -->
+<button type="button" class="btn btn-dark bg-gradient position-relative rounded-circle p-2 position-absolute top-50 end-0 me-3" data-bs-toggle="offcanvas" data-bs-target="#carritoVenta" aria-controls="carritoVenta">
+    🛒
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      1
+    </span>
+</button>
+
+<div class="ms-4">
+    <div class="mt-2 ms-4">
+        <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Producto➕</button>
+        <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Exportar excel📤</button>
+        <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Importar excel📥</button>
+    </div>
+    <div class="d-flex flex-wrap mt-3 ms-4">
+        <app-tarjeta-producto></app-tarjeta-producto>
+        <app-tarjeta-producto></app-tarjeta-producto>
+        <app-tarjeta-producto></app-tarjeta-producto>
+    </div>    
 </div>
+
+<!-- Offcanvas -->
+<app-filtro-productos></app-filtro-productos>
+<app-carrito-venta></app-carrito-venta>

@@ -14,6 +14,9 @@ import { RegistroScreenComponent } from './screens/registro-screen/registro-scre
 import { InicioScreenComponent } from './screens/inicio-screen/inicio-screen.component';
 import { FormsModule } from '@angular/forms';
 import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-producto.component';
+import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
+import { CategoriaProductoComponent } from './components/categoria-producto/categoria-producto.component';
+import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-
     IngresoScreenComponent,
     RegistroScreenComponent,
     InicioScreenComponent,
-    TarjetaProductoComponent
+    TarjetaProductoComponent,
+    FiltroProductosComponent,
+    CategoriaProductoComponent,
+    CarritoVentaComponent
   ],
   imports: [
     BrowserModule,
