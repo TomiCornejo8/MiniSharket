@@ -7,11 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  flag:boolean = true;
+  sesion:boolean = true;
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }
+
+  // estadoSesion(sesion:boolean){
+  //   this.sesion = sesion;
+  //   window.location.href="/inicio";
+  // }
 
 }

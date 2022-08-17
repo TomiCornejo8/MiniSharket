@@ -17,6 +17,16 @@ import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-
 import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
 import { CategoriaProductoComponent } from './components/categoria-producto/categoria-producto.component';
 import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.component';
+import { ColaProductoComponent } from './components/cola-producto/cola-producto.component';
+import { TarjetaProveedorComponent } from './components/tarjeta-proveedor/tarjeta-proveedor.component';
+import { FiltroProveedoresComponent } from './components/filtro-proveedores/filtro-proveedores.component';
+import { ListaInsumoComponent } from './components/lista-insumo/lista-insumo.component';
+import { RevisarCredencialComponent } from './components/revisar-credencial/revisar-credencial.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+import { AdvertenciaComponent } from './components/advertencia/advertencia.component';
+import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
+import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
+import { ImportarExcelComponent } from './components/importar-excel/importar-excel.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +43,17 @@ import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.
     TarjetaProductoComponent,
     FiltroProductosComponent,
     CategoriaProductoComponent,
-    CarritoVentaComponent
+    CarritoVentaComponent,
+    ColaProductoComponent,
+    TarjetaProveedorComponent,
+    FiltroProveedoresComponent,
+    ListaInsumoComponent,
+    RevisarCredencialComponent,
+    EditarUsuarioComponent,
+    AdvertenciaComponent,
+    CrearProductoComponent,
+    EditarProductoComponent,
+    ImportarExcelComponent
   ],
   imports: [
     BrowserModule,

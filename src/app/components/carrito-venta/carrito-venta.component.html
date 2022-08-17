@@ -1,13 +1,20 @@
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="carritoVenta" aria-labelledby="carritoVentaLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title"><b>Carrito de venta</b></h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body text-center">
-        <h5><b>Monto total: </b>$1000</h5>
-        <div>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><b>Carrito de venta</b></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
 
-        </div>
-        <button type="button" class="btn btn-success bg-gradient border-dark mt-2">Realizar venta💸</button>
-    </div>
+  <div class="offcanvas-body text-center">
+    <button class="btn btn-primary bg-gradient border-dark rounded-circle p-4 mb-3" type="button">📸QR</button>
+    <!-- Lista de productos -->
+    <ul class="list-group mb-2">
+      <app-cola-producto></app-cola-producto>
+      <app-cola-producto></app-cola-producto>
+      <app-cola-producto></app-cola-producto>
+    </ul>
+    <!-- Monto total de productos -->
+    <h5><b>Monto total: </b>$1000</h5>
+    <!-- Boton realizar venta -->
+    <button type="button" class="btn btn-success bg-gradient border-dark mt-1">Realizar venta💸</button>
+  </div>
 </div>

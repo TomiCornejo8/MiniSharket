@@ -1,1 +1,22 @@
-<p>ventas-screen works!</p>
+<div class="ms-5">
+  <table class="table ms-5 mt-3 w-auto">
+    <thead>
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Productos</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Metodo pago</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody class="border-primary">
+      <tr *ngFor="let venta of ventas">
+        <td>{{venta.fecha}}</td>
+        <td>{{venta.productos}}</td>
+        <td>${{venta.monto}}</td>
+        <td>{{venta.metodoPago}}</td>
+        <td><button class="btn btn-dark bg-gradient border-dark p-1" type="button">❌</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

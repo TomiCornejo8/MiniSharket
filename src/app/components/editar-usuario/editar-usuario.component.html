@@ -1,0 +1,34 @@
+<!-- Button trigger modal -->
+<!-- data-bs-toggle="modal" data-bs-target="#editarUsuario" -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="editarUsuario" tabindex="-1" aria-labelledby="editarUsuarioLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-primary text-white">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarUsuarioLabel"><b>Editar usuario📝</b></h5>
+        </div>
+
+        <div class="modal-body">
+            <input id="nombre" type="text" class="form-control">
+            <label for="nombre" class="form-label">Nombre</label>
+
+            <input id="claveNueva" type="password" class="form-control">
+            <label for="claveNueva" class="form-label">Contraseña nueva</label>
+
+            <input id="claveNueva2" type="password" class="form-control">
+            <label for="claveNueva2" class="form-label">Repetir contraseña nueva</label>
+
+            <input id="icono" type="file" class="form-control">
+            <label for="icono" class="form-label">Icono</label>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-toggle="modal" data-bs-target="#revisarCredencial">Editar</button>
+        </div>
+
+      </div>
+    </div>
+</div>

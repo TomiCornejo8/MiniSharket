@@ -1,0 +1,47 @@
+<!-- Button trigger modal -->
+<!-- data-bs-toggle="modal" data-bs-target="#editarProducto" -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="editarProductoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-primary text-white">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarProductoLabel"><b>Editar producto 🛍</b></h5>
+        </div>
+
+        <div class="modal-body">
+            <!-- Nombre producto -->
+            <input id="nombreP" type="text" class="form-control">
+            <label for="nombreP" class="form-label">Nombre</label>
+
+            <!-- Seleccionar categoria -->
+            <select id="categoriaP" class="form-select" aria-label="Default select example">
+                <option selected>Selecciona una categoria</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <label for="CategoriaP" class="form-label">Categoria</label>
+
+            <!-- Stock -->
+            <input id="stock" type="number" class="form-control">
+            <label for="stock" class="form-label">Stock</label>
+
+            <!-- Precio -->
+            <input id="precio" type="number" class="form-control">
+            <label for="precio" class="form-label">Precio</label>
+
+            <!-- Imagen -->
+            <input id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
+            <label for="imagenP" class="form-label">Imagen</label>            
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark">Editar</button>
+        </div>
+
+      </div>
+    </div>
+</div>

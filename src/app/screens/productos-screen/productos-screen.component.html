@@ -3,7 +3,7 @@
 ⚙
 </button>
 
-<!-- Boton de filtros -->
+<!-- Boton de compra -->
 <button type="button" class="btn btn-dark bg-gradient position-relative rounded-circle p-2 position-absolute top-50 end-0 me-3" data-bs-toggle="offcanvas" data-bs-target="#carritoVenta" aria-controls="carritoVenta">
     🛒
     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -12,11 +12,15 @@
 </button>
 
 <div class="ms-4">
+    <!-- Botonera de productos -->
     <div class="mt-2 ms-4">
-        <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Producto➕</button>
+        <button class="btn btn-dark bg-gradient border-dark me-1 ms-2" type="button" data-bs-toggle="modal" data-bs-target="#crearProducto">Producto➕</button>
         <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Exportar excel📤</button>
-        <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Importar excel📥</button>
+        <button class="btn btn-dark bg-gradient border-dark me-1" type="button" data-bs-toggle="modal" data-bs-target="#importExcel">Importar excel📥</button>
+        <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Exportar QR📱</button>
     </div>
+
+    <!-- Tarjetas de productos -->
     <div class="d-flex flex-wrap mt-3 ms-4">
         <app-tarjeta-producto></app-tarjeta-producto>
         <app-tarjeta-producto></app-tarjeta-producto>
@@ -27,3 +31,6 @@
 <!-- Offcanvas -->
 <app-filtro-productos></app-filtro-productos>
 <app-carrito-venta></app-carrito-venta>
+<app-crear-producto></app-crear-producto>
+<app-editar-producto></app-editar-producto>
+<app-importar-excel></app-importar-excel>

@@ -1,1 +1,17 @@
-<p>proveedores-screen works!</p>
+<!-- Boton de filtros -->
+<button class="btn btn-dark bg-gradient border-dark rounded-circle p-2 position-absolute top-50 start-0 ms-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#filtroProveedores" aria-controls="filtroProveedores">
+    ⚙
+</button>
+
+<!-- Botonera de proveedor -->
+<div class="mt-2 ms-5">
+    <button class="btn btn-dark bg-gradient border-dark me-1 ms-3" type="button">Proveedor➕</button>
+</div>
+<!-- Proveedores -->
+<div class="ms-3">
+    <app-tarjeta-proveedor></app-tarjeta-proveedor>
+    <app-tarjeta-proveedor></app-tarjeta-proveedor>
+    <app-tarjeta-proveedor></app-tarjeta-proveedor>
+</div>
+
+<app-filtro-proveedores></app-filtro-proveedores>
