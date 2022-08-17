@@ -1,9 +1,11 @@
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="filtroProductos"
-  aria-labelledby="filtroProductosLabel">
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="filtroProductos" aria-labelledby="filtroProductosLabel">
+
+  <!-- Titulo y boton de cerrar -->
   <div class="offcanvas-header">
     <h5 class="offcanvas-title"><b>Filtros</b></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+
   <div class="offcanvas-body">
     <!-- Filtros normales -->
     <h5><b>Ordenar</b></h5>
@@ -13,6 +15,7 @@
         Ranking📈
       </label>
     </div>
+
     <div class="form-check">
       <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
       <label class="form-check-label" for="flexRadioDefault2">
@@ -22,12 +25,17 @@
 
     <!-- Filtros por categoria -->
     <br>
-    <h5><b>Categorias </b><button class="btn btn-dark bg-gradient border-dark p-1" type="button">Categoria➕</button></h5>
+    <h5><b>Categorias </b><button class="btn btn-dark bg-gradient border-dark p-1" type="button" data-bs-toggle="modal" data-bs-target="#crearCategoria">Categoria➕</button></h5>
+
+    <!-- Aqui se agregan las categorias -->
     <div class="form-check d-flex flex-column d-grid gap-2">
-      <!-- Aqui se agregan las categorias -->
-      <app-categoria-producto></app-categoria-producto>
-      <app-categoria-producto></app-categoria-producto>
-      <app-categoria-producto></app-categoria-producto>
+      <app-categoria></app-categoria>
+      <app-categoria></app-categoria>
+      <app-categoria></app-categoria>
     </div>
+
   </div>
 </div>
+
+<app-crear-categoria></app-crear-categoria>
+<app-editar-categoria></app-editar-categoria>

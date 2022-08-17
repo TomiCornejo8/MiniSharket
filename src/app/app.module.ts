@@ -15,7 +15,7 @@ import { InicioScreenComponent } from './screens/inicio-screen/inicio-screen.com
 import { FormsModule } from '@angular/forms';
 import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-producto.component';
 import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
-import { CategoriaProductoComponent } from './components/categoria-producto/categoria-producto.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
 import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.component';
 import { ColaProductoComponent } from './components/cola-producto/cola-producto.component';
 import { TarjetaProveedorComponent } from './components/tarjeta-proveedor/tarjeta-proveedor.component';
@@ -27,6 +27,8 @@ import { AdvertenciaComponent } from './components/advertencia/advertencia.compo
 import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
 import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
 import { ImportarExcelComponent } from './components/importar-excel/importar-excel.component';
+import { CrearCategoriaComponent } from './components/crear-categoria/crear-categoria.component';
+import { EditarCategoriaComponent } from './components/editar-categoria/editar-categoria.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { ImportarExcelComponent } from './components/importar-excel/importar-exc
     InicioScreenComponent,
     TarjetaProductoComponent,
     FiltroProductosComponent,
-    CategoriaProductoComponent,
+    CategoriaComponent,
     CarritoVentaComponent,
     ColaProductoComponent,
     TarjetaProveedorComponent,
@@ -53,7 +55,9 @@ import { ImportarExcelComponent } from './components/importar-excel/importar-exc
     AdvertenciaComponent,
     CrearProductoComponent,
     EditarProductoComponent,
-    ImportarExcelComponent
+    ImportarExcelComponent,
+    CrearCategoriaComponent,
+    EditarCategoriaComponent
   ],
   imports: [
     BrowserModule,
