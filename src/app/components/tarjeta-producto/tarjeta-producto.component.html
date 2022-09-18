@@ -1,13 +1,15 @@
 <div class="card bg-primary border-dark m-2" style="width: 15rem;">
-    <div class="mt-2 me-2">
-        <button class="btn btn-dark bg-gradient border-dark float-end p-1" type="button" data-bs-toggle="modal" data-bs-target="#advertencia">❌</button>
-        <button class="btn btn-dark bg-gradient border-dark float-end me-1 p-1" type="button" data-bs-toggle="modal" data-bs-target="#editarProducto">📝</button>
+    <div class="mt-1">
+        <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button" data-bs-toggle="modal" data-bs-target="#editarProducto">📝</button>
+        <button class="btn btn-dark bg-gradient border-dark  p-1" type="button" data-bs-toggle="modal" data-bs-target="#advertencia">❌</button>
     </div>
-    <img width="40px" height="130px" src="../../../assets/Sharky.png" class="card-img-top">
+
+    <h5 class="mt-2 mb-0 text-white text-center"><b>{{producto.nombre}}</b></h5>
+    <img height="250px" src="../../../assets/producto.png" class="card-img-top">
+
     <div class="card-body">
-        <p class="m-0 text-white">Nombre</p>
-        <p class="m-0 text-white">stock: STOCK</p>
-        <p class="m-0 text-white">$ precio</p>
+        <p class="m-0 text-white"><b>Stock: </b>{{producto.stock}} {{producto.unidad}}</p>
+        <p class="m-0 text-white">${{producto.precio}} x {{producto.cantVenta}} {{producto.unidad}}</p>
     </div>
     <div>
         <button class="btn btn-dark bg-gradient border-dark mb-1" type="button">Agregar</button>
