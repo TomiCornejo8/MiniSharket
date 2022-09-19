@@ -19,4 +19,7 @@ export class ProductosScreenComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  crearProducto(producto:Producto){
+    this.productos.push(producto);
+  }
 }

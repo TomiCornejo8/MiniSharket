@@ -5,7 +5,8 @@
     </div>
 
     <h5 class="mt-2 mb-0 text-white text-center"><b>{{producto.nombre}}</b></h5>
-    <img height="250px" src="../../../assets/producto.png" class="card-img-top">
+    <img *ngIf="producto.img == ''" height="250px" src="../../../assets/producto.png" class="card-img-top">
+    <img *ngIf="producto.img != ''" height="250px" src="{{producto.img}}" class="card-img-top">
 
     <div class="card-body">
         <p class="m-0 text-white"><b>Stock: </b>{{producto.stock}} {{producto.unidad}}</p>
