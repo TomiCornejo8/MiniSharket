@@ -12,13 +12,13 @@
 
         <div class="modal-body">
             <!-- Input categoria -->
-            <input id="categoriaC" type="text" class="form-control">
+            <input [(ngModel)]="categoria" id="categoriaC" type="text" class="form-control">
             <label for="categoriaC" class="form-label">Categoría</label>    
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark">Crear</button>
+          <button (click)="crear()" [disabled]="categoria == ''" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
         </div>
 
       </div>

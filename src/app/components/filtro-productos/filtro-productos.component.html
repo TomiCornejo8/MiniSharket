@@ -29,13 +29,11 @@
 
     <!-- Aqui se agregan las categorias -->
     <div class="form-check d-flex flex-column d-grid gap-2">
-      <app-categoria></app-categoria>
-      <app-categoria></app-categoria>
-      <app-categoria></app-categoria>
+      <app-categoria *ngFor="let categoriai of categorias" [categoria]="categoriai"></app-categoria>
     </div>
 
   </div>
 </div>
 
-<app-crear-categoria></app-crear-categoria>
+<app-crear-categoria (crearCategoria)="crearCategoria($event)"></app-crear-categoria>
 <app-editar-categoria></app-editar-categoria>

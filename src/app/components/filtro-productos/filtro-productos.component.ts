@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltroProductosComponent implements OnInit {
 
+  categorias:string[] = ["C1","C2","C3"];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  crearCategoria(categoria:string){
+    this.categorias.push(categoria);
   }
 
 }

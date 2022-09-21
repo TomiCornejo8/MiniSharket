@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-crear-categoria',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearCategoriaComponent implements OnInit {
 
+  categoria:string = "";
+  @Output() crearCategoria = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  crear(){
+    this.crearCategoria.emit(this.categoria);
   }
 
 }
