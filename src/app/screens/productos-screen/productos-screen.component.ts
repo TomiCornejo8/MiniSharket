@@ -22,4 +22,10 @@ export class ProductosScreenComponent implements OnInit {
   crearProducto(producto:Producto){
     this.productos.push(producto);
   }
+
+  //indexof: devuelve la posición del elemento entregado
+  //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
+  eliminarProducto(producto:Producto){
+    this.productos.splice(this.productos.indexOf(producto),1);
+  }
 }

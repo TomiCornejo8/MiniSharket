@@ -12,6 +12,7 @@ export class FiltroProductosComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //sessionStorage.setItem('categorias',JSON.stringify();
   }
 
   crearCategoria(categoria:string){

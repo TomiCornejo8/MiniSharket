@@ -22,7 +22,7 @@
 
     <!-- Tarjetas de productos -->
     <div class="d-flex flex-wrap mt-3 ms-4">
-        <app-tarjeta-producto *ngFor="let producto of productos" [producto]="producto"></app-tarjeta-producto>
+        <app-tarjeta-producto (eliminarProducto)="eliminarProducto($event)" *ngFor="let producto of productos" [producto]="producto"></app-tarjeta-producto>
     </div>    
 </div>
 

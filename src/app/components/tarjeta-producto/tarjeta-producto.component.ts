@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 
 @Component({
@@ -8,11 +8,16 @@ import { Producto } from 'src/app/models/producto.model';
 })
 export class TarjetaProductoComponent implements OnInit {
 
+  @Output() eliminarProducto = new EventEmitter<Producto>();
   @Input() producto:Producto;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  eliminar(){
+    this.eliminarProducto.emit(this.producto);
   }
 
 }
