@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Producto } from 'src/app/models/producto.model';
 
 @Component({
   selector: 'app-cola-producto',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColaProductoComponent implements OnInit {
 
+@Input() producto:Producto;
+cantidadProducto:number=1;
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
+  restar(){
+    if(this.cantidadProducto>0)this.cantidadProducto--;
+  }
+  sumar(){
+    this.cantidadProducto++;
+  }
+  cambiarCantidad(nuevaCantidadProducto:string){
+    let numbernuevaCantidadProducto=Number.parseInt(nuevaCantidadProducto);
+    if(numbernuevaCantidadProducto>0)this.cantidadProducto=numbernuevaCantidadProducto;
+  }
 }
