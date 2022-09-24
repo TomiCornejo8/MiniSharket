@@ -9,9 +9,9 @@ import { Producto } from 'src/app/models/producto.model';
 export class ProductosScreenComponent implements OnInit{
 
   productos:Producto[] = [
-    new Producto("Queso mantecoso","Unidades",40,1,600,"Calo"),
-    new Producto("Jamon","Unidades",25,1,600,"San Jorge"),
-    new Producto("Palta","Kilogramos",50,1,1000000,"La feria")
+    new Producto("Queso mantecoso","Unidad",40,1,"Calo"),
+    new Producto("Jamon","Unidad",25,1,"San Jorge"),
+    new Producto("Palta","Kilogramo",50,1,"La feria")
   ];
 
   constructor() { }
