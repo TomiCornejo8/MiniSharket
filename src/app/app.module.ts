@@ -29,6 +29,7 @@ import { EditarProductoComponent } from './components/editar-producto/editar-pro
 import { ImportarExcelComponent } from './components/importar-excel/importar-excel.component';
 import { CrearCategoriaComponent } from './components/crear-categoria/crear-categoria.component';
 import { EditarCategoriaComponent } from './components/editar-categoria/editar-categoria.component';
+import { CrearProveedorComponent } from './components/crear-proveedor/crear-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { EditarCategoriaComponent } from './components/editar-categoria/editar-c
     EditarProductoComponent,
     ImportarExcelComponent,
     CrearCategoriaComponent,
-    EditarCategoriaComponent
+    EditarCategoriaComponent,
+    CrearProveedorComponent
   ],
   imports: [
     BrowserModule,

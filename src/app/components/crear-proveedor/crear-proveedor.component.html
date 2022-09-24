@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="crearProveedor" tabindex="-1" aria-labelledby="crearProveedorLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-primary text-white">
+  
+        <div class="modal-header">
+          <h5 class="modal-title" id="crearProveedorLabel"><b>Crear proveedor 🛍</b></h5>
+        </div>
+  
+        <div class="modal-body">
+          <!-- Nombre proveedor -->
+          <input [(ngModel)]="nombre" (keyup)="validarVacio()" id="nombre" type="text" class="form-control">
+          <label for="nombre" class="form-label">Nombre(*)</label>
+
+          <!-- Email proveedor -->
+          <input [(ngModel)]="email" (keyup)="validarVacio()" id="email" type="text" class="form-control">
+          <label for="email" class="form-label">Email(*)</label>
+
+          <!-- Numero de contacto proveedor -->
+          <input [(ngModel)]="numero" (keyup)="validarVacio()" id="numero" type="text" class="form-control">
+          <label for="numero" class="form-label">Numero de contacto(*)</label>
+  
+        <div class="modal-footer">
+          <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
