@@ -14,7 +14,12 @@ export class AdvertenciaComponent implements OnInit {
   }
 
   revisarRespuesta(aux:boolean){
-    this.respuesta.emit(aux);
+    if(aux === true){
+        let flagEliminarProducto='flagEliminarProducto';
+        let flagEliminar=true;
+        window.sessionStorage.setItem(flagEliminarProducto,JSON.stringify(flagEliminar));
+        console.log(window.sessionStorage.getItem(flagEliminarProducto));
+      }
   }
 
 }

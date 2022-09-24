@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { Producto } from 'src/app/models/producto.model';
   templateUrl: './productos-screen.component.html',
   styleUrls: ['./productos-screen.component.sass']
 })
-export class ProductosScreenComponent implements OnInit {
+export class ProductosScreenComponent implements OnInit{
 
   productos:Producto[] = [
     new Producto("Queso mantecoso","Unidades",40,1,600,"Calo"),
@@ -26,6 +26,17 @@ export class ProductosScreenComponent implements OnInit {
   //indexof: devuelve la posición del elemento entregado
   //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
   eliminarProducto(producto:Producto){
-    this.productos.splice(this.productos.indexOf(producto),1);
+      let flagEliminarProducto='flagEliminarProducto';
+      let varProducto= window.sessionStorage.getItem(flagEliminarProducto);
+      console.log(varProducto);
+      if(varProducto!==null){
+        let flagEliminar = JSON.parse(varProducto);
+        if(varProducto ==="true"){
+          this.productos.splice(this.productos.indexOf(producto),1);
+          flagEliminar=false;
+          window.sessionStorage.setItem(flagEliminarProducto,JSON.stringify(flagEliminar));
+        }
+      }
+    
   }
 }

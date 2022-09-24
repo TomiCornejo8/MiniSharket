@@ -15,9 +15,12 @@ export class TarjetaProductoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   eliminar(){
-    this.eliminarProducto.emit(this.producto);
+    let eliminar=this.eliminarProducto;
+    let producto=this.producto;
+    setTimeout(function emitir(){
+      eliminar.emit(producto);
+    },2500);
   }
 
 }
