@@ -8,6 +8,7 @@ import { Producto } from 'src/app/models/producto.model';
 })
 export class ProductosScreenComponent implements OnInit{
 
+  w=window.sessionStorage;
   productos:Producto[] = [
     new Producto("Queso mantecoso","Unidad",40,1,"Calo"),
     new Producto("Jamon","Unidad",25,1,"San Jorge"),
@@ -21,20 +22,21 @@ export class ProductosScreenComponent implements OnInit{
 
   crearProducto(producto:Producto){
     this.productos.push(producto);
+    this.w.setItem("arrayProductos",JSON.stringify(this.productos));
   }
 
   //indexof: devuelve la posición del elemento entregado
   //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
   eliminarProducto(producto:Producto){
-      let flagEliminarProducto='flagEliminarProducto';
-      let varProducto= window.sessionStorage.getItem(flagEliminarProducto);
-      console.log(varProducto);
-      if(varProducto!==null){
-        let flagEliminar = JSON.parse(varProducto);
-        if(varProducto ==="true"){
+      let stringEliminarProducto='flagEliminarProducto';
+      let flagEliminarProducto= this.w.getItem(stringEliminarProducto);
+      console.log(flagEliminarProducto);
+      if(flagEliminarProducto!==null){
+        let flagEliminar = JSON.parse(flagEliminarProducto);
+        if(flagEliminarProducto ==="true"){
           this.productos.splice(this.productos.indexOf(producto),1);
           flagEliminar=false;
-          window.sessionStorage.setItem(flagEliminarProducto,JSON.stringify(flagEliminar));
+          this.w.setItem(stringEliminarProducto,JSON.stringify(flagEliminar));
         }
       }
     

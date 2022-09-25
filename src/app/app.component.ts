@@ -11,6 +11,7 @@ export class AppComponent implements OnInit{
     let flagEliminarProducto=false;
     let flagEliminarProveedor=false;
     let flagEliminarCategoria=false;
+    let flagEditarProducto=false;
     let categoriaProducto={};
     let ordenTarjetaProducto="";
     localStore.setItem("flagEliminarProducto",JSON.stringify(flagEliminarProducto));
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit{
     localStore.setItem("flagEliminarCategoria",JSON.stringify(flagEliminarCategoria));
     localStore.setItem("categoriaProducto",JSON.stringify(categoriaProducto));
     localStore.setItem("ordenTarjetaProducto",JSON.stringify(ordenTarjetaProducto));
+    localStore.setItem("ordenTarjetaProducto",JSON.stringify(flagEditarProducto));
   }
   title = 'MiPymeApp';
 }
