@@ -17,7 +17,7 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
 import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.component';
 import { ColaProductoComponent } from './components/cola-producto/cola-producto.component';
 import { TarjetaProveedorComponent } from './components/tarjeta-proveedor/tarjeta-proveedor.component';
-import { FiltroProveedoresComponent } from './components/filtro-proveedores/filtro-proveedores.component';
+// import { FiltroProveedoresComponent } from './components/filtro-proveedores/filtro-proveedores.component';
 import { ListaInsumoComponent } from './components/lista-insumo/lista-insumo.component';
 import { RevisarCredencialComponent } from './components/revisar-credencial/revisar-credencial.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
@@ -45,7 +45,6 @@ import { FinanzasScreenComponent } from './screens/finanzas-screen/finanzas-scre
     CarritoVentaComponent,
     ColaProductoComponent,
     TarjetaProveedorComponent,
-    FiltroProveedoresComponent,
     ListaInsumoComponent,
     RevisarCredencialComponent,
     EditarUsuarioComponent,
