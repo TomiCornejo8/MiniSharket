@@ -1,8 +1,7 @@
 <div class="card bg-primary border-dark m-2" style="width: 15rem;">
     <div class="mt-1">
-        <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button" data-bs-toggle="modal" data-bs-target="#editarProducto">📝</button>
-        <!-- data-bs-toggle="modal" data-bs-target="#advertencia" -->
-        <button (click)="eliminar()" class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
+        <button (click)="editarProducto()" class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button" data-bs-toggle="modal" data-bs-target="#editarProducto">📝</button>
+        <button (click)="eliminar()" class="btn btn-dark bg-gradient border-dark  p-1" data-bs-toggle="modal" data-bs-target="#advertencia" type="button">❌</button>
     </div>
 
     <h5 class="mt-2 mb-0 text-white text-center"><b>{{producto.nombre}}</b></h5>
@@ -11,7 +10,7 @@
 
     <div class="card-body">
         <p class="m-0 text-white"><b>Stock: </b>{{producto.stock}} {{producto.unidad}}</p>
-        <p class="m-0 text-white">${{producto.precio}} x {{producto.cantVenta}} {{producto.unidad}}</p>
+        <p class="m-0 text-white">${{producto.precio}} x {{producto.unidad}}</p>
     </div>
     <div>
         <button class="btn btn-dark bg-gradient border-dark mb-1" type="button">Agregar</button>

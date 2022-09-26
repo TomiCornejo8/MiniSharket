@@ -12,34 +12,35 @@
 
         <div class="modal-body">
             <!-- Nombre producto -->
-            <input id="nombreP" type="text" class="form-control">
             <label for="nombreP" class="form-label">Nombre</label>
+            <input id="nombreP" type="text" class="form-control" #nombre>
+            
 
             <!-- Seleccionar categoria -->
+            <label for="CategoriaP" class="form-label">Categoria</label>
             <select id="categoriaP" class="form-select" aria-label="Default select example">
                 <option selected>Selecciona una categoria</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option *ngFor="let categoria of categorias" value="{{categoria}}" >{{categoria}}</option> 
             </select>
-            <label for="CategoriaP" class="form-label">Categoria</label>
+            
 
             <!-- Stock -->
-            <input id="stock" type="number" class="form-control">
             <label for="stock" class="form-label">Stock</label>
-
+            <input id="stock" type="number" class="form-control" #stock>
+            
             <!-- Precio -->
-            <input id="precio" type="number" class="form-control">
             <label for="precio" class="form-label">Precio</label>
+            <input id="precio" type="number" class="form-control" #precio>
 
             <!-- Imagen -->
-            <input id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
-            <label for="imagenP" class="form-label">Imagen</label>            
+            <label for="imagenP" class="form-label">Imagen</label> 
+            <input id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg" #imagen>
+                       
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark">Editar</button>
+          <button (click)="editar(nombre.value,stock.value,precio.value,imagen.value)" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Editar</button>
         </div>
 
       </div>

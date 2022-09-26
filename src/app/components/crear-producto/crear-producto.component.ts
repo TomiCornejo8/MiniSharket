@@ -15,7 +15,6 @@ export class CrearProductoComponent implements OnInit {
   nombre: string = '';
   unidad: string = '';
   stock: number = 0;
-  cantVenta: number = 1;
   precio: number = 0;
   proveedor: string = '';
   categorias: string[] = [];
@@ -51,7 +50,6 @@ export class CrearProductoComponent implements OnInit {
     this.nombre = '';
     this.unidad = '';
     this.stock = 0;
-    this.cantVenta = 1;
     this.precio = 0;
     this.proveedor = '';
     this.categorias = [];
@@ -63,7 +61,7 @@ export class CrearProductoComponent implements OnInit {
   }
 
   validarVacio(){
-    if(this.nombre == '' || this.unidad == '' || this.stock < 0 || this.cantVenta <= 0 || this.precio <= 0){
+    if(this.nombre == '' || this.unidad == '' || this.stock < 0 || this.precio <= 0){
       this.bandera = false;
     }else{
       this.bandera = true;
@@ -102,7 +100,7 @@ export class CrearProductoComponent implements OnInit {
   });
 
   crear(){
-    this.crearProducto.emit(new Producto(this.nombre,this.unidad,this.stock,this.cantVenta,this.precio,this.proveedor,this.categorias,this.img));
+    this.crearProducto.emit(new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,this.categorias,this.img));
     this.limpiar();
   }
 }
