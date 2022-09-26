@@ -9,8 +9,12 @@ import { Proveedor } from 'src/app/models/proveedor.model';
 export class CrearProveedorComponent implements OnInit {
 
   @Output() crearProveedor = new EventEmitter<Proveedor>();
-  @Input() proveedor:Proveedor;
 
+  //Atributos de proveedor
+  nombre:string =''; 
+  email:string ='';
+  numero:string ='';
+  
   //Bandera
   bandera:boolean = false;
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Proveedor } from 'src/app/models/proveedor.model';
 
 @Component({
   selector: 'app-tarjeta-proveedor',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tarjeta-proveedor.component.sass']
 })
 export class TarjetaProveedorComponent implements OnInit {
+
+  @Input() proveedor:Proveedor;
 
   insumoFlag:boolean = false;
 

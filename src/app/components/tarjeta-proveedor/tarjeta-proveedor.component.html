@@ -4,9 +4,9 @@
             <div class="card-body m-1">
                 <button class="btn btn-dark bg-gradient border-secondary float-end p-2" type="button">❌</button>
                 <button class="btn btn-dark bg-gradient border-secondary float-end me-3 p-2" type="button">📝</button>
-                <h2 class="card-title">Nombre proveedor</h2>
-                <p class="card-text">Email: </p>
-                <p class="card-text">Telefono: </p>
+                <h2 class="card-title">{{proveedor.nombre}}</h2>
+                <p class="card-text">Email: {{proveedor.email}}</p>
+                <p class="card-text">Telefono: {{proveedor.numero}}</p>
                 <p> 
                     <button (click)="insumoBtn()" class="btn border border-primary" type="button">Insumos</button>
                 </p>
