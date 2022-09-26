@@ -7,8 +7,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
 import { ProductosScreenComponent } from './screens/productos-screen/productos-screen.component';
 import { ProveedoresScreenComponent } from './screens/proveedores-screen/proveedores-screen.component';
-import { VentasScreenComponent } from './screens/ventas-screen/ventas-screen.component';
-import { GastosScreenComponent } from './screens/gastos-screen/gastos-screen.component';
 import { IngresoScreenComponent } from './screens/ingreso-screen/ingreso-screen.component';
 import { RegistroScreenComponent } from './screens/registro-screen/registro-screen.component';
 import { InicioScreenComponent } from './screens/inicio-screen/inicio-screen.component';
@@ -26,7 +24,6 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
 import { AdvertenciaComponent } from './components/advertencia/advertencia.component';
 import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
 import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
-import { ImportarExcelComponent } from './components/importar-excel/importar-excel.component';
 import { CrearCategoriaComponent } from './components/crear-categoria/crear-categoria.component';
 import { EditarCategoriaComponent } from './components/editar-categoria/editar-categoria.component';
 import { CrearProveedorComponent } from './components/crear-proveedor/crear-proveedor.component';
@@ -38,8 +35,6 @@ import { CrearProveedorComponent } from './components/crear-proveedor/crear-prov
     InfoUsuarioComponent,
     ProductosScreenComponent,
     ProveedoresScreenComponent,
-    VentasScreenComponent,
-    GastosScreenComponent,
     IngresoScreenComponent,
     RegistroScreenComponent,
     InicioScreenComponent,
@@ -56,7 +51,6 @@ import { CrearProveedorComponent } from './components/crear-proveedor/crear-prov
     AdvertenciaComponent,
     CrearProductoComponent,
     EditarProductoComponent,
-    ImportarExcelComponent,
     CrearCategoriaComponent,
     EditarCategoriaComponent,
     CrearProveedorComponent

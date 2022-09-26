@@ -31,16 +31,6 @@
                     <a class="nav-link active" aria-current="page" [routerLink]="['/proveedores']">Proveedores</a>
                 </li>
 
-                <!--boton de Ventas-->
-                <li *ngIf="sesion" class="nav-item btn-dark ms-4 border-dark bg-gradient">
-                    <a class="nav-link active" [routerLink]="['/ventas']">Ventas</a>
-                </li>
-
-                <!--boton de Gastos-->
-                <li *ngIf="sesion" class="nav-item btn-dark ms-4 border-dark bg-gradient">
-                    <a class="nav-link active" [routerLink]="['/gastos']">Gastos</a>
-                </li>
-
                 <!--Usuario-->
                 <li *ngIf="sesion" class="nav-item">
                     <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
