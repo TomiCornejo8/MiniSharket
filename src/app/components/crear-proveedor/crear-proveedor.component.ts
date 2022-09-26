@@ -12,9 +12,11 @@ export class CrearProveedorComponent implements OnInit {
 
   //Atributos de proveedor
   nombre:string =''; 
-  email:string ='';
+  emails:string[] =[];
+  numeros:string[] =[];
+
   numero:string ='';
-  
+  email:string = '';
   //Bandera
   bandera:boolean = false;
 
@@ -25,14 +27,16 @@ export class CrearProveedorComponent implements OnInit {
 
   limpiar(){
     this.nombre ='';
-    this.email = '';
+    this.emails = [];
+    this.numeros = [];
     this.numero = '';
+    this.email = '';
 
     this.bandera = false;
   }
 
   validarVacio(){
-    if(this.nombre == '' || this.email == '' || this.numero == ''){
+    if(this.nombre == '' || this.email.length == 0 || this.numero.length == 0){
       this.bandera = false;
     }else{
       this.bandera = true;
@@ -40,7 +44,15 @@ export class CrearProveedorComponent implements OnInit {
   }
 
   crear(){
-    this.crearProveedor.emit(new Proveedor(this.nombre,this.email,this.numero));
+    this.crearProveedor.emit(new Proveedor(this.nombre,this.emails,this.numeros));
     this.limpiar();
+  }
+
+  agregarEmail(){
+    this.emails.push(this.email);
+  }
+
+  agregarNumero(){
+    this.numeros.push(this.numero);
   }
 }
