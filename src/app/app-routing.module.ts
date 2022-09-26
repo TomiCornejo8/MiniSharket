@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FinanzasScreenComponent } from './screens/finanzas-screen/finanzas-screen.component';
 import { IngresoScreenComponent } from './screens/ingreso-screen/ingreso-screen.component';
 import { InicioScreenComponent } from './screens/inicio-screen/inicio-screen.component';
 import { ProductosScreenComponent } from './screens/productos-screen/productos-screen.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
 
   {path:'productos', component:ProductosScreenComponent},
   {path:'proveedores', component:ProveedoresScreenComponent},
+  {path:'finanzas', component:FinanzasScreenComponent},
   
   {path:'ingreso', component:IngresoScreenComponent},
   {path:'registro', component:RegistroScreenComponent},
