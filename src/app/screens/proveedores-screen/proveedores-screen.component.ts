@@ -8,6 +8,7 @@ import { Proveedor } from 'src/app/models/proveedor.model';
 })
 export class ProveedoresScreenComponent implements OnInit {
 
+  w=window.sessionStorage;
   proveedores:Proveedor[] =[
     new Proveedor("Don juanito",["Donjuanito@mail.com"],["+569124141"]),
     new Proveedor("Donsella",["Donsella@mail.com"],["+569123512"]),
@@ -21,8 +22,20 @@ export class ProveedoresScreenComponent implements OnInit {
   }
 
   eliminarProveedor(proveedor:Proveedor){
-    this.proveedores.splice(this.proveedores.indexOf(proveedor),1);
+    let stringEliminarProducto='flagEliminarProducto';
+    let flagEliminarProducto= this.w.getItem(stringEliminarProducto);
+    console.log(flagEliminarProducto);
+    if(flagEliminarProducto!==null){
+      let flagEliminar = JSON.parse(flagEliminarProducto);
+      if(flagEliminarProducto ==="true"){
+        this.proveedores.splice(this.proveedores.indexOf(proveedor),1);
+        flagEliminar=false;
+        this.w.setItem(stringEliminarProducto,JSON.stringify(flagEliminar));
+      }
+    }
+    
   }
+  
   ngOnInit(): void {
   }
 
