@@ -1,60 +1,58 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <!--BOTON DE LOGO-->
-    <div class="container-fluid">
-
-         <!-- hamburguesa lo puse primero para que se mantenga en la izquierda, data-bs-target comandar a que se debe colapsar-->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#opciones"
-            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <a class="navbar-brand" [routerLink]="['/inicio']">
-            <img src="../../../assets/Sharky.png" alt="" width="35" height="34" class="d-inline-block align-text-top">
-        </a>
+     <!-- hamburguesa lo puse primero para que se mantenga en la izquierda, data-bs-target comandar a que se debe colapsar-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#opciones"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- EL NAVBAR NO SE MUEVE -->
+    <a class="navbar-brand" [routerLink]="['/inicio']" style="float: left;">
+        <img src="../../../assets/Sharky.png" alt="" width="35" height="34" class="d-inline-block align-text-top">
+    </a>
+    <!-- <div class="container-fluid"> -->
 
         <!--el div con id opciones es para que el boton hamburguesa reconozca lo que debe colapsar-->
         <div class="collapse navbar-collapse" id="opciones">
-            <ul class="navbar-nav mb-4 mb-lg-1" id="navbar">
+            <ul class="navbar-nav mb-1" id="navbar">
 
                 <!--boton de Inicio-->
-                <li class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                <li class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/inicio']">Inicio</a>
                 </li>
 
                 <!--boton de Productos-->
-                <li *ngIf="sesion" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                <li *ngIf="sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/productos']">Productos</a>
                 </li>
 
                 <!--boton de Proveedores-->
-                <li *ngIf="sesion" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                <li *ngIf="sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/proveedores']">Proveedores</a>
                 </li>
 
                 <!--boton de Finanzas-->
-                <li *ngIf="sesion" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                <li *ngIf="sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/finanzas']">Finanzas</a>
                 </li>
 
                 <!--Usuario-->
-                <li *ngIf="sesion" class="nav-item">
+                <li *ngIf="sesion" class="nav-item mt-1">
                     <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
                         <img src="../../../assets/Sharky.png" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
                     </a>
                 </li>
 
                 <!--boton de Ingreso-->
-                <li *ngIf="!sesion" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                <li *ngIf="!sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
                     <a class="nav-link active" [routerLink]="['/ingreso']">Ingresar</a>
                 </li>
 
                 <!--boton de Registro-->
-                <li *ngIf="!sesion" class="nav-item btn-dark ms-4 border-dark bg-gradient">
+                <li *ngIf="!sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
                     <a class="nav-link active" [routerLink]="['/registro']">Registrarse</a>
                 </li>
             </ul>
         </div>
-    </div>
+    <!-- </div> -->
 </nav>
 
 <app-info-usuario></app-info-usuario>
