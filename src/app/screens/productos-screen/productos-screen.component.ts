@@ -16,6 +16,7 @@ export class ProductosScreenComponent implements OnInit{
   ];
 
   carrito:Producto[] = [];
+  cantCarrito:number = 0;
 
   constructor() { }
 
@@ -46,5 +47,10 @@ export class ProductosScreenComponent implements OnInit{
 
   agregarCarrito(producto:Producto){
     this.carrito.push(producto);
+    this.cantCarrito++;
+  }
+
+  restarCantidad(){
+    this.cantCarrito--;
   }
 }

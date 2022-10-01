@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 
 @Component({
@@ -7,7 +7,7 @@ import { Producto } from 'src/app/models/producto.model';
   styleUrls: ['./carrito-venta.component.sass']
 })
 export class CarritoVentaComponent implements OnInit {
-  
+  @Output() restarCantidad = new EventEmitter();
   @Input() carrito:Producto[];
   montoTotal=0;
 
@@ -18,7 +18,8 @@ export class CarritoVentaComponent implements OnInit {
 
   eliminarColaProducto(producto:Producto){
     producto.banderaCarrito = false;
-    this.carrito.splice(this.carrito.indexOf(producto),1)
+    this.carrito.splice(this.carrito.indexOf(producto),1);
+    this.restarCantidad.emit();
   }
 
 }
