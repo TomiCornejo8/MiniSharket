@@ -11,7 +11,6 @@ export class TarjetaProductoComponent implements OnInit {
   @Output() eliminarProducto = new EventEmitter<Producto>();
   @Output() agregarCarrito = new EventEmitter<Producto>();
   @Input() producto:Producto;
-  banderaCarrito:boolean = false;
   w=window.sessionStorage;
   constructor() { }
 
@@ -72,7 +71,7 @@ export class TarjetaProductoComponent implements OnInit {
 
   agregar(){
     this.agregarCarrito.emit(this.producto);
-    this.banderaCarrito = true;
+    this.producto.banderaCarrito = true;
   }
     
 }

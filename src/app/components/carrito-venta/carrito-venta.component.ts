@@ -16,4 +16,9 @@ export class CarritoVentaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  eliminarColaProducto(producto:Producto){
+    producto.banderaCarrito = false;
+    this.carrito.splice(this.carrito.indexOf(producto),1)
+  }
+
 }

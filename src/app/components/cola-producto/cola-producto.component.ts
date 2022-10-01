@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 
 @Component({
@@ -9,6 +9,7 @@ import { Producto } from 'src/app/models/producto.model';
 export class ColaProductoComponent implements OnInit {
 
   @Input() producto:Producto;
+  @Output() eliminarColaProducto = new EventEmitter<Producto>;
   cantidadProducto:number=1;
 
   constructor() { }
@@ -26,5 +27,9 @@ export class ColaProductoComponent implements OnInit {
   cambiarCantidad(nuevaCantidadProducto:string){
     let numbernuevaCantidadProducto=Number.parseInt(nuevaCantidadProducto);
     if(numbernuevaCantidadProducto>0)this.cantidadProducto=numbernuevaCantidadProducto;
+  }
+  
+  eliminar(){
+    this.eliminarColaProducto.emit(this.producto);
   }
 }
