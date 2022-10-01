@@ -8,9 +8,7 @@
     <button class="btn btn-primary bg-gradient border-dark rounded-circle p-4 mb-3" type="button">📸QR</button>
     <!-- Lista de productos -->
     <ul class="list-group mb-2">
-      <app-cola-producto></app-cola-producto>
-      <app-cola-producto></app-cola-producto>
-      <app-cola-producto></app-cola-producto>
+      <app-cola-producto *ngFor="let producto of carrito" [producto]="producto"></app-cola-producto>
     </ul>
     <!-- Monto total de productos -->
     <h5><b>Monto total: </b>{{montoTotal}}$</h5>

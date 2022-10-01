@@ -20,12 +20,12 @@
 
     <!-- Tarjetas de productos -->
     <div class="d-flex flex-wrap mt-3 ms-4">
-        <app-tarjeta-producto (eliminarProducto)="eliminarProducto($event)" *ngFor="let producto of productos" [producto]="producto"></app-tarjeta-producto>
+        <app-tarjeta-producto (agregarCarrito)="agregarCarrito($event)" (eliminarProducto)="eliminarProducto($event)" *ngFor="let producto of productos" [producto]="producto"></app-tarjeta-producto>
     </div>    
 </div>
 
 <!-- Offcanvas -->
 <app-filtro-productos></app-filtro-productos>
-<app-carrito-venta></app-carrito-venta>
+<app-carrito-venta [carrito]="carrito"></app-carrito-venta>
 <app-crear-producto (crearProducto)="crearProducto($event)"></app-crear-producto>
 <app-editar-producto></app-editar-producto>

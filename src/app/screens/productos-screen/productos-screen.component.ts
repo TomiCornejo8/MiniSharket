@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 
 @Component({
@@ -14,6 +14,8 @@ export class ProductosScreenComponent implements OnInit{
     new Producto("Jamon","Unidad",25,1,"San Jorge"),
     new Producto("Palta","Kilogramo",50,1,"La feria")
   ];
+
+  carrito:Producto[] = [];
 
   constructor() { }
 
@@ -40,5 +42,9 @@ export class ProductosScreenComponent implements OnInit{
         }
       }
     
+  }
+
+  agregarCarrito(producto:Producto){
+    this.carrito.push(producto);
   }
 }

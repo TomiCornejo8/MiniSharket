@@ -13,7 +13,7 @@
         <p class="m-0 text-white">${{producto.precio}} x {{producto.unidad}}</p>
     </div>
     <div>
-        <button class="btn btn-dark bg-gradient border-dark mb-1" type="button">Agregar</button>
+        <button [disabled]="banderaCarrito" (click)="agregar()" class="btn btn-dark bg-gradient border-dark mb-1" type="button">Agregar</button>
     </div>
 </div>
 

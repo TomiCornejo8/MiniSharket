@@ -8,8 +8,8 @@ import { Producto } from 'src/app/models/producto.model';
 })
 export class ColaProductoComponent implements OnInit {
 
-@Input() producto:Producto;
-cantidadProducto:number=1;
+  @Input() producto:Producto;
+  cantidadProducto:number=1;
 
   constructor() { }
 

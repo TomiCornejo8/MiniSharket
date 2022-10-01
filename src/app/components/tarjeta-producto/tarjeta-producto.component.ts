@@ -9,7 +9,9 @@ import { Producto } from 'src/app/models/producto.model';
 export class TarjetaProductoComponent implements OnInit {
 
   @Output() eliminarProducto = new EventEmitter<Producto>();
+  @Output() agregarCarrito = new EventEmitter<Producto>();
   @Input() producto:Producto;
+  banderaCarrito:boolean = false;
   w=window.sessionStorage;
   constructor() { }
 
@@ -66,6 +68,11 @@ export class TarjetaProductoComponent implements OnInit {
         }
       }
     ,2500);
+  }
+
+  agregar(){
+    this.agregarCarrito.emit(this.producto);
+    this.banderaCarrito = true;
   }
     
 }
