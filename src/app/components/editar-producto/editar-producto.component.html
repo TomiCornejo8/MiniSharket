@@ -13,28 +13,33 @@
         <div class="modal-body">
             <!-- Nombre producto -->
             <label for="nombreP" class="form-label">Nombre</label>
-            <input id="nombreP" type="text" class="form-control" #nombre>
+            <input id="nombreP" type="text" class="form-control" #nombre >
             
 
             <!-- Seleccionar categoria -->
             <label for="CategoriaP" class="form-label">Categoria</label>
-            <select id="categoriaP" class="form-select" aria-label="Default select example">
-                <option selected>Selecciona una categoria</option>
-                <option *ngFor="let categoria of categorias" value="{{categoria}}" >{{categoria}}</option> 
-            </select>
-            
 
+            <select id="categoriaP1" class="form-select" aria-label="Default select example" >
+                <option selected >Selecciona una categoria</option>
+                <option *ngFor="let categoria of categorias" value="{{categoria}}" (click)="seleccionarCategoria(categoria)">{{categoria}}</option> 
+            </select>
+            <label for="CategoriaAc" class="form-label">Categorias activas</label> <button (click)="cargarCategorias()">Cargar</button>
+            <div style="background-color: white;height: 20rem;">
+              <div *ngFor="let categoria of categoriasProducto" style="height: 3rem; width:5.8rem ; display: inline-flex;border:solid black 0.008rem">
+                <p style="color: black; width:2rem;height: 2.9rem">{{categoria}}</p><button type="button" style="height: 3rem;background-color: red;float: right;width: auto;" value="{{categoria}}" (click)="eliminarCategoria(categoria)">X</button>
+              </div>
+            </div>
             <!-- Stock -->
             <label for="stock" class="form-label">Stock</label>
-            <input id="stock" type="number" class="form-control" #stock>
+            <input id="stock" type="number" class="form-control" #stock value="null">
             
             <!-- Precio -->
             <label for="precio" class="form-label">Precio</label>
-            <input id="precio" type="number" class="form-control" #precio>
+            <input id="precio" type="number" class="form-control" #precio value="null">
 
             <!-- Imagen -->
             <label for="imagenP" class="form-label">Imagen</label> 
-            <input id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg" #imagen>
+            <input id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg" #imagen value="null">
                        
         </div>
 
