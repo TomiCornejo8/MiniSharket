@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
+import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
+import { RegistroProducto } from 'src/app/models/registroProducto.model';
 
 @Component({
   selector: 'app-productos-screen',
@@ -15,8 +17,8 @@ export class ProductosScreenComponent implements OnInit{
     new Producto("Palta","Kilogramo",50,1,"La feria")
   ];
 
-  carrito:Producto[] = [];
-  cantCarrito:number = 0;
+  carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
+  cant:number = 0;
 
   constructor() { }
 
@@ -46,11 +48,12 @@ export class ProductosScreenComponent implements OnInit{
   }
 
   agregarCarrito(producto:Producto){
-    this.carrito.push(producto);
-    this.cantCarrito++;
+    this.carrito.lista.push(new RegistroProducto(1,producto.nombre,producto.precio,producto.unidad,producto));
+    this.carrito.montoTotal += producto.precio;
+    this.cant++;
   }
 
-  restarCantidad(){
-    this.cantCarrito--;
+  quitarCarrito(){
+    this.cant--;
   }
 }

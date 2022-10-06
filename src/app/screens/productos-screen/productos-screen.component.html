@@ -7,7 +7,7 @@
 <button type="button" class="btn btn-dark bg-gradient rounded-circle p-2 position-fixed top-50 end-0 me-3" data-bs-toggle="offcanvas" data-bs-target="#carritoVenta" aria-controls="carritoVenta">
     🛒
     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-      {{cantCarrito}}
+      {{cant}}
     </span>
 </button>
 
@@ -26,6 +26,6 @@
 
 <!-- Offcanvas -->
 <app-filtro-productos></app-filtro-productos>
-<app-carrito-venta (restarCantidad)="restarCantidad()" [carrito]="carrito"></app-carrito-venta>
+<app-carrito-venta (menosProducto)="quitarCarrito()" [carrito]="carrito"></app-carrito-venta>
 <app-crear-producto (crearProducto)="crearProducto($event)"></app-crear-producto>
 <app-editar-producto></app-editar-producto>
