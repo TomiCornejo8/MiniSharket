@@ -20,4 +20,6 @@ export class FiltroProductosComponent implements OnInit {
     sessionStorage.setItem('categoriasProductos',JSON.stringify(this.categorias));
   }
 
+  
+
 }

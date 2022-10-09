@@ -27,6 +27,7 @@ import { CrearCategoriaComponent } from './components/crear-categoria/crear-cate
 import { EditarCategoriaComponent } from './components/editar-categoria/editar-categoria.component';
 import { CrearProveedorComponent } from './components/crear-proveedor/crear-proveedor.component';
 import { FinanzasScreenComponent } from './screens/finanzas-screen/finanzas-screen.component';
+import { EditarProveedorComponent } from './components/editar-proveedor/editar-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { FinanzasScreenComponent } from './screens/finanzas-screen/finanzas-scre
     CrearCategoriaComponent,
     EditarCategoriaComponent,
     CrearProveedorComponent,
-    FinanzasScreenComponent
+    FinanzasScreenComponent,
+    EditarProveedorComponent
   ],
   imports: [
     BrowserModule,

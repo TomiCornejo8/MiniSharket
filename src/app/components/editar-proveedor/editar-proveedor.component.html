@@ -1,0 +1,39 @@
+
+<!-- Modal -->
+<div class="modal fade" id="editarProveedor" tabindex="-1" aria-labelledby="editarProveedorLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-primary text-white">
+  
+        <div class="modal-header">
+          <h5 class="modal-title" id="crearProveedorLabel"><b>Crear proveedor 🛍</b></h5>
+        </div>
+  
+        <div class="modal-body">
+          <!-- Nombre proveedor -->
+          <label for="nombre" class="form-label">Nombre(*)</label>
+          <input id="nombre" type="text" class="form-control">
+
+          <!-- Email proveedor -->
+          <div>
+            <label for="email" class="form-label">Email(*)</label>
+            <div>
+              <input id="email" type="text" class="form-control">
+            </div>
+            <!-- <div>{{emails}}</div> -->
+          </div>
+
+          <!-- Numero de contacto proveedor -->
+          <div>
+            <label for="numero" class="form-label">Numero de contacto(*)</label>
+            <input id="numero" type="text" class="form-control">
+          </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
+          <!-- <div>{{numeros}}</div> arreglar para que se vean segun se agregan -->
+        </div>
+  
+      </div>
+    </div>
+  </div>

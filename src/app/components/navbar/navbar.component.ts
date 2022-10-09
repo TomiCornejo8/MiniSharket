@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   sesion:boolean = true;
-  bandera:boolean = false;
+  pantalla:boolean = false;
 
   constructor() { 
   }
@@ -18,9 +18,9 @@ export class NavbarComponent implements OnInit {
 
   ajustePantalla(){
     if(window.screen.width<991){
-      this.bandera = true;
+      this.pantalla = true;
     }else{
-      this.bandera = false;
+      this.pantalla = false;
     }
 
   }
