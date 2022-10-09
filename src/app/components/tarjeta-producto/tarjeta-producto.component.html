@@ -1,6 +1,6 @@
 <div class="card bg-primary border-dark m-2" style="width: 15rem;">
     <div class="mt-1">
-        <button (click)="editarProducto()" class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button" data-bs-toggle="modal" data-bs-target="#editarProducto">📝</button>
+        <button  (click)="editarProducto()" class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button" data-bs-toggle="modal" data-bs-target="#editarProducto">📝</button>
         <button (click)="eliminar()" class="btn btn-dark bg-gradient border-dark  p-1" data-bs-toggle="modal" data-bs-target="#advertencia" type="button">❌</button>
     </div>
 
@@ -18,3 +18,4 @@
 </div>
 
 <app-advertencia></app-advertencia>
+<app-editar-producto [editarP]="editar"></app-editar-producto>
