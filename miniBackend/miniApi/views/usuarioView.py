@@ -12,6 +12,11 @@ class UsuarioSerializer(serializers.ModelSerializer):
         model =Usuario
         fields = '__all__'
 
+class UsuarioCodigoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = ['id']
+
 @api_view(['POST'])
 def usuario_api_view(request):
 
@@ -50,3 +55,13 @@ def usuario_detail_api_view(request,nombre=None,clave=None):
             return Response({'message':'Usuario dont have accces'},status = status.HTTP_204_NO_CONTENT)
 
     return Response({'message':'Usuario not found'},status = status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def usuario_codigo_api_view(request,codigo=None):
+    usuario = Usuario.objects.filter(codigo = codigo).first()
+    if usuario:
+        if request.method == 'GET':
+            usuario_serializer = UsuarioCodigoSerializer(usuario)
+            return Response(usuario_serializer.data,status = status.HTTP_200_OK)
+    
+    return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)
