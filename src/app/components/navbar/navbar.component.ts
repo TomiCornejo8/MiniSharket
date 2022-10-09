@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   sesion:boolean = true;
+  bandera:boolean = false;
 
   constructor() { 
   }
@@ -15,6 +16,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ajustePantalla(){
+    if(window.screen.width<991){
+      this.bandera = true;
+    }else{
+      this.bandera = false;
+    }
+
+  }
   // estadoSesion(sesion:boolean){
   //   this.sesion = sesion;
   //   window.location.href="/inicio";
