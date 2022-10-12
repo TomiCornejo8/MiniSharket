@@ -27,12 +27,8 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
   }
-  eliminar(){
-    let eliminar=this.eliminarProducto;
-    let producto=this.producto;
-    setTimeout(function(){
-      eliminar.emit(producto);
-    },2500);
+  eliminar(respuesta:any){
+    if(respuesta)this.eliminarProducto.emit(this.producto)
   }
 
   editarProducto(){

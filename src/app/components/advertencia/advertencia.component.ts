@@ -13,12 +13,9 @@ export class AdvertenciaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  revisarRespuesta(aux:boolean){
-    if(aux === true){
-        let flagEliminarProducto='flagEliminarProducto';
-        let flagEliminar=true;
-        window.sessionStorage.setItem(flagEliminarProducto,JSON.stringify(flagEliminar));
-        console.log(window.sessionStorage.getItem(flagEliminarProducto));
+  revisarRespuesta(respuesta:boolean){
+    if(respuesta === true){
+        this.respuesta.emit(respuesta);
       }
   }
 

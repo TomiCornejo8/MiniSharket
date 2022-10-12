@@ -35,18 +35,7 @@ export class ProductosScreenComponent implements OnInit{
   //indexof: devuelve la posición del elemento entregado
   //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
   eliminarProducto(producto:Producto){
-      let stringEliminarProducto='flagEliminarProducto';
-      let flagEliminarProducto= this.w.getItem(stringEliminarProducto);
-      console.log(flagEliminarProducto);
-      if(flagEliminarProducto!==null){
-        let flagEliminar = JSON.parse(flagEliminarProducto);
-        if(flagEliminarProducto ==="true"){
-          this.productos.splice(this.productos.indexOf(producto),1);
-          flagEliminar=false;
-          this.w.setItem(stringEliminarProducto,JSON.stringify(flagEliminar));
-        }
-      }
-    
+          this.productos.splice(this.productos.indexOf(producto),1);    
   }
 
   agregarCarrito(producto:Producto){
