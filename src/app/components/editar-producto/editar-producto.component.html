@@ -30,12 +30,13 @@
 
             <!-- Imagen -->
             <label for="imagenP" class="form-label">Imagen</label> 
-            <input id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg" #imagen value="{{productoActual.img}}">
+            <input [(ngModel)]="valueImg" (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
+            <img *ngIf="img !=''" src="{{img}}" class="mb-1 w-25 h-25 rounded mx-auto d-block">
             <!--Seleccionar proveedor-->
             <label for="proveedor" class="form-label">Proveedor</label>
             <select class="form-select" aria-label="Default select example">
               <option value="{{productoActual.proveedor}}">Selecciona un provedor</option>
-              <option *ngFor="let proveedor of proveedoresDP" (click)="seleccionarProveedor(proveedor)"><div *ngIf="proveedor==productoActual.unidad"> Actualmente seleccionado ---> </div>{{proveedor}}</option>
+              <option *ngFor="let proveedor of proveedoresDP" (click)="seleccionarProveedor(proveedor)"><div *ngIf="proveedor==productoActual.proveedor"> Actualmente seleccionado ---> </div>{{proveedor}}</option>
             </select>  
           <!-- Seleccionar categoria -->
           <label for="CategoriaP" class="form-label">Categoria</label>
@@ -54,7 +55,7 @@
           
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal" (click)="eliminarMemoriaProducto()">Cancelar</button>
-          <button (click)="editar(nombre.value,stock.value,precio.value,imagen.value)" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Editar</button>
+          <button (click)="editar(nombre.value,stock.value,precio.value)" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Editar</button>
         </div>
 
       </div>

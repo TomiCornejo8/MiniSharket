@@ -1,8 +1,7 @@
-import { DomElementSchemaRegistry, } from '@angular/compiler';
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChanges, TemplateRef, ViewContainerRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto.model';
-
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-editar-producto',
   templateUrl: './editar-producto.component.html',
@@ -15,15 +14,17 @@ export class EditarProductoComponent implements OnInit,OnChanges {
   categorias:any;
   w=window.sessionStorage;
   productoActual:Producto = new Producto();
+  img:string="";
   proveedoresDP: string[] = ["P1", "P2", "P3"];
   unidadesDP: string[] = ["Unidad", "Kilogramo", "Gramo"];
+  valueImg="";
 
-
-  constructor( private router:Router) {   
+  constructor( private sanitizer: DomSanitizer) {   
   }
   ngOnChanges(changes: SimpleChanges): void {
       if(changes['productoEntrada'].currentValue){
           this.productoActual=changes['productoEntrada'].currentValue
+          
       }
     
     
@@ -34,7 +35,7 @@ export class EditarProductoComponent implements OnInit,OnChanges {
 
   ngOnInit(): void { 
 }
-  editar(nombre:string,stock:string,precio:string,imagen:string){
+  editar(nombre:string,stock:string,precio:string){
     
       if(nombre!==""){
         this.productoActual.nombre=nombre;
@@ -45,9 +46,12 @@ export class EditarProductoComponent implements OnInit,OnChanges {
       if(precio!=null && Number.parseInt(precio)>=0){
         this.productoActual.precio=Number.parseInt(precio);
       }
-      if(imagen!=null && imagen!==""){
-        this.productoActual.img=imagen;
+      if(this.img!==""){
+        this.productoActual.img=this.img;
+        this.valueImg='';
+        this.img='';
       }
+      
       this.productoCambiado.emit(this.productoActual);
   }
 
@@ -71,5 +75,38 @@ eliminarMemoriaProducto(){
 eliminarCategoria(categoria:any){
 
 }
+
+captureFile(event: any) {
+  const img = event.target.files[0];
+  this.extractBase64(img).then((image: any) => {
+    this.img = image.base;
+  });
+}
+
+// Transforma las imagenes a base64
+extractBase64 = async ($event: any) => new Promise((resolve, reject) => {
+  try {
+    const unsafeImg = window.URL.createObjectURL($event);
+    const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+    const reader = new FileReader();
+    reader.readAsDataURL($event);
+    reader.onload = () => {
+      resolve({
+        base: reader.result
+      });
+    };
+    reader.onerror = error => {
+      resolve({
+        base: null
+      });
+    };
+    return reader.result;
+  } catch (e) {
+    return null;
+  }
+});
+
+
+
 }
 
