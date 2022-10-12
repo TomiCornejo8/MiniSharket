@@ -22,11 +22,15 @@ export class RegistroScreenComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if(datos){
+      window.location.href="/inicio";
+    }
   }
 
   sesion(){
     sessionStorage.setItem('usuario',JSON.stringify({"nombre":this.usuario,"icono":this.img,"tipo":this.tipo}));
-    
+    window.location.href="/inicio";
   }
 
   revisar(){

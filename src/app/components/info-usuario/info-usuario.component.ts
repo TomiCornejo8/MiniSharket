@@ -7,15 +7,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class InfoUsuarioComponent implements OnInit {
 
-  @Output() cerrarSesion = new EventEmitter<boolean>;
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
   cerrar(){
-    this.cerrarSesion.emit(false);
+    sessionStorage.clear();
+    window.location.href="/inicio";
   }
 
 }

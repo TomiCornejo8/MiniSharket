@@ -12,7 +12,7 @@
             Mini Sharket
         </a>
 
-        <div *ngIf="bandera">
+        <div *ngIf="bandera && sesion">
             <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
                 <img src="../../../assets/Sharky.png" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
             </a>
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="!bandera">
+        <div *ngIf="!bandera && sesion">
             <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
                 <img src="../../../assets/Sharky.png" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
             </a>

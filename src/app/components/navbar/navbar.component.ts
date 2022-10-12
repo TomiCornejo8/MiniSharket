@@ -7,13 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  sesion:boolean = true;
+  sesion:boolean = false;
   bandera:boolean = false;
 
   constructor() { 
   }
 
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if(datos){
+      this.sesion = true;
+    }
   }
 
   ajustePantalla(){

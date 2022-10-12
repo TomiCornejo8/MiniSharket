@@ -46,7 +46,7 @@
 
         <!-- Boton de aceptar -->
         <div class="text-center mt-3">
-            <button [disabled]="!bandera" type="button" class="btn btn-dark bg-gradient">Registrarse</button>
+            <button (click)="sesion()" [disabled]="!bandera" type="button" class="btn btn-dark bg-gradient">Registrarse</button>
         </div>
     </div>
 </div>
