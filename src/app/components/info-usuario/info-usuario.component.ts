@@ -7,9 +7,17 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class InfoUsuarioComponent implements OnInit {
 
+  icono:string = "";
+  nombre:string = "";
+
   constructor() { }
 
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if(datos){
+      this.icono = JSON.parse(datos || "[]").icono;
+      this.nombre = JSON.parse(datos || "[]").nombre;
+    }
   }
 
   cerrar(){

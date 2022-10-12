@@ -9,6 +9,7 @@ export class NavbarComponent implements OnInit {
 
   sesion:boolean = false;
   bandera:boolean = false;
+  icono:string = "";
 
   constructor() { 
   }
@@ -17,6 +18,7 @@ export class NavbarComponent implements OnInit {
     let datos = sessionStorage.getItem('usuario');
     if(datos){
       this.sesion = true;
+      this.icono = JSON.parse(datos || "[]").icono;
     }
   }
 
@@ -28,9 +30,4 @@ export class NavbarComponent implements OnInit {
     }
 
   }
-  // estadoSesion(sesion:boolean){
-  //   this.sesion = sesion;
-  //   window.location.href="/inicio";
-  // }
-
 }

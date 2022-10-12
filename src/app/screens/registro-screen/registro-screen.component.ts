@@ -29,7 +29,7 @@ export class RegistroScreenComponent implements OnInit {
   }
 
   sesion(){
-    sessionStorage.setItem('usuario',JSON.stringify({"nombre":this.usuario,"icono":this.img,"tipo":this.tipo}));
+    sessionStorage.setItem('usuario',JSON.stringify({"nombre":this.usuario,"icono":this.img,"tipo":this.tipo,"codigo":this.codigo}));
     window.location.href="/inicio";
   }
 
