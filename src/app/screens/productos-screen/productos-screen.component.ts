@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
@@ -9,7 +9,8 @@ import { RegistroProducto } from 'src/app/models/registroProducto.model';
   styleUrls: ['./productos-screen.component.sass']
 })
 export class ProductosScreenComponent implements OnInit{
-
+ @Input() productoEditarr:Producto;
+ prodEditado:any;
   w=window.sessionStorage;
   productos:Producto[] = [
     new Producto("Queso mantecoso","Unidad",40,1,"Calo"),
@@ -21,6 +22,7 @@ export class ProductosScreenComponent implements OnInit{
   cant:number = 0;
 
   constructor() { }
+ 
 
   ngOnInit(): void {
   }
@@ -55,5 +57,12 @@ export class ProductosScreenComponent implements OnInit{
 
   quitarCarrito(){
     this.cant--;
+  }
+  editarProducto(producto:any){
+    this.productoEditarr=producto;
+
+  }
+  productoEditado(producto:any){
+    this.productoEditarr=producto;
   }
 }

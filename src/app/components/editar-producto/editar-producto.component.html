@@ -10,7 +10,7 @@
           <h5 class="modal-title" id="editarProductoLabel"><b>Editar producto 🛍</b></h5>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body" #modalBody>
             <!-- Nombre producto -->
             <label for="nombreP" class="form-label">Nombre</label>
             <input id="nombreP" type="text" class="form-control" #nombre value="{{productoActual.nombre}}">
@@ -18,7 +18,7 @@
             <label for="unidadP" class="form-label">Tipo de unidad(*)</label>
             <select id="unidadP" class="form-select" aria-label="Default select example">
               <option value="">Selecciona una unidad</option>
-              <option *ngFor="let unidadi of unidadesDP">{{unidadi}}</option>
+              <option *ngFor="let unidad of unidadesDP"><div *ngIf="unidad==productoActual.unidad"> Actualmente seleccionado ---> </div>{{unidad}}</option>
             </select>
             <!-- Stock -->
             <label for="stock" class="form-label">Stock</label>
@@ -33,9 +33,9 @@
             <input id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg" #imagen value="{{productoActual.img}}">
             <!--Seleccionar proveedor-->
             <label for="proveedor" class="form-label">Proveedor</label>
-            <select [(ngModel)]="proveedor" id="proveedor" class="form-select" aria-label="Default select example">
-              <option value="">Selecciona un provedor</option>
-              <option *ngFor="let proveedori of proveedoresDP">{{proveedori}}</option>
+            <select class="form-select" aria-label="Default select example">
+              <option value="{{productoActual.proveedor}}">Selecciona un provedor</option>
+              <option *ngFor="let proveedor of proveedoresDP" (click)="seleccionarProveedor(proveedor)"><div *ngIf="proveedor==productoActual.unidad"> Actualmente seleccionado ---> </div>{{proveedor}}</option>
             </select>  
           <!-- Seleccionar categoria -->
           <label for="CategoriaP" class="form-label">Categoria</label>
@@ -44,9 +44,9 @@
               <option selected >Selecciona una categoria</option>
               <option *ngFor="let categoria of categorias" value="{{categoria}}" (click)="seleccionarCategoria(categoria)">{{categoria}}</option> 
           </select>
-          <label for="CategoriaAc" class="form-label">Categorias activas</label> <button id="cargarCategorias"(click)="cargarCategorias()"  >Cargar</button>
+          <label for="CategoriaAc" class="form-label">Categorias activas</label>
           <div style="background-color: white;height: 12rem;">
-            <div *ngFor="let categoria of categoriasProducto" style="height: 3rem; width:5.8rem ; display: inline-flex;border:solid black 0.008rem">
+            <div *ngFor="let categoria of productoActual.categorias" style="height: 3rem; width:5.8rem ; display: inline-flex;border:solid black 0.008rem">
               <p style="color: black; width:2rem;height: 2.9rem">{{categoria}}</p><button type="button" style="height: 3rem;background-color: red;float: right;width: auto;" value="{{categoria}}" (click)="eliminarCategoria(categoria)">X</button>
             </div>
           </div>       

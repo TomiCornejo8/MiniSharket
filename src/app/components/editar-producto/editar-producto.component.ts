@@ -1,4 +1,4 @@
-import { DomElementSchemaRegistry } from '@angular/compiler';
+import { DomElementSchemaRegistry, } from '@angular/compiler';
 import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChanges, TemplateRef, ViewContainerRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { Producto } from 'src/app/models/producto.model';
@@ -9,86 +9,67 @@ import { Producto } from 'src/app/models/producto.model';
   styleUrls: ['./editar-producto.component.sass']
 })
 export class EditarProductoComponent implements OnInit,OnChanges {
-  @Input() editarP:any;
+
+  @Input() productoEntrada:any;
+  @Output() productoCambiado = new EventEmitter<Producto>();
   categorias:any;
   w=window.sessionStorage;
-  categoriasProducto=new Array;
   productoActual:Producto = new Producto();
   proveedoresDP: string[] = ["P1", "P2", "P3"];
-  unidadesDP: string[] = ["Unidades", "Kilogramos", "Gramos"];
-  proveedor: string = '';
+  unidadesDP: string[] = ["Unidad", "Kilogramo", "Gramo"];
+
+
   constructor( private router:Router) {   
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    if(changes['editarP'].currentValue===true){
-      console.log("hola mundo dentro del change");
-      let stringcategoriasProductos='categoriasProductos', stringproductoEditar="productoEditar";
-      let varcategorias= this.w.getItem(stringcategoriasProductos), varProducto=this.w.getItem(stringproductoEditar);
-      if(varcategorias!==null){
-        let categoriasProductos = JSON.parse(varcategorias);
-        this.categorias=categoriasProductos;
-    }
-      if(varProducto!==null){
-        let producto = JSON.parse(varProducto);
-        this.productoActual=producto;
-        this.cargarCategorias();
-        
+      if(changes['productoEntrada'].currentValue){
+          this.productoActual=changes['productoEntrada'].currentValue
       }
-    }
+    
+    
     
   }
 
  
 
-  ngOnInit(): void {
-    
-  
+  ngOnInit(): void { 
 }
   editar(nombre:string,stock:string,precio:string,imagen:string){
     
-    let producto:Array<any>=[null,null,null,null,null,null,null];
       if(nombre!==""){
-        producto[0]=nombre;
+        this.productoActual.nombre=nombre;
       }
       if(stock!=null && Number.parseInt(stock)>=0){
-        producto[2]=stock;
+        this.productoActual.stock=Number.parseInt(stock);
       }
       if(precio!=null && Number.parseInt(precio)>=0){
-        producto[3]=precio;
+        this.productoActual.precio=Number.parseInt(precio);
       }
       if(imagen!=null && imagen!==""){
-        producto[4]=imagen;
+        this.productoActual.img=imagen;
       }
-      producto[1]=this.categoriasProducto;
-      this.w.setItem("Producto",JSON.stringify(producto));
-      this.w.setItem("flagEditarProducto",JSON.stringify(true));
+      this.productoCambiado.emit(this.productoActual);
   }
 
   seleccionarCategoria(categoria:any){
-    if(this.categoriasProducto.indexOf(categoria)===-1){
-      this.categoriasProducto.push(categoria);
-    }
+   // if(this.categoriasProducto.indexOf(categoria)===-1){
+   //   this.categoriasProducto.push(categoria);
+   // }
   
-}
-eliminarCategoria(categoria:any){
-  this.categoriasProducto.splice(this.categoriasProducto.indexOf(categoria),1);
 }
 
-cargarCategorias(){
-   
-      this.productoActual.categorias.forEach((actualCategoria:string)=>{
-        if( this.categoriasProducto.indexOf(actualCategoria)=== -1) {
-            this.categoriasProducto.push(actualCategoria);
-        }
-      });
-  
+
+seleccionarProveedor(proveedor:any){
+  this.productoActual.proveedor=proveedor;
 }
 eliminarMemoriaProducto(){
   let  stringproductoEditar="productoEditar";
   this.w.removeItem(stringproductoEditar);
   
     
+}
+eliminarCategoria(categoria:any){
+
 }
 }
 

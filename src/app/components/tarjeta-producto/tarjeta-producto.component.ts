@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 
 @Component({
@@ -6,14 +6,24 @@ import { Producto } from 'src/app/models/producto.model';
   templateUrl: './tarjeta-producto.component.html',
   styleUrls: ['./tarjeta-producto.component.sass']
 })
-export class TarjetaProductoComponent implements OnInit {
+export class TarjetaProductoComponent implements OnInit,OnChanges {
 
   @Output() eliminarProducto = new EventEmitter<Producto>();
   @Output() agregarCarrito = new EventEmitter<Producto>();
+  @Output() editarProductoFlag = new EventEmitter<Producto>();
+
   @Input() producto:Producto;
+  @Input() productoEditar:any;
   editar=false;
   w=window.sessionStorage;
+
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.editar===true){
+        this.producto=changes["productoEditar"].currentValue;
+        this.editar=false
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -26,64 +36,8 @@ export class TarjetaProductoComponent implements OnInit {
   }
 
   editarProducto(){
-    this.w.setItem("productoEditar",JSON.stringify(this.producto));
-    this.editar=true
-
-    let intervaloEditarProducto=setInterval(()=>{
-        let stringEditarProducto='flagEditarProducto';
-        let stringProducto='Producto';
-        let varProducto= this.w.getItem(stringProducto);
-        let flagEditarProducto= this.w.getItem(stringEditarProducto);
-        console.log("hola mundo1");
-        if(flagEditarProducto!==null){
-          let flagEditar = JSON.parse(flagEditarProducto);
-            if(flagEditar===true && varProducto!==null)
-            {
-              let valoresEditados = JSON.parse(varProducto);
-              
-              if(valoresEditados!==null)
-            {
-              console.log("hola mundo2",valoresEditados);
-              for(let i=0;i<5;i++){
-                    if(valoresEditados[i]!==null){
-                        switch(i){
-                                case  0:{
-                                  this.producto.nombre=valoresEditados[i];
-                                  break;  
-                                }
-                                case  1:{
-                                  this.producto.categorias=valoresEditados[i]; 
-                                  break;   
-                                }
-                                case  2:{
-                                  this.producto.stock=valoresEditados[i]; 
-                                  break;   
-                                    }
-                                case  3:{
-                                  this.producto.precio=valoresEditados[i]; 
-                                  break;   
-                                  }
-                                case  4:{
-                                  this.producto.img=valoresEditados[i];  
-                                  break;  
-                                  }
-                              }
-                    }
-              }
-            }
-              console.log("Se termino el intervalo");
-              this.w.setItem(stringEditarProducto,JSON.stringify(false));
-              this.w.removeItem(stringProducto);
-              this.editar=false;
-              clearInterval(intervaloEditarProducto);
-            }
-            
-        }
-      }
-    ,2500);
-    console.log("nothola");
-    setTimeout(() => { clearInterval(intervaloEditarProducto);} ,120000);
-    
+    this.editarProductoFlag.emit(this.producto);
+    this.editar=true;
   }
 
   agregar(){
