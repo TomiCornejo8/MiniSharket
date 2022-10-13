@@ -20,7 +20,7 @@
 
         <div>
             <label><p class="card-text">Icono</p></label>
-            <input [(ngModel)]="img" (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
+            <input (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
             <img *ngIf="img != ''" src="{{img}}" class="w-25 h-25 rounded mx-auto d-block mt-2">
         </div>
 

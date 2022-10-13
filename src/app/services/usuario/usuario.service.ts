@@ -15,8 +15,13 @@ export class UsuarioService {
     return this.http.get(url);
   }
 
-  getNombre(nombre:string){
+  getNombre(nombre:string):Observable<any>{
     let url = this.url + nombre;
+    return this.http.get(url);
+  }
+
+  getCodigo(nombre:string,codigo:string):Observable<any>{
+    let url = this.url + "verificar/" + nombre + "/" + codigo;
     return this.http.get(url);
   }
 

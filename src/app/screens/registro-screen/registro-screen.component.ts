@@ -31,20 +31,27 @@ export class RegistroScreenComponent implements OnInit {
 
   sesion() {
     this.usuarioService.getNombre(this.usuario).subscribe(data=>{
-      if(data == false){
+      if(data.existe == "false"){
         if (this.tipo == 1) {
           this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo).subscribe(data => {
-            console.log(data);
-            if (data) {
-              sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
-              window.location.href = "/inicio";
-            } else {
-              alert("Nombre de usuario ya esta registrado");
+            sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+            window.location.href = "/inicio";
+          });
+        }else{
+
+          this.usuarioService.getCodigo(this.minimarket,this.codigo).subscribe(data=>{
+            if(data){
+              this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo,data.id).subscribe(data => {
+                sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+                window.location.href = "/inicio";
+              });
+            }else{
+              alert("Minimarket o codigo no corresponden");
             }
           });
         }
       }else{
-        alert("Nombre de usuario ya esta en uso");
+        alert(data.existe + " Nombre de usuario ya esta en uso");
       }
     });
   }
