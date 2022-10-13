@@ -31,7 +31,7 @@
 
         <!-- Imagen -->
         <label for="imagenP" class="form-label">Imagen</label>
-        <input [(ngModel)]="img" (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
+        <input  (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
         <img *ngIf="img != ''" src="{{img}}" class="mb-1 w-25 h-25 rounded mx-auto d-block">
 
         <!-- Seleccionar proveedor -->

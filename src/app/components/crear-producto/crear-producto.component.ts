@@ -19,9 +19,10 @@ export class CrearProductoComponent implements OnInit {
   proveedor: string = '';
   categorias: string[] = [];
   img: string = '';
+ 
 
   //Variables de los dropdown
-  unidadesDP: string[] = ["Unidades", "Kilogramos", "Gramos"];
+  unidadesDP: string[] = ["Unidad", "Kilogramo", "Gramo"];
   categoria: string = '';
   categoriasDP: string[] = ["C1", "C2", "C3"];
   proveedoresDP: string[] = ["P1", "P2", "P3"];
