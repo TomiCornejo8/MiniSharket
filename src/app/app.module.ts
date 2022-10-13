@@ -16,7 +16,6 @@ import { FiltroProductosComponent } from './components/filtro-productos/filtro-p
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.component';
 import { TarjetaProveedorComponent } from './components/tarjeta-proveedor/tarjeta-proveedor.component';
-// import { FiltroProveedoresComponent } from './components/filtro-proveedores/filtro-proveedores.component';
 import { ListaInsumoComponent } from './components/lista-insumo/lista-insumo.component';
 import { RevisarCredencialComponent } from './components/revisar-credencial/revisar-credencial.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
@@ -28,6 +27,7 @@ import { EditarCategoriaComponent } from './components/editar-categoria/editar-c
 import { CrearProveedorComponent } from './components/crear-proveedor/crear-proveedor.component';
 import { FinanzasScreenComponent } from './screens/finanzas-screen/finanzas-screen.component';
 import { EditarProveedorComponent } from './components/editar-proveedor/editar-proveedor.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,8 @@ import { EditarProveedorComponent } from './components/editar-proveedor/editar-p
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

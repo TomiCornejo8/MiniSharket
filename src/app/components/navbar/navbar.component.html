@@ -13,9 +13,9 @@
 
         <!--pantalla al ser falso osea pantalla <= a 991 este cargara la seccion del usuario antes que "opciones" del navbar
         manteniendose en la parte de arriba -->
-        <div *ngIf="pantalla">
+        <div *ngIf="pantalla && sesion">
             <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
-                <img src="../../../assets/Sharky.png" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
+                <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
             </a>
         </div>
 
@@ -56,9 +56,9 @@
         </div>
 
         <!--pantalla al ser verdadero osea pantalla > a 991 este cargara la seccion del usuario al final del navbar-->
-        <div *ngIf="!pantalla">
+        <div *ngIf="!pantalla && sesion">
             <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
-                <img src="../../../assets/Sharky.png" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
+                <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
             </a>
         </div>
     </div>

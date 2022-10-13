@@ -4,28 +4,52 @@
         <!-- imput de Usuario -->
         <div>
             <label><p class="card-text">Usuario</p></label>
-            <input [(ngModel)]="usuario" type="text" class="form-control" placeholder="ej: UsuarioCognito">
+            <input (change)="revisar()" [(ngModel)]="usuario" type="text" class="form-control">
         </div>
 
         <!-- imput de contraseña -->
         <div>
             <label><p class="card-text">Clave</p></label>
-            <input [(ngModel)]="clave1" type="password" class="form-control" placeholder="ej: *123PassworD456*">
+            <input (change)="revisar()" [(ngModel)]="clave1" type="password" class="form-control">
         </div>
 
         <div>
             <label><p class="card-text">Repetir clave</p></label>
-            <input [(ngModel)]="clave2" type="password" class="form-control" placeholder="ej: *123PassworD456*">
+            <input (change)="revisar()" [(ngModel)]="clave2" type="password" class="form-control">
         </div>
 
         <div>
             <label><p class="card-text">Icono</p></label>
-            <input class="form-control" type="file" accept=".jpg, .png, .jpeg">
+            <input (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
+            <img *ngIf="img != ''" src="{{img}}" class="w-25 h-25 rounded mx-auto d-block mt-2">
+        </div>
+
+        <div>
+            <label><p class="card-text">Tipo de cuenta</p></label>
+            <br>
+            <div class="form-check form-check-inline">
+                <input (input)="cambioTipo(1)" class="form-check-input" type="radio" name="flexRadioDefault" id="minimarket" checked>
+                <label class="form-check-label" for="minimarket">Minimarket</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input (input)="cambioTipo(2)" class="form-check-input" type="radio" name="flexRadioDefault" id="vendedor">
+                <label class="form-check-label" for="vendedor">Vendedor</label>
+            </div>
+        </div>
+
+        <div *ngIf="tipo==2">
+            <label><p class="card-text">Minimarket a vincular</p></label>
+            <input (change)="revisar()" [(ngModel)]="minimarket" type="text" class="form-control">
+        </div>
+
+        <div>
+            <label><p class="card-text">Codigo del minimarket </p></label>
+            <input (change)="revisar()" [(ngModel)]="codigo" type="password" class="form-control">
         </div>
 
         <!-- Boton de aceptar -->
-        <div class="text-center">
-            <button type="button" class="btn btn-dark bg-gradient">Registrarse</button>
+        <div class="text-center mt-3">
+            <button (click)="sesion()" [disabled]="!bandera" type="button" class="btn btn-dark bg-gradient">Registrarse</button>
         </div>
     </div>
 </div>

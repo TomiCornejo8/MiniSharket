@@ -30,6 +30,8 @@ export class CrearProductoComponent implements OnInit {
   //Bandera
   bandera:boolean = false;
 
+  textoImg:string;
+
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class CrearProductoComponent implements OnInit {
     this.proveedor = '';
     this.categorias = [];
     this.img = '';
+    this.textoImg = '';
 
     this.categoria = '';
     this.categoriasDP = ["C1", "C2", "C3"];

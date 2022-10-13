@@ -3,21 +3,21 @@
         <h5 class="Ingresar text-center">Inicar sesión</h5>
 
         <!-- <form action=""> -->
-            <!-- imput de Usuario -->
-            <div id="usuario">
-                <label><p class="card-text">Usuario</p></label>
-                <input type="text" class="form-control" placeholder="UsuarioCognito" [(ngModel)]="usuario">
+            <!-- imput de nombre -->
+            <div id="nombre">
+                <label><p class="card-text">nombre</p></label>
+                <input type="text" class="form-control" [(ngModel)]="nombre">
             </div>
 
             <!-- imput de contraseña -->
             <div id="clave">
                 <label><p class="card-text">Contraseña</p></label>
-                <input type="password" class="form-control" placeholder="ej: *123PassworD456*" [(ngModel)]="clave">
+                <input type="password" class="form-control" [(ngModel)]="clave">
             </div>
 
             <!-- Boton de aceptar -->
             <div class="text-center">
-                <button type="button" class="btn btn-dark bg-gradient">Ingresar</button>
+                <button [disabled]="nombre=='' || clave==''" (click)="ingresar()" type="button" class="btn btn-dark bg-gradient">Ingresar</button>
             </div>
     </div>
 </div>
