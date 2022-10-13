@@ -28,19 +28,22 @@
             <label><p class="card-text">Tipo de cuenta</p></label>
             <br>
             <div class="form-check form-check-inline">
-                <input (input)="cambioTipo('Minimarket')" class="form-check-input" type="radio" name="flexRadioDefault" id="minimarket" checked>
+                <input (input)="cambioTipo(1)" class="form-check-input" type="radio" name="flexRadioDefault" id="minimarket" checked>
                 <label class="form-check-label" for="minimarket">Minimarket</label>
             </div>
             <div class="form-check form-check-inline">
-                <input (input)="cambioTipo('Vendedor')" class="form-check-input" type="radio" name="flexRadioDefault" id="vendedor">
+                <input (input)="cambioTipo(2)" class="form-check-input" type="radio" name="flexRadioDefault" id="vendedor">
                 <label class="form-check-label" for="vendedor">Vendedor</label>
             </div>
         </div>
 
-        <div *ngIf="tipo=='Vendedor'">
+        <div *ngIf="tipo==2">
             <label><p class="card-text">Minimarket a vincular</p></label>
             <input (change)="revisar()" [(ngModel)]="minimarket" type="text" class="form-control">
-            <label><p class="card-text">Codigo</p></label>
+        </div>
+
+        <div>
+            <label><p class="card-text">Codigo del minimarket </p></label>
             <input (change)="revisar()" [(ngModel)]="codigo" type="password" class="form-control">
         </div>
 

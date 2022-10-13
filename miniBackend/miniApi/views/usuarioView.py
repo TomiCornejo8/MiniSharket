@@ -57,11 +57,21 @@ def usuario_detail_api_view(request,nombre=None,clave=None):
     return Response({'message':'Usuario not found'},status = status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
-def usuario_codigo_api_view(request,codigo=None):
-    usuario = Usuario.objects.filter(codigo = codigo).first()
+def usuario_codigo_api_view(request,nombre=None,codigo=None):
+    usuario = Usuario.objects.filter(nombre = nombre).first()
     if usuario:
         if request.method == 'GET':
-            usuario_serializer = UsuarioCodigoSerializer(usuario)
-            return Response(usuario_serializer.data,status = status.HTTP_200_OK)
-    
+            if usuario.codigo == codigo:
+                usuario_serializer = UsuarioCodigoSerializer(usuario)
+                return Response(usuario_serializer.data,status = status.HTTP_200_OK)
+    return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def usuario_check_api_view(request,nombre=None):
+    usuario = Usuario.objects.filter(nombre = nombre).first()
+    if request.method == 'GET':
+        if usuario:
+            return Response({"existe":"true"},status = status.HTTP_200_OK)
+        else:
+            return Response({"existe":"false"},status = status.HTTP_200_OK)
     return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)

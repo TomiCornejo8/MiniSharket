@@ -15,7 +15,18 @@ export class UsuarioService {
     return this.http.get(url);
   }
 
-  post(){
+  getNombre(nombre:string){
+    let url = this.url + nombre;
+    return this.http.get(url);
+  }
 
+  post(nombre:string,clave:string,icono:string,tipo:number,codigo:string,minimarket:number = 0){
+    let value;
+    if(minimarket == 0){
+      value = {"nombre":nombre,"clave":clave,"icono":icono,"codigo":codigo,"tipo":tipo};
+    }else{
+      value = {"nombre":nombre,"clave":clave,"icono":icono,"codigo":codigo,"minimarket":minimarket,"tipo":tipo};
+    }
+    return this.http.post(this.url,value);
   }
 }

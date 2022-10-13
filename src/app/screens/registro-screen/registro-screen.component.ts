@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-registro-screen',
@@ -12,42 +13,57 @@ export class RegistroScreenComponent implements OnInit {
   clave1: string = "";
   clave2: string = "";
   img: string = "";
-  
-  tipo:string = "Minimarket";
-  minimarket:string = "";
-  codigo:string = "";
 
-  bandera:boolean = false;
+  tipo: number = 1;
+  minimarket: string = "";
+  codigo: string = "";
 
-  constructor(private sanitizer: DomSanitizer) { }
+  bandera: boolean = false;
+
+  constructor(private sanitizer: DomSanitizer, private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
-    if(datos){
-      window.location.href="/inicio";
+    if (datos) {
+      window.location.href = "/inicio";
     }
   }
 
-  sesion(){
-    sessionStorage.setItem('usuario',JSON.stringify({"nombre":this.usuario,"icono":this.img,"tipo":this.tipo,"codigo":this.codigo}));
-    window.location.href="/inicio";
+  sesion() {
+    this.usuarioService.getNombre(this.usuario).subscribe(data=>{
+      if(data == false){
+        if (this.tipo == 1) {
+          this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo).subscribe(data => {
+            console.log(data);
+            if (data) {
+              sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+              window.location.href = "/inicio";
+            } else {
+              alert("Nombre de usuario ya esta registrado");
+            }
+          });
+        }
+      }else{
+        alert("Nombre de usuario ya esta en uso");
+      }
+    });
   }
 
-  revisar(){
-    if(this.usuario == "" || this.clave1 == "" || this.clave2 == ""){
+  revisar() {
+    if (this.usuario == "" || this.clave1 == "" || this.clave2 == "" || this.codigo == "") {
       this.bandera = false;
-    }else if(this.tipo == "Vendedor"){
-      if(this.minimarket == "" || this.codigo == ""){
+    } else if (this.tipo == 2) {
+      if (this.minimarket == "" || this.codigo == "") {
         this.bandera = false;
-      }else{
+      } else {
         this.bandera = true;
       }
-    }else{
+    } else {
       this.bandera = true;
     }
   }
 
-  cambioTipo(val:string){
+  cambioTipo(val: number) {
     this.tipo = val;
     this.revisar();
   }

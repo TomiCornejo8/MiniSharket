@@ -23,7 +23,7 @@ export class IngresoScreenComponent implements OnInit {
         sessionStorage.setItem('usuario',JSON.stringify({"nombre":data.nombre,"icono":data.icono,"tipo":data.tipo,"codigo":data.codigo}));
         window.location.href="/inicio";
       }else{
-        alert("ÑO 😾");
+        alert("No se pudo ingresar 🤨");
       }
     });
   }
