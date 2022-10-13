@@ -44,12 +44,15 @@ export class CrearProveedorComponent implements OnInit {
   }
 
   crear(){
+    this.emails.push(this.email);
+    this.numeros.push(this.numero);
     this.crearProveedor.emit(new Proveedor(this.nombre,this.emails,this.numeros));
     this.limpiar();
   }
 
   agregarEmail(){
     this.emails.push(this.email);
+    this.email = '';
   }
 
   agregarNumero(){

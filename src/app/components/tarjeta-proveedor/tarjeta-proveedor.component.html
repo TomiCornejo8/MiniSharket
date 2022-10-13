@@ -3,7 +3,7 @@
         <div class="card mb-2 col-10 col-md-5 me-2 border border-primary border-5">
             <div class="card-body m-1">
                 <button (click)="eliminar()"class="btn btn-dark bg-gradient border-secondary float-end p-2" type="button" data-bs-toggle="modal" data-bs-target="#advertencia">❌</button>
-                <button class="btn btn-dark bg-gradient border-secondary float-end me-3 p-2" type="button">📝</button>
+                <button class="btn btn-dark bg-gradient border-secondary float-end me-3 p-2" type="button" data-bs-toggle="modal" data-bs-target="#editarProveedor">📝</button>
                 <h2 class="card-title">{{proveedor.nombre}}</h2>
                 <p class="card-text">Email: {{proveedor.email}}</p>
                 <p class="card-text">Telefono: {{proveedor.numero}}</p>
@@ -28,3 +28,4 @@
 </div>
 
 <app-advertencia></app-advertencia>
+<app-editar-proveedor></app-editar-proveedor>

@@ -15,9 +15,11 @@
           <!-- Email proveedor -->
           <div>
             <label for="email" class="form-label">Email(*)</label>
-            <input [(ngModel)]="email" (keyup)="validarVacio()" id="email" type="text" class="form-control">
-            <button (click)="agregarEmail()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
-            <!-- <div>{{email}}</div> arreglar para que se vean segun se agregan -->
+            <div>
+              <input [(ngModel)]="email" (keyup)="validarVacio()" id="email" type="text" class="form-control">
+              <button (click)="agregarEmail()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
+            </div>
+            <!-- <div>{{emails}}</div> -->
           </div>
 
           <!-- Numero de contacto proveedor -->
@@ -30,6 +32,7 @@
         <div class="modal-footer">
           <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
           <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
+          <!-- <div>{{numeros}}</div> arreglar para que se vean segun se agregan -->
         </div>
   
       </div>
