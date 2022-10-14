@@ -8,13 +8,26 @@ import { Proveedor } from 'src/app/models/proveedor.model';
 export class EditarProveedorComponent implements OnInit,OnChanges {
   @Input() proveedorEntrada:any;
   @Output() proveedorCambiado = new EventEmitter<Proveedor>();
+  @Output() editarCancelado = new EventEmitter<boolean>();
   proveedorActual:Proveedor= new Proveedor();
-  vacio='';
+  emails=new Array();
+  numeros=new Array();
+  vacionumero='';
+  vacioEmail='';
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes,"En changes editar provee")
     if(changes['proveedorEntrada'].currentValue){
-      console.log(changes['proveedorEntrada'].currentValue)
         this.proveedorActual=changes['proveedorEntrada'].currentValue;
+        this.emails=new Array();
+        this.numeros=new Array();
+        this.proveedorActual.email.forEach(email=>{
+          this.emails.push(email);
+        });
+        this.proveedorActual.numero.forEach(numero=>{
+          this.numeros.push(numero);
+        });
+        
     }
   }
 
@@ -22,25 +35,37 @@ export class EditarProveedorComponent implements OnInit,OnChanges {
   }
 
   editarProveedor(nombre:string){
-    if(nombre!=='')this.proveedorActual.nombre=nombre;
+    if(nombre!==''){
+      this.proveedorActual.nombre=nombre;
+    }
+    if(this.emails.length!==0){
+      this.proveedorActual.email=this.emails;
+    }
+    if(this.numeros.length!==0){
+      this.proveedorActual.numero=this.numeros;
+    }
 
     this.proveedorCambiado.emit(this.proveedorActual);
   }
   agregarEmail(email:string){
-    if(email!='')this.proveedorActual.email.push(email);
-    this.vacio="";
+    if(email!='')this.emails.push(email);
+    this.vacioEmail="";
   }
   eliminarEmail(email:string){
-    this.proveedorActual.email.splice(this.proveedorActual.email.indexOf(email),1);
+    this.emails.splice(this.emails.indexOf(email),1);
   }
   
   agregarNumero(numero:string){
     if(numero!='')
-    {this.proveedorActual.numero.push(numero);
-    this.vacio="";}
+    {this.numeros.push(numero);
+    this.vacionumero="";}
   }
   eliminarNumero(numero:string){
-    this.proveedorActual.numero.splice(this.proveedorActual.numero.indexOf(numero),1);
+    this.numeros.splice(this.numeros.indexOf(numero),1);
   }
-  
+  limpiarVariablesLocales(){
+    this.vacionumero='';
+    this.vacioEmail='';
+    this.editarCancelado.emit(true);
+  }
 }

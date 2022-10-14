@@ -6,9 +6,10 @@
 
 <!-- Proveedores -->
 <div class="ms-3">
-    <app-tarjeta-proveedor (editarProvee)="editarProveedor($event)" (eliminarProveedor)="eliminarProveedor($event)" *ngFor="let proveedor of proveedores" [proveedor]="proveedor" [proveedorEditar]="proveedorEditado" ></app-tarjeta-proveedor>
+    <app-tarjeta-proveedor (editarProvee)="editarProveedor($event)" (eliminarProveedor)="eliminarProveedor($event)" 
+    *ngFor="let proveedor of proveedores" [proveedor]="proveedor" ></app-tarjeta-proveedor>
 </div>
 
 <app-crear-proveedor (crearProveedor)="crearProveedor($event)"></app-crear-proveedor>
 
-<app-editar-proveedor [proveedorEntrada]="provedorEditar" (proveedorCambiado)="proveedorEditado($event)"></app-editar-proveedor>
+<app-editar-proveedor [proveedorEntrada]="proveedorEditar" (proveedorCambiado)="proveedor_Editado($event)"  (editarCancelado)="limpiarProveedorEditado($event)" ></app-editar-proveedor>

@@ -10,8 +10,8 @@ export class ProveedoresScreenComponent implements OnInit {
   ngOnInit(): void {
   }
   w=window.sessionStorage;
-  provedorEditar:any;
-  provedorEditado:any;
+  proveedorEditar:any;
+  proveedorEditado:any;
   proveedores:Proveedor[] =[
     new Proveedor("Don juanito",["Donjuanito@mail.com"],["+569124141"]),
     new Proveedor("Donsella",["Donsella@mail.com"],["+569123512"]),
@@ -30,11 +30,15 @@ export class ProveedoresScreenComponent implements OnInit {
   }
   
   editarProveedor(proveedor:any){
-    this.provedorEditar=proveedor;
+    this.proveedorEditar=proveedor;
 
   }
-  proveedorEditado(proveedor:any){
-    this.provedorEditado=proveedor;
+  proveedor_Editado(proveedor:any){
+    this.proveedorEditado=proveedor;
   }
-
+  limpiarProveedorEditado(flag:any){
+    if(flag){
+      this.proveedorEditar=new Proveedor();
+    }
+  }
 }

@@ -21,6 +21,7 @@ export class TarjetaProveedorComponent implements OnInit,OnChanges {
     if(this.editar===true){
       this.proveedor=changes['proveedorEditar'].currentValue
       this.editar=false
+      console.log(this.editar)
     }
   }
 
@@ -28,7 +29,6 @@ export class TarjetaProveedorComponent implements OnInit,OnChanges {
   }
 
   eliminar(respuesta:any){
-    console.log(this.proveedor)
     if(respuesta)this.eliminarProveedor.emit(this.proveedor)
   }
 
