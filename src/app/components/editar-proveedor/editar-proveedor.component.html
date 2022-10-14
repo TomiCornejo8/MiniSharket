@@ -5,32 +5,42 @@
         <div class="modal-content bg-primary text-white">
   
         <div class="modal-header">
-          <h5 class="modal-title" id="crearProveedorLabel"><b>Crear proveedor 🛍</b></h5>
+          <h5 class="modal-title" id="crearProveedorLabel"><b>Editar proveedor 🛍</b></h5>
         </div>
   
         <div class="modal-body">
           <!-- Nombre proveedor -->
           <label for="nombre" class="form-label">Nombre(*)</label>
-          <input id="nombre" type="text" class="form-control">
+          <input id="nombre" type="text" class="form-control" value="{{proveedorActual.nombre}}" #nombre>
 
           <!-- Email proveedor -->
           <div>
             <label for="email" class="form-label">Email(*)</label>
-            <div>
-              <input id="email" type="text" class="form-control">
-            </div>
+           
+              <div style="display: inline-flex;padding-bottom: 3%;"><input id="email" type="text" class="form-control" style="width: 24rem" #email [(ngModel)]="vacio"><button style="margin-left: 15px" (click)="agregarEmail(email.value)">Agregar</button></div>
+              <div style="background-color: white;height: 6rem;overflow: auto;">
+                <div *ngFor="let proveedorEmail of proveedorActual.email" style="height: 2rem; width:fit-content ; display: inline-flex;border:solid black 0.008rem">
+                  <p style="color: black;height: 2.9rem">{{proveedorEmail}}</p><button type="button" style="height: 2rem;background-color: red;float: right;width: auto;" (click)="eliminarEmail(proveedorEmail)">X</button>
+                </div>
+              </div>
+            
             <!-- <div>{{emails}}</div> -->
           </div>
 
           <!-- Numero de contacto proveedor -->
           <div>
             <label for="numero" class="form-label">Numero de contacto(*)</label>
-            <input id="numero" type="text" class="form-control">
+            <div style="display: inline-flex;padding-bottom: 3%;"><input id="numero" type="text" class="form-control" style="width: 24rem" #numero [(ngModel)]="vacio"><button style="margin-left: 15px" (click)="agregarNumero(numero.value)">Agregar</button></div>
+            <div style="background-color: white;height: 6rem;overflow: auto;">
+              <div *ngFor="let proveedorNumero of proveedorActual.numero " style="height: 2rem; width:fit-content  ; display: inline-flex;border:solid black 0.008rem">
+                  <p style="color: black; height: 2.9rem">{{proveedorNumero}}</p><button type="button" style="height: 2rem;background-color: red;float: right;width: auto;" (click)="eliminarNumero(proveedorNumero)">X</button>
+              </div>
+            </div>
           </div>
   
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal" (click)="editarProveedor(nombre.value)">Editar</button>
           <!-- <div>{{numeros}}</div> arreglar para que se vean segun se agregan -->
         </div>
   

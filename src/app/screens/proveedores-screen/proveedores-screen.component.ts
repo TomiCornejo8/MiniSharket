@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Proveedor } from 'src/app/models/proveedor.model';
 
 @Component({
@@ -7,8 +7,11 @@ import { Proveedor } from 'src/app/models/proveedor.model';
   styleUrls: ['./proveedores-screen.component.sass']
 })
 export class ProveedoresScreenComponent implements OnInit {
-
+  ngOnInit(): void {
+  }
   w=window.sessionStorage;
+  provedorEditar:any;
+  provedorEditado:any;
   proveedores:Proveedor[] =[
     new Proveedor("Don juanito",["Donjuanito@mail.com"],["+569124141"]),
     new Proveedor("Donsella",["Donsella@mail.com"],["+569123512"]),
@@ -17,26 +20,21 @@ export class ProveedoresScreenComponent implements OnInit {
 
   constructor() { }
 
+
   crearProveedor(proveedor:Proveedor){
     this.proveedores.push(proveedor);
   }
 
   eliminarProveedor(proveedor:Proveedor){
-    let stringEliminarProducto='flagEliminarProducto';
-    let flagEliminarProducto= this.w.getItem(stringEliminarProducto);
-    console.log(flagEliminarProducto);
-    if(flagEliminarProducto!==null){
-      let flagEliminar = JSON.parse(flagEliminarProducto);
-      if(flagEliminarProducto ==="true"){
-        this.proveedores.splice(this.proveedores.indexOf(proveedor),1);
-        flagEliminar=false;
-        this.w.setItem(stringEliminarProducto,JSON.stringify(flagEliminar));
-      }
-    }
-    
+      this.proveedores.splice(this.proveedores.indexOf(proveedor),1);   
   }
   
-  ngOnInit(): void {
+  editarProveedor(proveedor:any){
+    this.provedorEditar=proveedor;
+
+  }
+  proveedorEditado(proveedor:any){
+    this.provedorEditado=proveedor;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Proveedor } from 'src/app/models/proveedor.model';
 
 @Component({
@@ -6,28 +6,35 @@ import { Proveedor } from 'src/app/models/proveedor.model';
   templateUrl: './tarjeta-proveedor.component.html',
   styleUrls: ['./tarjeta-proveedor.component.sass']
 })
-export class TarjetaProveedorComponent implements OnInit {
+export class TarjetaProveedorComponent implements OnInit,OnChanges {
 
   @Output() eliminarProveedor = new EventEmitter<Proveedor>();
+  @Output() editarProvee = new EventEmitter<Proveedor>();
   @Input() proveedor:Proveedor;
+  @Input() proveedorEditar:any;
+  editar=false
   w=window.sessionStorage;
   insumoFlag:boolean = false;
 
   constructor() { }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.editar===true){
+      this.proveedor=changes['proveedorEditar'].currentValue
+      this.editar=false
+    }
+  }
 
   ngOnInit(): void {
   }
 
-  eliminar(){
-    let eliminar=this.eliminarProveedor;
-    let proveedor=this.proveedor;
-    setTimeout(function(){
-      eliminar.emit(proveedor);
-    },2500);
+  eliminar(respuesta:any){
+    console.log(this.proveedor)
+    if(respuesta)this.eliminarProveedor.emit(this.proveedor)
   }
 
   editarProveedor(){
-    
+    this.editarProvee.emit(this.proveedor);
+    this.editar=true;
   }
 
   insumoBtn(){

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  sesion:boolean = false;
+  sesion:boolean = true;
   pantalla:boolean = false;
   icono:string = "";
 
