@@ -14,9 +14,8 @@ export class AdvertenciaComponent implements OnInit {
   }
 
   revisarRespuesta(respuesta:boolean){
-    if(respuesta === true){
         this.respuesta.emit(respuesta);
-      }
+     
   }
 
 }

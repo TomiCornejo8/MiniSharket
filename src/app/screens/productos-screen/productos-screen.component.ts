@@ -10,6 +10,8 @@ import { RegistroProducto } from 'src/app/models/registroProducto.model';
 })
 export class ProductosScreenComponent implements OnInit{
  @Input() productoEditarr:Producto;
+ productoAEliminar:Producto;
+ banderaEliminarProducto:boolean;
  prodEditado:any;
   w=window.sessionStorage;
   productos:Producto[] = [
@@ -32,11 +34,6 @@ export class ProductosScreenComponent implements OnInit{
     this.w.setItem("arrayProductos",JSON.stringify(this.productos));
   }
 
-  //indexof: devuelve la posición del elemento entregado
-  //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
-  eliminarProducto(producto:Producto){
-          this.productos.splice(this.productos.indexOf(producto),1);    
-  }
 
   agregarCarrito(producto:Producto){
     this.carrito.lista.push(new RegistroProducto(1,producto.nombre,producto.precio,producto.unidad,producto));
@@ -53,5 +50,28 @@ export class ProductosScreenComponent implements OnInit{
   }
   productoEditado(producto:any){
     this.productoEditarr=producto;
+  }
+  eliminarProductoBandera(respuesta:any){
+    this.banderaEliminarProducto=respuesta;
+    if(respuesta===false){
+      this.productoAEliminar=new Producto();
+    }
+    
+  }
+
+  //indexof: devuelve la posición del elemento entregado
+  //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
+  eliminarProductoI(producto:Producto){
+    console.log(this.productoAEliminar ===producto);
+    if(this.productoAEliminar ===producto){
+      this.productos.splice(this.productos.indexOf(producto),1);  
+      this.productoAEliminar=new Producto();
+      console.log(this.productos);
+    }
+      
+  
+  }
+  guardarProductoActivo(producto:any){
+    this.productoAEliminar=producto;
   }
 }
