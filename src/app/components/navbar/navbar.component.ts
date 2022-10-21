@@ -19,6 +19,8 @@ export class NavbarComponent implements OnInit {
     if(datos){
       this.sesion = true;
       this.icono = JSON.parse(datos || "[]").icono;
+    }else{
+      this.sesion = false;
     }
   }
 
@@ -28,6 +30,5 @@ export class NavbarComponent implements OnInit {
     }else{
       this.pantalla = false;
     }
-
   }
 }
