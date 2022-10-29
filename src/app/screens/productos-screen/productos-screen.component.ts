@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { Producto } from 'src/app/models/producto.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 
 @Component({
   selector: 'app-productos-screen',
@@ -14,19 +15,32 @@ export class ProductosScreenComponent implements OnInit{
  banderaEliminarProducto:boolean;
  prodEditado:any;
   w=window.sessionStorage;
-  productos:Producto[] = [
+  productos:Producto[] = [];
+  /*[
     new Producto("Queso mantecoso","Unidad",40,1,"Calo"),
     new Producto("Jamon","Unidad",25,1,"San Jorge"),
     new Producto("Palta","Kilogramo",50,1,"La feria")
-  ];
+  ];*/
 
   carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
   cant:number = 0;
 
-  constructor() { }
+  constructor(private productoService:ProductoService) {
+    let datos = sessionStorage.getItem('usuario');
+    if(datos){
+      let minimarket = JSON.parse(datos || "[]").id; //Se obtiene el id del usuario logueado
+      productoService.get(minimarket).subscribe(data=>{
+        this.productos = data;
+      });
+    }else{
+      window.location.href="/inicio";
+    }
+
+   }
  
 
   ngOnInit(): void {
+    
   }
 
   crearProducto(producto:Producto){

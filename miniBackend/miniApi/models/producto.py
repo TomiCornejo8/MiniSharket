@@ -12,5 +12,5 @@ class Producto(models.Model):
     img = models.ImageField(blank='',default="",upload_to='img/')
     minimarket = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     unidad = models.ForeignKey(Unidad,on_delete=models.DO_NOTHING)
-    categorias = models.ManyToManyField(Categoria)
+    categorias = models.ManyToManyField(Categoria,null=True)
 

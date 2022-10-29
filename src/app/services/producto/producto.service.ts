@@ -11,14 +11,20 @@ export class ProductoService {
 
   constructor(private http:HttpClient) { }
 
-  get(minimarket:string):Observable<any>{
-    let url = this.url + minimarket;
+  get(minimarket:number):Observable<any>{
+    let url = this.url + "minimarket/" + minimarket;
     return this.http.get(url);
   }
 
   post(producto:Producto){
-    let value = {};
+    let value = {"nombre":producto.nombre,
+    "stock":producto.stock,
+    "precio":producto.precio,
+    "nVentas":producto.nVentas,
+    "img":producto.img,
+    "minimarket":producto.minimarket,
+    "unidad":producto.unidad,
+    "categorias":producto.categorias};
     return this.http.post(this.url,value);
   }
-  
 }

@@ -19,7 +19,7 @@
         <label for="unidadP" class="form-label">Tipo de unidad(*)</label>
         <select [(ngModel)]="unidad" (change)="validarVacio()" id="unidadP" class="form-select" aria-label="Default select example">
           <option value="">Selecciona una unidad</option>
-          <option *ngFor="let unidadi of unidadesDP">{{unidadi}}</option>
+          <option *ngFor="let unidadi of unidadesDP">{{unidadi.unidad}}</option>
         </select>
 
         <!-- Stock -->
@@ -59,6 +59,9 @@
         <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
       </div>
 
+      <!-- <div class="text-center mt-1 mb-1">
+        <button (click)="check()" type="button" class="btn btn-warning bg-gradient border border-dark p-1">👀</button>
+      </div> -->
     </div>
   </div>
 </div>

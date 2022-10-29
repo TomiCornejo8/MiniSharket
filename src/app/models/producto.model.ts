@@ -7,8 +7,10 @@ export class Producto{
     categorias:string[];
     img:string;
     banderaCarrito:boolean;
+    nVentas:number;
+    minimarket:number;
 
-    constructor(nombre?:string,unidad?:string,stock?:number,precio?:number,proveedor:string = "",categorias:string[] = [],img:string = "",banderaCarrito = false){
+    constructor(nombre?:string,unidad?:string,stock?:number,precio?:number,proveedor:string = "",categorias:string[] = [],img:string = "",banderaCarrito = false,nVentas:number=0,minimarket:number = -1){
         //Campos obligatorios
         this.nombre = nombre == null? "" : nombre;
         this.unidad = unidad == null ? "" : unidad;
@@ -20,6 +22,8 @@ export class Producto{
         this.categorias = categorias;
         this.img = img;
         this.banderaCarrito = banderaCarrito;
+        this.nVentas = nVentas;
+        this.minimarket = minimarket;
     }
     
 }

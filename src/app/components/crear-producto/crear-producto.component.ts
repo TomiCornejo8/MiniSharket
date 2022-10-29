@@ -1,6 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Categoria } from 'src/app/models/categoria.model';
 import { Producto } from 'src/app/models/producto.model';
+import { Unidad } from 'src/app/models/unidad.model';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { ProductoService } from 'src/app/services/producto/producto.service';
+import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
 @Component({
   selector: 'app-crear-producto',
@@ -22,9 +27,10 @@ export class CrearProductoComponent implements OnInit {
  
 
   //Variables de los dropdown
-  unidadesDP: string[] = ["Unidad", "Kilogramo", "Gramo"];
+  unidadesDP:Unidad[] = [];
   categoria: string = '';
-  categoriasDP: string[] = ["C1", "C2", "C3"];
+  hola:string[];
+  categoriasDP:string[] = ["C1","C2","C3"];
   proveedoresDP: string[] = ["P1", "P2", "P3"];
 
   //Bandera
@@ -32,10 +38,31 @@ export class CrearProductoComponent implements OnInit {
 
   textoImg:string;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer,
+    private productoService:ProductoService,
+    private unidadService:UnidadService,
+    private categoriaService:CategoriaService) { }
 
   ngOnInit(): void {
+    this.unidadService.list().subscribe(data =>{
+      this.unidadesDP = data;
+    });
   }
+
+  // check(){
+  //   alert(this.hola[0]);
+  // }
+
+  // obtenerCategorias(){
+  //   let dataSesion = sessionStorage.getItem('usuario');
+  //   if(dataSesion){
+  //     let minimarket = JSON.parse(dataSesion || "[]").id;
+  //     this.categoriaService.list(minimarket).subscribe(x=>{
+  //       this.categoriasDP = x;
+        
+  //     });
+  //   }
+  // }
 
   nuevaCategoria() {
     if (this.categoria != '') {
@@ -60,7 +87,7 @@ export class CrearProductoComponent implements OnInit {
     this.textoImg = '';
 
     this.categoria = '';
-    this.categoriasDP = ["C1", "C2", "C3"];
+    this.categorias = ["C1","C2","C3"];
     this.bandera = false;
   }
 
@@ -104,7 +131,12 @@ export class CrearProductoComponent implements OnInit {
   });
 
   crear(){
-    this.crearProducto.emit(new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,this.categorias,this.img));
+    let dataSesion = sessionStorage.getItem('usuario');
+    this.unidadesDP.forEach(x =>{
+      if(x.unidad == this.unidad) this.unidad = x.id.toString();
+    });
+    let producto = new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,this.categorias,this.img,false,0,JSON.parse(dataSesion || "[]").id);
+    this.crearProducto.emit(producto);
     this.limpiar();
   }
 }

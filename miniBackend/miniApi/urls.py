@@ -22,18 +22,18 @@ urlpatterns = [
 
     path('producto/',producto_api_view),
     path('producto/<int:id>',producto_detail_api_view),
-    path('producto/<int:minimarket>',producto_minimarket_api_view),
+    path('producto/minimarket/<int:minimarket>',producto_minimarket_api_view),
 
     path('unidad/',unidad_api_view),
     path('unidad/<int:id>',unidad_detail_api_view),
 
     path('categoria/',categoria_api_view),
     path('categoria/<int:id>',categoria_detail_api_view),
-    path('categoria/<int:minimarket>',categoria_minimarket_api_view),
+    path('categoria/minimarket/<int:minimarket>',categoria_minimarket_api_view),
 
     path('proveedor/',proveedor_api_view),
     path('proveedor/<int:id>',proveedor_detail_api_view),
-    path('proveedor/<int:minimarket>',proveedor_minimarket_api_view),
+    path('proveedor/minimarket/<int:minimarket>',proveedor_minimarket_api_view),
 
     path('email/',email_api_view),
     path('email/<int:id>',email_detail_api_view),

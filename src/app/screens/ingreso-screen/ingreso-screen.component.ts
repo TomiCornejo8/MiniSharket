@@ -20,7 +20,7 @@ export class IngresoScreenComponent implements OnInit {
   ingresar(){
     this.usuarioService.get(this.nombre,this.clave).subscribe(data=>{
       if(data){
-        sessionStorage.setItem('usuario',JSON.stringify({"nombre":data.nombre,"icono":data.icono,"tipo":data.tipo,"codigo":data.codigo}));
+        sessionStorage.setItem('usuario',JSON.stringify({"id":data.id,"nombre":data.nombre,"icono":data.icono,"tipo":data.tipo,"codigo":data.codigo}));
         window.location.href="/inicio";
       }else{
         alert("No se pudo ingresar 🤨");
