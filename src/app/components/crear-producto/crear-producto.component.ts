@@ -80,6 +80,18 @@ export class CrearProductoComponent implements OnInit {
     this.categoria = this.dCategoria;
   }
 
+  listarCategorias(){
+    this.categoria = this.dCategoria; //Cambiar el categoria
+    this.categoriasDP = [];
+    let dataSesion = sessionStorage.getItem('usuario');
+    if(dataSesion){
+      let minimarket = JSON.parse(dataSesion || "[]").id;
+      this.categoriaService.list(minimarket).subscribe(data =>{
+        this.categoriasDP = data;
+      });
+    }
+  }
+
   limpiar(){
     this.nombre = '';
     this.unidad = '';
@@ -89,17 +101,7 @@ export class CrearProductoComponent implements OnInit {
     this.categorias = [];
     this.img = '';
     this.textoImg = '';
-
-    this.categoria = this.dCategoria; //Cambiar el categoria
-    
-    let dataSesion = sessionStorage.getItem('usuario');
-    if(dataSesion){
-      let minimarket = JSON.parse(dataSesion || "[]").id;
-      this.categoriaService.list(minimarket).subscribe(data =>{
-        this.categoriasDP = data;
-      });
-    }
-
+    this.listarCategorias();
     this.bandera = false;
   }
 
@@ -141,14 +143,27 @@ export class CrearProductoComponent implements OnInit {
       return null;
     }
   });
-
+  /*
+  nombre = models.CharField(max_length=100)
+  stock = models.FloatField()
+  precio = models.PositiveIntegerField()
+  nVentas = models.PositiveBigIntegerField()
+  img = models.ImageField(blank='',default="",upload_to='img/')
+  minimarket = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+  unidad = models.ForeignKey(Unidad,on_delete=models.DO_NOTHING)
+  proveedor = models.ForeignKey(Proveedor,on_delete=models.DO_NOTHING,null=True)
+  categorias = models.ManyToManyField(Categoria,default = "")*/
   crear(){
     let dataSesion = sessionStorage.getItem('usuario');
     this.unidadesDP.forEach(x =>{
       if(x.unidad == this.unidad) this.unidad = x.id.toString();
     });
-    // let producto = new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,this.categorias,this.img,false,0,JSON.parse(dataSesion || "[]").id);
-    // this.crearProducto.emit(producto);
+    this.proveedoresDP.forEach(x =>{
+      if(x.nombre == this.proveedor) this.proveedor = x.id.toString();
+    });
+    let categoriaID = this.categorias.map(x => x.id.toString());
+    let producto = new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,categoriaID,this.img,false,0,JSON.parse(dataSesion || "[]").id);
+    this.crearProducto.emit(producto);
     this.limpiar();
   }
 }
