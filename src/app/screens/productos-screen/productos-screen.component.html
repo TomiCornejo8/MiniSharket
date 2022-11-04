@@ -20,8 +20,8 @@
 
     <!-- Tarjetas de productos -->
     <div class="d-flex flex-wrap mt-3 ms-4">
-        <app-tarjeta-producto (editarProductoFlag)="editarProducto($event)" (agregarCarrito)="agregarCarrito($event)" [respuestaEliminar]="banderaEliminarProducto"
-        (eliminarProducto)="eliminarProductoI($event)" *ngFor="let producto of productos" [producto]="producto" [productoEditar]="productoEditarr"   (productoPresionoBoton)="guardarProductoActivo($event)"></app-tarjeta-producto>
+        <app-tarjeta-producto (editarProductoFlag)="editarProducto($event)" (agregarCarrito)="agregarCarrito($event)" 
+        (eliminarProducto)="eliminarProductoI($event)" *ngFor="let producto of productos" [producto]="producto" [productoEditar]="productoEditarr"  ></app-tarjeta-producto>
     </div>    
 </div>
 
@@ -30,4 +30,4 @@
 <app-carrito-venta (menosProducto)="quitarCarrito()" [carrito]="carrito"></app-carrito-venta>
 <app-crear-producto (crearProducto)="crearProducto($event)"></app-crear-producto>
 <app-editar-producto [productoEntrada]="this.productoEditarr"  (productoCambiado)="productoEditado($event)"></app-editar-producto>
-<app-advertencia (respuesta)="eliminarProductoBandera($event)"></app-advertencia>
+<app-advertencia ></app-advertencia>
