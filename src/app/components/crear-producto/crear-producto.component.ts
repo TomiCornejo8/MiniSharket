@@ -2,9 +2,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Categoria } from 'src/app/models/categoria.model';
 import { Producto } from 'src/app/models/producto.model';
+import { Proveedor } from 'src/app/models/proveedor.model';
 import { Unidad } from 'src/app/models/unidad.model';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
 @Component({
@@ -17,21 +19,23 @@ export class CrearProductoComponent implements OnInit {
   @Output() crearProducto = new EventEmitter<Producto>();
   
   //Atributos de producto a crear
-  nombre: string = '';
-  unidad: string = '';
-  stock: number = 0;
-  precio: number = 0;
-  proveedor: string = '';
-  categorias: string[] = [];
-  img: string = '';
- 
+  nombre: string;
+  unidad: string;
+  stock: number;
+  precio: number;
+  proveedor: string;
+  categorias:Categoria[];
+  img: string;
 
   //Variables de los dropdown
-  unidadesDP:Unidad[] = [];
-  categoria: string = '';
-  hola:string[];
-  categoriasDP:string[] = ["C1","C2","C3"];
-  proveedoresDP: string[] = ["P1", "P2", "P3"];
+  unidadesDP:Unidad[];
+  categoria:Categoria;
+  categoriasDP:Categoria[];
+  proveedoresDP:Proveedor[];
+
+
+  //DEFAULTS
+  dCategoria:Categoria = new Categoria(0,"");
 
   //Bandera
   bandera:boolean = false;
@@ -41,39 +45,39 @@ export class CrearProductoComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer,
     private productoService:ProductoService,
     private unidadService:UnidadService,
-    private categoriaService:CategoriaService) { }
+    private categoriaService:CategoriaService,
+    private proveedorService:ProveedorService) { }
 
   ngOnInit(): void {
+    this.limpiar();
     this.unidadService.list().subscribe(data =>{
       this.unidadesDP = data;
     });
+    let dataSesion = sessionStorage.getItem('usuario');
+    if(dataSesion){
+      let minimarket = JSON.parse(dataSesion || "[]").id;
+      this.proveedorService.get(minimarket).subscribe(data =>{
+        this.proveedoresDP = data;
+      });
+    }
   }
 
-  // check(){
-  //   alert(this.hola[0]);
-  // }
-
-  // obtenerCategorias(){
-  //   let dataSesion = sessionStorage.getItem('usuario');
-  //   if(dataSesion){
-  //     let minimarket = JSON.parse(dataSesion || "[]").id;
-  //     this.categoriaService.list(minimarket).subscribe(x=>{
-  //       this.categoriasDP = x;
-        
-  //     });
-  //   }
-  // }
+  check(){
+    let categoriaID = this.categorias.map(x => x.id);
+  }
 
   nuevaCategoria() {
-    if (this.categoria != '') {
+    if (this.categoria.categoria != '') {
       this.categorias.push(this.categoria);
       this.categoriasDP.splice(this.categoriasDP.indexOf(this.categoria), 1);
+      this.categoria = this.dCategoria;
     }
   }
 
   quitarCategoria(i: number) {
     this.categoriasDP.push(this.categorias[i]);
     this.categorias.splice(i, 1);
+    this.categoria = this.dCategoria;
   }
 
   limpiar(){
@@ -86,8 +90,16 @@ export class CrearProductoComponent implements OnInit {
     this.img = '';
     this.textoImg = '';
 
-    this.categoria = '';
-    this.categorias = ["C1","C2","C3"];
+    this.categoria = this.dCategoria; //Cambiar el categoria
+    
+    let dataSesion = sessionStorage.getItem('usuario');
+    if(dataSesion){
+      let minimarket = JSON.parse(dataSesion || "[]").id;
+      this.categoriaService.list(minimarket).subscribe(data =>{
+        this.categoriasDP = data;
+      });
+    }
+
     this.bandera = false;
   }
 
@@ -135,8 +147,8 @@ export class CrearProductoComponent implements OnInit {
     this.unidadesDP.forEach(x =>{
       if(x.unidad == this.unidad) this.unidad = x.id.toString();
     });
-    let producto = new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,this.categorias,this.img,false,0,JSON.parse(dataSesion || "[]").id);
-    this.crearProducto.emit(producto);
+    // let producto = new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,this.categorias,this.img,false,0,JSON.parse(dataSesion || "[]").id);
+    // this.crearProducto.emit(producto);
     this.limpiar();
   }
 }

@@ -38,19 +38,18 @@
         <label for="proveedor" class="form-label">Proveedor</label>
         <select [(ngModel)]="proveedor" id="proveedor" class="form-select" aria-label="Default select example">
           <option value="">Selecciona un provedor</option>
-          <option *ngFor="let proveedori of proveedoresDP">{{proveedori}}</option>
+          <option *ngFor="let proveedori of proveedoresDP">{{proveedori.nombre}}</option>
         </select>
 
         <!-- Seleccionar categoria -->
         <label for="CategoriaP" class="form-label">Categoria</label>
         <select [(ngModel)]="categoria" (ngModelChange)="nuevaCategoria()" id="categoriaP" class="form-select" aria-label="Default select example">
-          <option value="">Selecciona una categoria</option>
-          <option *ngFor="let categoriai of categoriasDP">{{categoriai}}</option>
+          <option [ngValue]="dCategoria">Selecciona una categoria</option>
+          <option *ngFor="let categoriai of categoriasDP" [ngValue]="categoriai">{{categoriai.categoria}}</option>
         </select>
-        
-
+      
         <ul class="list-group">
-          <li class="list-group-item" *ngFor="let categoriaj of categorias; let i = index">{{categoriaj}} <button (click)="quitarCategoria(i)" type="button" class="btn btn-dark bg-gradient border-dark rounded-circle p-1 float-end">❌</button></li>
+          <li class="list-group-item" *ngFor="let categoriaj of categorias; let i = index">{{categoriaj.categoria}} <button (click)="quitarCategoria(i)" type="button" class="btn btn-dark bg-gradient border-dark rounded-circle p-1 float-end">❌</button></li>
         </ul>
       </div>
 
@@ -59,9 +58,9 @@
         <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
       </div>
 
-      <!-- <div class="text-center mt-1 mb-1">
+      <div class="text-center mt-1 mb-1">
         <button (click)="check()" type="button" class="btn btn-warning bg-gradient border border-dark p-1">👀</button>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>

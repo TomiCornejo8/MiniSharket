@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'miniBackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'minidb',
+        'NAME': 'minidb1',
         'USER': 'postgres',
         'PASSWORD':'123456',
         'HOST':'localhost',

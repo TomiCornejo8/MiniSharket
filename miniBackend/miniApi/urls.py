@@ -23,6 +23,7 @@ urlpatterns = [
     path('producto/',producto_api_view),
     path('producto/<int:id>',producto_detail_api_view),
     path('producto/minimarket/<int:minimarket>',producto_minimarket_api_view),
+    path('producto/proveedor/<int:proveedor>',producto_minimarket_api_view),
 
     path('unidad/',unidad_api_view),
     path('unidad/<int:id>',unidad_detail_api_view),

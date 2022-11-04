@@ -1,5 +1,6 @@
 from django.db import models
 
+from .proveedor import Proveedor
 from .categoria import Categoria
 from .unidad import Unidad
 from .usuario import Usuario
@@ -12,5 +13,5 @@ class Producto(models.Model):
     img = models.ImageField(blank='',default="",upload_to='img/')
     minimarket = models.ForeignKey(Usuario,on_delete=models.CASCADE)
     unidad = models.ForeignKey(Unidad,on_delete=models.DO_NOTHING)
-    categorias = models.ManyToManyField(Categoria,null=True)
-
+    proveedor = models.ForeignKey(Proveedor,on_delete=models.DO_NOTHING,null=True)
+    categorias = models.ManyToManyField(Categoria,default = "")

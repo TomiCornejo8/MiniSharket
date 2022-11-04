@@ -10,6 +10,7 @@ from .models.tipoRegistro import TipoRegistro
 from .models.tipoCuenta import TipoCuenta
 from .models.unidad import Unidad
 from .models.usuario import Usuario
+from .models.img import Img
 
 # Register your models here.
 admin.site.register(Categoria)
@@ -23,3 +24,4 @@ admin.site.register(TipoRegistro)
 admin.site.register(TipoCuenta)
 admin.site.register(Unidad)
 admin.site.register(Usuario)
+admin.site.register(Img)
