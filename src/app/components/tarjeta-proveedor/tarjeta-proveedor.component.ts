@@ -54,28 +54,15 @@ export class TarjetaProveedorComponent implements OnInit,OnChanges {
   
   confirmBox(){  
     Swal.fire({  
-      title: 'Are you sure want to remove?',  
-      text: 'You will not be able to recover this file!',  
-      icon: 'warning',  
+      html:
+      "<span style='font-size: 33px'>Esta seguro que quiere eliminar el proveedor "+"<b>"+this.proveedor.nombre+"</b> </span>", 
+      text: 'No podra ser recuperado',    
       showCancelButton: true,  
-      confirmButtonText: 'Yes, delete it!',  
-      cancelButtonText: 'No, keep it'  
+      confirmButtonText: 'Si,eliminar',  
+      cancelButtonText: 'No,cancelar'  
     }).then((result) => {  
-      if (result.value) {  
-        Swal.fire(  
-          'Deleted!',  
-          'Your imaginary file has been deleted.',  
-          'success'  
-        )  ;
+      if (result.value) { 
         this.eliminarProveedor.emit(this.proveedor);
-      } 
-      else if (result.dismiss === Swal.DismissReason.cancel) {  
-        Swal.fire(  
-          'Cancelled',  
-          'Your imaginary file is safe :)',  
-          'error'  
-        )  
-        
       }  
     })  
   }  

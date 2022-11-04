@@ -53,32 +53,23 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
   
 
   confirmBox(){  
-    Swal.fire({  
-      title: 'Are you sure want to remove?',  
-      text: 'You will not be able to recover this file!',  
-      icon: 'warning',  
+    let imagen=this.producto.img == '' ? "../../../assets/producto.png" : this.producto.img;
+    Swal.fire({ 
+      html:
+      "<span style='font-size: 33px'>Esta seguro que quiere eliminar el proveedor "+"<b>"+this.producto.nombre+"</b> </span>", 
+      text: 'No podra ser recuperado',  
+      imageUrl:imagen,
+      imageHeight: 300,
       showCancelButton: true,  
-      confirmButtonText: 'Yes, delete it!',  
-      cancelButtonText: 'No, keep it'  
+      confirmButtonText: 'Si,eliminar',  
+      cancelButtonText: 'No,cancelar'  
     }).then((result) => {  
       if (result.value) {  
-        Swal.fire(  
-          'Deleted!',  
-          'Your imaginary file has been deleted.',  
-          'success'  
-        )  ;
         this.eliminarProducto.emit(this.producto);
       } 
-      else if (result.dismiss === Swal.DismissReason.cancel) {  
-        Swal.fire(  
-          'Cancelled',  
-          'Your imaginary file is safe :)',  
-          'error'  
-        )  
-        
-      }  
     })  
   }  
-
+  
+  
 
 }
