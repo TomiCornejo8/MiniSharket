@@ -3,6 +3,7 @@ import { Producto } from 'src/app/models/producto.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
 @Component({
   selector: 'app-productos-screen',
@@ -25,22 +26,18 @@ export class ProductosScreenComponent implements OnInit{
   carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
   cant:number = 0;
 
-  constructor(private productoService:ProductoService) {
+  constructor(private productoService:ProductoService){}
+
+  ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
     if(datos){
       let minimarket = JSON.parse(datos || "[]").id; //Se obtiene el id del usuario logueado
-      productoService.get(minimarket).subscribe(data=>{
+      this.productoService.get(minimarket).subscribe(data=>{
         this.productos = data;
       });
     }else{
       window.location.href="/inicio";
     }
-
-   }
- 
-
-  ngOnInit(): void {
-    
   }
 
   crearProducto(producto:Producto){

@@ -62,10 +62,6 @@ export class CrearProductoComponent implements OnInit {
     }
   }
 
-  check(){
-    let categoriaID = this.categorias.map(x => x.id);
-  }
-
   nuevaCategoria() {
     if (this.categoria.categoria != '') {
       this.categorias.push(this.categoria);
@@ -143,16 +139,7 @@ export class CrearProductoComponent implements OnInit {
       return null;
     }
   });
-  /*
-  nombre = models.CharField(max_length=100)
-  stock = models.FloatField()
-  precio = models.PositiveIntegerField()
-  nVentas = models.PositiveBigIntegerField()
-  img = models.ImageField(blank='',default="",upload_to='img/')
-  minimarket = models.ForeignKey(Usuario,on_delete=models.CASCADE)
-  unidad = models.ForeignKey(Unidad,on_delete=models.DO_NOTHING)
-  proveedor = models.ForeignKey(Proveedor,on_delete=models.DO_NOTHING,null=True)
-  categorias = models.ManyToManyField(Categoria,default = "")*/
+
   crear(){
     let dataSesion = sessionStorage.getItem('usuario');
     this.unidadesDP.forEach(x =>{
@@ -163,6 +150,9 @@ export class CrearProductoComponent implements OnInit {
     });
     let categoriaID = this.categorias.map(x => x.id.toString());
     let producto = new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,categoriaID,this.img,false,0,JSON.parse(dataSesion || "[]").id);
+    this.productoService.post(producto).subscribe(data =>{
+      console.log(data);
+    });
     this.crearProducto.emit(producto);
     this.limpiar();
   }

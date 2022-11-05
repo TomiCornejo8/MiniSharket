@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
+import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
 @Component({
   selector: 'app-tarjeta-producto',
@@ -19,7 +20,8 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
   eliminarP=false;
   w=window.sessionStorage;
 
-  constructor() { }
+  constructor(private unidadService:UnidadService){}
+
   ngOnChanges(changes: SimpleChanges): void {
     if(this.editar===true){
         this.producto=changes["productoEditar"].currentValue;
@@ -37,6 +39,12 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
   }
 
   ngOnInit(): void {
+    if(this.producto.id != 0){
+      this.producto.img = "http://127.0.0.1:8000" + this.producto.img;
+      this.unidadService.get(this.producto.unidad).subscribe(data =>{
+        this.producto.unidad = data.unidad;
+      });
+    }
   }
   /*
   eliminar(respuesta:any){
