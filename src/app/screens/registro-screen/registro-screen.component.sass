@@ -1,7 +1,17 @@
+$celular: 991px
+$computador: 992px
+        
 #registrar
+        margin: auto
         padding-top: 3%
         padding-bottom: 3%
-        width: 100%
+        @media screen and (max-width: $celular)
+                width: 22rem
+                margin-top: 5%
+
+        @media screen and (min-width: $computador) 
+                width: 25rem
+                margin-top: 4%
 
 input[type='radio']:after
         width: 15px

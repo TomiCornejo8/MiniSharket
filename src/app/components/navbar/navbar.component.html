@@ -7,7 +7,7 @@
         </button>
 
         <a class="navbar-brand" [routerLink]="['/inicio']" >
-            <img src="../../../assets/Sharky.png" alt="" width="35" height="34">
+            <img id="navImagen" src="../../../assets/Sharky.png" alt="">
             Mini Sharket
         </a>
 
@@ -24,32 +24,32 @@
             <div class="navbar-nav mb-1" id="navbar">
 
                 <!--boton de Inicio-->
-                <div class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
+                <div class="nav-item btn-dark border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/inicio']">Inicio</a>
                 </div>
 
                 <!--boton de Productos-->
-                <div *ngIf="sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
+                <div *ngIf="sesion" class="nav-item btn-dark border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/productos']">Productos</a>
                 </div>
 
                 <!--boton de Proveedores-->
-                <div *ngIf="sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
+                <div *ngIf="sesion" class="nav-item btn-dark border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/proveedores']">Proveedores</a>
                 </div>
 
                 <!--boton de Finanzas-->
-                <div *ngIf="sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
+                <div *ngIf="sesion" class="nav-item btn-dark border-dark bg-gradient">
                     <a class="nav-link active" aria-current="page" [routerLink]="['/finanzas']">Finanzas</a>
                 </div>
 
                 <!--boton de Ingreso-->
-                <div *ngIf="!sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
+                <div *ngIf="!sesion" class="nav-item btn-dark border-dark bg-gradient">
                     <a class="nav-link active" [routerLink]="['/ingreso']">Ingresar</a>
                 </div>
 
                 <!--boton de Registro-->
-                <div *ngIf="!sesion" class="nav-item btn-dark ms-4 mt-1 border-dark bg-gradient">
+                <div *ngIf="!sesion" class="nav-item btn-dark border-dark bg-gradient">
                     <a class="nav-link active" [routerLink]="['/registro']">Registrarse</a>
                 </div>
             </div>

@@ -1,6 +1,6 @@
-<div id="ingresar" class="card bg-primary text-white" style="width: 25rem;margin:4% 35%;">
+<div id="ingresar" class="card bg-primary text-white">
     <div class="card-body">
-        <h5 class="Ingresar text-center">Inicar sesión</h5>
+        <h5 class="Ingresar text-center">Iniciar sesión</h5>
 
         <!-- <form action=""> -->
             <!-- imput de nombre -->
@@ -17,8 +17,13 @@
 
             <!-- Boton de aceptar -->
             <div class="text-center">
+                    <!-- texto que aparece cuando no se ingresa correctamente--> 
+                <div *ngIf="!verificacion">
+                    <p>Ingreso de datos incorrectos</p>
+                </div>
                 <button [disabled]="nombre=='' || clave==''" (click)="ingresar()" type="button" class="btn btn-dark bg-gradient">Ingresar</button>
             </div>
     </div>
+
 </div>
 
