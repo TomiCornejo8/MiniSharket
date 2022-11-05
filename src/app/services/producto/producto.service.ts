@@ -24,6 +24,7 @@ export class ProductoService {
     "img":producto.img,
     "minimarket":producto.minimarket,
     "unidad":producto.unidad,
+    "proveedor":producto.proveedor,
     "categorias":producto.categorias};
     return this.http.post(this.url,value);
   }

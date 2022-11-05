@@ -40,7 +40,9 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
     if(this.producto.id != 0){
-      this.producto.img = "http://127.0.0.1:8000" + this.producto.img;
+      if(this.producto.img != null){
+        this.producto.img = "http://127.0.0.1:8000" + this.producto.img;
+      }
       this.unidadService.get(this.producto.unidad).subscribe(data =>{
         this.producto.unidad = data.unidad;
       });

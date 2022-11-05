@@ -1,26 +1,28 @@
 <!-- Button trigger modal -->
 <!-- data-bs-toggle="modal" data-bs-target="#crearCategoria" -->
-  
-  <!-- Modal -->
-  <div class="modal fade" id="crearCategoria" tabindex="-1" aria-labelledby="crearCategoriaLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content bg-primary text-white">
 
-        <div class="modal-header">
-          <h5 class="modal-title" id="crearCategoriaLabel"><b>Crear categoría</b></h5>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="crearCategoria" tabindex="-1" aria-labelledby="crearCategoriaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-primary text-white">
 
-        <div class="modal-body">
-            <!-- Input categoria -->
-            <input [(ngModel)]="categoria" id="categoriaC" type="text" class="form-control">
-            <label for="categoriaC" class="form-label">Categoría</label>    
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button (click)="crear()" [disabled]="categoria == ''" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
-        </div>
-
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearCategoriaLabel"><b>Crear categoría</b></h5>
       </div>
+
+      <div class="modal-body">
+        <!-- Input categoria -->
+        <input [(ngModel)]="categoria" id="categoriaC" type="text" class="form-control">
+        <label for="categoriaC" class="form-label">Categoría</label>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary bg-gradient border border-dark"
+          data-bs-dismiss="modal">Cancelar</button>
+        <button (click)="crear()" [disabled]="categoria == ''" type="button"
+          class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
+      </div>
+
     </div>
+  </div>
 </div>

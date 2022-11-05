@@ -26,7 +26,9 @@
 </div>
 
 <!-- Offcanvas -->
-<app-filtro-productos (enviarFiltro)="filtroProductos($event)" ></app-filtro-productos>
+<app-filtro-productos [categorias]="categorias" (enviarFiltro)="filtroProductos($event)" ></app-filtro-productos>
 <app-carrito-venta (menosProducto)="quitarCarrito()" [carrito]="carrito"></app-carrito-venta>
 <app-crear-producto (crearProducto)="crearProducto($event)"></app-crear-producto>
-<app-advertencia ></app-advertencia>
+
+<!-- Modals -->
+<app-crear-categoria (crearCategoria)="crearCategoria($event)"></app-crear-categoria>

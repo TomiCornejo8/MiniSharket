@@ -25,15 +25,18 @@
 
     <!-- Filtros por categoria -->
     <br>
-    <h5><b>Categorias </b><button class="btn btn-dark bg-gradient border-dark p-1" type="button" data-bs-toggle="modal" data-bs-target="#crearCategoria">Categoria➕</button></h5>
+    <h5><b>Categorias </b>
+    <button class="btn btn-dark bg-gradient border-dark p-1" type="button" data-bs-toggle="modal" data-bs-target="#crearCategoria">Categoria➕</button></h5>
 
     <!-- Aqui se agregan las categorias -->
     <div class="form-check d-flex flex-column d-grid gap-2">
-      <app-categoria *ngFor="let categoriai of categorias" [categoria]="categoriai"></app-categoria>
+      <span *ngFor="let categoriai of categorias">
+        <input class="form-check-input mt-2" type="checkbox" value="" checked>
+        <label class="form-check-label" for="flexCheckChecked">{{categoriai.categoria}}
+          <button class="btn btn-dark bg-gradient border-dark p-1 me-2" type="button" data-bs-toggle="modal" data-bs-target="#editarCategoria">📝</button>
+          <button class="btn btn-dark bg-gradient border-dark p-1" type="button">❌</button>
+        </label>
+      </span>
     </div>
-
-  </div>
-
-
-<app-crear-categoria (crearCategoria)="crearCategoria($event)"></app-crear-categoria>
-<app-editar-categoria></app-editar-categoria>
+    <app-editar-categoria></app-editar-categoria>
+</div>

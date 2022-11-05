@@ -1,7 +1,9 @@
 import { Component,OnInit  } from '@angular/core';
+import { Categoria } from 'src/app/models/categoria.model';
 import { Producto } from 'src/app/models/producto.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
@@ -12,21 +14,16 @@ import { UnidadService } from 'src/app/services/unidad/unidad.service';
   styleUrls: ['./productos-screen.component.sass']
 })
 export class ProductosScreenComponent implements OnInit{
- filtroActivo={nombre:"alfa" ,sentido:"az"};
- productoAEliminar:Producto;
- prodEditado:any;
+  filtroActivo={nombre:"alfa" ,sentido:"az"};
   w=window.sessionStorage;
-  productos:Producto[] =
-  [
-    new Producto("Queso mantecoso","Unidad",40,1,"Calo"),
-    new Producto("Jamon","Unidad",25,1,"San Jorge"),
-    new Producto("Palta","Kilogramo",50,1,"La feria")
-  ];
+  productos:Producto[] =[];
+  categorias:Categoria[] = [];
 
   carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
   cant:number = 0;
 
-  constructor(private productoService:ProductoService){}
+  constructor(private productoService:ProductoService,
+    private categoriaService:CategoriaService){}
 
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
@@ -39,6 +36,14 @@ export class ProductosScreenComponent implements OnInit{
       window.location.href="/inicio";
     }
     this.sortAlfa(1);
+    
+    let dataSesion = sessionStorage.getItem('usuario');
+    if(dataSesion){
+      let minimarket = JSON.parse(dataSesion || "[]").id;
+      this.categoriaService.list(minimarket).subscribe(data =>{
+        this.categorias = data;
+      });
+    }
   }
 
 
@@ -121,7 +126,14 @@ export class ProductosScreenComponent implements OnInit{
   eliminarProductoI(producto:Producto){
       this.productos.splice(this.productos.indexOf(producto),1);  
   }
-  guardarProductoActivo(producto:any){
-    this.productoAEliminar=producto;
+
+  crearCategoria(categoria:string){
+    let datos = sessionStorage.getItem('usuario');
+    let minimarket = JSON.parse(datos || "[]").id;
+
+    let categoriax = new Categoria(0,categoria,minimarket);
+    this.categoriaService.post(categoriax).subscribe(data =>{
+      // this.categorias.push(data);
+    });
   }
 }
