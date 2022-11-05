@@ -34,7 +34,7 @@
             <label for="proveedor" class="form-label">Proveedor</label>
             <select class="form-select" aria-label="Default select example">
               <option value="{{productoActual.proveedor}}">Selecciona un provedor</option>
-              <option *ngFor="let proveedor of proveedoresDP" (click)="seleccionarProveedor(proveedor)"><div *ngIf="proveedor.nombre==productoActual.proveedor"> Actualmente seleccionado ---> </div>{{proveedor.nombre}}</option>
+              <option *ngFor="let proveedor of proveedoresDP" (click)="seleccionarProveedor(proveedor.nombre)"><div *ngIf="proveedor.nombre==productoActual.proveedor"> Actualmente seleccionado ---> </div>{{proveedor.nombre}}</option>
             </select>  
           <!-- Seleccionar categoria -->
           <label for="CategoriaP" class="form-label">Categoria</label>

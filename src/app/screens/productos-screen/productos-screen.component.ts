@@ -34,6 +34,7 @@ export class ProductosScreenComponent implements OnInit{
       this.productoService.get(minimarket).subscribe(data=>{
         this.productos = data;
       });
+      
       if(this.dataSesion){
         let minimarket = JSON.parse(this.dataSesion || "[]").id;
         this.categoriaService.list(minimarket).subscribe(data =>{
@@ -70,9 +71,9 @@ export class ProductosScreenComponent implements OnInit{
   }
   buscarProveedor(){
       this.productos.forEach(producto =>{
+        this.UnidadConvertir();
         this.proveedoresDP.forEach(proveedor =>{
           let auxProve= proveedor.id.toLocaleString();
-          console.log(producto.proveedor.toString()  === auxProve,producto.proveedor)
           if(producto.proveedor.toString()  === auxProve ){
             producto.proveedor=proveedor.nombre;
           }
@@ -80,7 +81,14 @@ export class ProductosScreenComponent implements OnInit{
     }
     )
   }
-
+UnidadConvertir(){
+  if(this.productos)
+    this.productos.forEach(producto=>{
+        producto.unidad= producto.unidad == "1" ? "Unidad" : producto.unidad; 
+        producto.unidad= producto.unidad == "2" ? "Kilogramo" : producto.unidad; 
+        producto.unidad= producto.unidad == "3" ? "Gramo" : producto.unidad; 
+    })
+}
 
 
 

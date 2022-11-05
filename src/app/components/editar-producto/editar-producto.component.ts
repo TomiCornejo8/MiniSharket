@@ -22,7 +22,7 @@ export class EditarProductoComponent implements OnInit{
   productoReferencia:Producto;
   img:string="";
   proveedoresDP: Proveedor[] ;
-  unidadesDP: string[] = ["Unidad", "Kilogramo", "Gramo"];
+  unidadesDP: string[] = ["Unidades", "Kilogramos", "Gramos"];
   valueImg="";
   dataSesion = sessionStorage.getItem('usuario');
 
@@ -37,7 +37,7 @@ export class EditarProductoComponent implements OnInit{
       let minimarket = JSON.parse(this.dataSesion || "[]").id;
       this.categoriaService.list(minimarket).subscribe(data =>{
         this.categorias = data;
-        this.buscarCategorias();
+
       });
     }
     if(this.dataSesion){
@@ -47,21 +47,6 @@ export class EditarProductoComponent implements OnInit{
       });
     }
 }
-
-buscarCategorias(){
-  this.productoActual.categorias.forEach(categoria =>{
-    this.categorias.forEach(backCate =>{
-      let auxCate= backCate.id.toLocaleString();
-      if(categoria.toString()  === auxCate ){
-        this.productoActual.categorias[this.productoActual.categorias.indexOf(categoria)]=backCate.categoria;
-        this.productoReferencia.categorias[this.productoReferencia.categorias.indexOf(categoria)]=backCate.categoria;
-      }
-    })
-      
-  })
-}
-
-
   editar(nombre:string,stock:string,precio:string){
     
       if(nombre!==""){
