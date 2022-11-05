@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filtro-productos',
@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filtro-productos.component.sass']
 })
 export class FiltroProductosComponent implements OnInit {
-
+  @Output() enviarFiltro=new EventEmitter<string>;
   categorias:string[] = ["C1","C2","C3"];
-
+  Hola:any;
   constructor() { }
 
   ngOnInit(): void {
@@ -20,6 +20,8 @@ export class FiltroProductosComponent implements OnInit {
     sessionStorage.setItem('categoriasProductos',JSON.stringify(this.categorias));
   }
 
-  
+  filtroActual(value:string){
+    this.enviarFiltro.emit(value);
+  }
 
 }

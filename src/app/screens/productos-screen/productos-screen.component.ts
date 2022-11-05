@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component,OnInit  } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+
 
 @Component({
   selector: 'app-productos-screen',
@@ -24,7 +25,7 @@ export class ProductosScreenComponent implements OnInit{
   carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
   cant:number = 0;
 
-  constructor(private productoService:ProductoService) {
+  constructor(private productoService:ProductoService ) {
   /*  let datos = sessionStorage.getItem('usuario');
     if(datos){
       let minimarket = JSON.parse(datos || "[]").id; //Se obtiene el id del usuario logueado
@@ -36,7 +37,18 @@ export class ProductosScreenComponent implements OnInit{
     }
 */
    }
- 
+   enviarProductos(filtro:string) {
+      if(filtro === "rank"){
+        this.productos.sort((x:Producto,y:Producto) =>{
+          return (x.nVentas > y.nVentas) ?  1 :-1 ;
+      });
+      }
+      if(filtro === "alfa"){
+        this.productos.sort((x:Producto,y:Producto) =>{
+            return x.nombre.localeCompare(y.nombre) ;
+        });
+      }
+	}
 
   ngOnInit(): void {
     
