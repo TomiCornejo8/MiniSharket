@@ -1,8 +1,6 @@
-<!-- Button trigger modal -->
-<!-- data-bs-toggle="modal" data-bs-target="#editarProducto" -->
-  
+
   <!-- Modal -->
-  <div class="modal fade" id="editarProducto" tabindex="-1" aria-labelledby="editarProductoLabel" aria-hidden="true" data-bs-backdrop="static"> 
+  <div  id="editarProducto" tabindex="-1" aria-labelledby="editarProductoLabel" aria-hidden="true" > 
     <div class="modal-dialog">
       <div class="modal-content bg-primary text-white">
 
@@ -18,7 +16,7 @@
             <label for="unidadP" class="form-label">Tipo de unidad(*)</label>
             <select id="unidadP" class="form-select" aria-label="Default select example">
               <option value="">Selecciona una unidad</option>
-              <option *ngFor="let unidad of unidadesDP"><div *ngIf="unidad==productoActual.unidad"> Actualmente seleccionado ---> </div>{{unidad}}</option>
+              <option *ngFor="let unidad of unidadesDP" (click)="seleccionarUnidad(unidad)"><div *ngIf="unidad==productoActual.unidad"> Actualmente seleccionado ---> </div>{{unidad}}</option>
             </select>
             <!-- Stock -->
             <label for="stock" class="form-label">Stock</label>

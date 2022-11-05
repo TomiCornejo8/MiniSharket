@@ -10,7 +10,7 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
   styleUrls: ['./productos-screen.component.sass']
 })
 export class ProductosScreenComponent implements OnInit{
- @Input() productoEditarr:Producto;
+
  productoAEliminar:Producto;
  prodEditado:any;
   w=window.sessionStorage;
@@ -56,13 +56,6 @@ export class ProductosScreenComponent implements OnInit{
 
   quitarCarrito(){
     this.cant--;
-  }
-  editarProducto(producto:any){
-    this.productoEditarr=producto;
-
-  }
-  productoEditado(producto:any){
-    this.productoEditarr=producto;
   }
   
   //indexof: devuelve la posición del elemento entregado

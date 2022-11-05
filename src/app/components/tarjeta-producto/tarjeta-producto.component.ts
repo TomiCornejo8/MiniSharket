@@ -1,6 +1,8 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 import  Swal  from 'sweetalert2';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EditarProductoComponent } from '../editar-producto/editar-producto.component';
 @Component({
   selector: 'app-tarjeta-producto',
   templateUrl: './tarjeta-producto.component.html',
@@ -17,7 +19,8 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
   eliminarP=false;
   w=window.sessionStorage;
 
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
+
   ngOnChanges(changes: SimpleChanges): void {
     if(this.editar===true){
         this.producto=changes["productoEditar"].currentValue;
@@ -41,6 +44,11 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
     if(respuesta)this.eliminarProducto.emit(this.producto)
   }*/
 
+  abrirModalEditarProducto() {
+		const modalRef=this.modalService.open(EditarProductoComponent);
+    modalRef.componentInstance.productoActual=JSON.parse(JSON.stringify(this.producto));
+    modalRef.componentInstance.productoReferencia=this.producto;
+	}
   editarProducto(){
     this.editarProductoFlag.emit(this.producto);
     this.editar=true;

@@ -6,30 +6,13 @@ import { Proveedor } from 'src/app/models/proveedor.model';
   templateUrl: './editar-proveedor.component.html',
   styleUrls: ['./editar-proveedor.component.sass']
 })
-export class EditarProveedorComponent implements OnInit,OnChanges {
-  @Input() proveedorEntrada:any;
+export class EditarProveedorComponent implements OnInit {
   proveedorActual:Proveedor= new Proveedor();
   proveedorReferencia:any;
-  emails=new Array();
-  numeros=new Array();
   vacionumero='';
   vacioEmail='';
   constructor(private modalService: NgbModal) { }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes,"En changes editar provee")
-    if(changes['proveedorEntrada'].currentValue){
-        this.proveedorActual=changes['proveedorEntrada'].currentValue;
-        this.emails=new Array();
-        this.numeros=new Array();
-        this.proveedorActual.email.forEach(email=>{
-          this.emails.push(email);
-        });
-        this.proveedorActual.numero.forEach(numero=>{
-          this.numeros.push(numero);
-        });
-        
-    }
-  }
+
 
   ngOnInit(): void {
   }
@@ -38,30 +21,29 @@ export class EditarProveedorComponent implements OnInit,OnChanges {
     if(nombre!==''){
       this.proveedorReferencia.nombre=nombre;
     }
-    if(this.emails.length!==0){
-      this.proveedorReferencia.email=this.emails;
+    if(this.proveedorActual.email.length!==0){
+      this.proveedorReferencia.email=this.proveedorActual.email;
     }
-    if(this.numeros.length!==0){
-      this.proveedorReferencia.numero=this.numeros;
+    if(this.proveedorActual.numero.length!==0){
+      this.proveedorReferencia.numero=this.proveedorActual.numero;
     }
     this.modalService.dismissAll(EditarProveedorComponent);
     
   }
   agregarEmail(email:string){
-    if(email!='')this.emails.push(email);
+    if(email!='')this.proveedorActual.email.push(email);
     this.vacioEmail="";
   }
   eliminarEmail(email:string){
-    this.emails.splice(this.emails.indexOf(email),1);
+    this.proveedorActual.email.splice(this.proveedorActual.email.indexOf(email),1);
   }
-  
   agregarNumero(numero:string){
     if(numero!='')
-    {this.numeros.push(numero);
+    { this.proveedorActual.numero.push(numero);
     this.vacionumero="";}
   }
   eliminarNumero(numero:string){
-    this.numeros.splice(this.numeros.indexOf(numero),1);
+    this.proveedorActual.numero.splice( this.proveedorActual.numero.indexOf(numero),1);
   }
   limpiarVariablesLocales(){
     this.modalService.dismissAll(EditarProveedorComponent);

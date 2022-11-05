@@ -11,7 +11,6 @@ import { EditarProveedorComponent } from '../editar-proveedor/editar-proveedor.c
 export class TarjetaProveedorComponent implements OnInit {
 
   @Output() eliminarProveedor = new EventEmitter<Proveedor>();
-  @Output() editarProvee = new EventEmitter<Proveedor>();
   @Input() proveedor:Proveedor;
   @Input() proveedorEditar:any;
   editar=false
@@ -30,16 +29,10 @@ export class TarjetaProveedorComponent implements OnInit {
     if(respuesta)this.eliminarProveedor.emit(this.proveedor)
   }
 
-  editarProveedor(proveedor:any){
-    alert("aqui");
-    this.proveedor=JSON.parse(JSON.stringify(proveedor));
-  }
 
-  open() {
+  abrirModalEditarProveedor() {
 		const modalRef=this.modalService.open(EditarProveedorComponent);
     modalRef.componentInstance.proveedorActual=JSON.parse(JSON.stringify(this.proveedor));
-    modalRef.componentInstance.emails=JSON.parse(JSON.stringify(this.proveedor.email));
-    modalRef.componentInstance.numeros=JSON.parse(JSON.stringify(this.proveedor.numero));
     modalRef.componentInstance.proveedorReferencia=this.proveedor;
 	}
 

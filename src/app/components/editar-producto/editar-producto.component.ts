@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChanges} from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-editar-producto',
@@ -8,27 +9,22 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls:[ './editar-producto.component.sass']
 })
 
-export class EditarProductoComponent implements OnInit,OnChanges {
+export class EditarProductoComponent implements OnInit{
 
   @Input() productoEntrada:any;
-  @Output() productoCambiado = new EventEmitter<Producto>();
-  categorias:any;
+  categorias:string[] = ["C1","C2","C3"];
   w=window.sessionStorage;
   productoActual:Producto = new Producto();
+  productoReferencia:Producto;
   img:string="";
   proveedoresDP: string[] = ["P1", "P2", "P3"];
   unidadesDP: string[] = ["Unidad", "Kilogramo", "Gramo"];
   valueImg="";
 
-  constructor( private sanitizer: DomSanitizer) {   
+  constructor( private sanitizer: DomSanitizer,private modalService: NgbModal) {   
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-      if(changes['productoEntrada'].currentValue){
-          this.productoActual=changes['productoEntrada'].currentValue  
-      }
-     
-  }
+  
 
  
 
@@ -37,27 +33,29 @@ export class EditarProductoComponent implements OnInit,OnChanges {
   editar(nombre:string,stock:string,precio:string){
     
       if(nombre!==""){
-        this.productoActual.nombre=nombre;
+        this.productoReferencia.nombre=nombre;
       }
       if(stock!=null && Number.parseInt(stock)>=0){
-        this.productoActual.stock=Number.parseInt(stock);
+        this.productoReferencia.stock=Number.parseInt(stock);
       }
       if(precio!=null && Number.parseInt(precio)>=0){
-        this.productoActual.precio=Number.parseInt(precio);
+        this.productoReferencia.precio=Number.parseInt(precio);
       }
       if(this.img!==""){
-        this.productoActual.img=this.img;
+        this.productoReferencia.img=this.img;
         this.valueImg='';
         this.img='';
       }
-      
-      this.productoCambiado.emit(this.productoActual);
+      this.productoReferencia.proveedor=this.productoActual.proveedor;
+      this.productoReferencia.unidad=this.productoActual.unidad;
+      this.productoReferencia.categorias=this.productoActual.categorias;
+      this.modalService.dismissAll(EditarProductoComponent);
   }
 
   seleccionarCategoria(categoria:any){
-   // if(this.categoriasProducto.indexOf(categoria)===-1){
-   //   this.categoriasProducto.push(categoria);
-   // }
+    if(this.productoActual.categorias.indexOf(categoria)===-1){
+      this.productoActual.categorias.push(categoria);
+    }
   
 }
 
@@ -65,14 +63,17 @@ export class EditarProductoComponent implements OnInit,OnChanges {
 seleccionarProveedor(proveedor:any){
   this.productoActual.proveedor=proveedor;
 }
-eliminarMemoriaProducto(){
-  let  stringproductoEditar="productoEditar";
-  this.w.removeItem(stringproductoEditar);
-  
-    
+seleccionarUnidad(unidad:any){
+  this.productoActual.unidad=unidad;
 }
-eliminarCategoria(categoria:any){
+eliminarMemoriaProducto(){
+  this.modalService.dismissAll(EditarProductoComponent);
+  let  stringproductoEditar="productoEditar";
+  this.w.removeItem(stringproductoEditar); 
+}
 
+eliminarCategoria(categoria:any){
+  this.productoActual.categorias.splice(this.productoActual.categorias.indexOf(categoria),1);  
 }
 
 captureFile(event: any) {
