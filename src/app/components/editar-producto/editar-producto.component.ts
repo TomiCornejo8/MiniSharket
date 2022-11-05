@@ -1,12 +1,13 @@
-import { Component, DoCheck, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChanges, TemplateRef, ViewContainerRef} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChanges} from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-editar-producto',
   templateUrl: './editar-producto.component.html',
-  styleUrls: ['./editar-producto.component.sass']
+  styleUrls:[ './editar-producto.component.sass']
 })
+
 export class EditarProductoComponent implements OnInit,OnChanges {
 
   @Input() productoEntrada:any;
@@ -21,14 +22,12 @@ export class EditarProductoComponent implements OnInit,OnChanges {
 
   constructor( private sanitizer: DomSanitizer) {   
   }
+
   ngOnChanges(changes: SimpleChanges): void {
       if(changes['productoEntrada'].currentValue){
-          this.productoActual=changes['productoEntrada'].currentValue
-          
+          this.productoActual=changes['productoEntrada'].currentValue  
       }
-    
-    
-    
+     
   }
 
  

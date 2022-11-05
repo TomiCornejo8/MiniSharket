@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Proveedor } from 'src/app/models/proveedor.model';
 @Component({
   selector: 'app-editar-proveedor',
@@ -7,14 +8,13 @@ import { Proveedor } from 'src/app/models/proveedor.model';
 })
 export class EditarProveedorComponent implements OnInit,OnChanges {
   @Input() proveedorEntrada:any;
-  @Output() proveedorCambiado = new EventEmitter<Proveedor>();
-  @Output() editarCancelado = new EventEmitter<boolean>();
   proveedorActual:Proveedor= new Proveedor();
+  proveedorReferencia:any;
   emails=new Array();
   numeros=new Array();
   vacionumero='';
   vacioEmail='';
-  constructor() { }
+  constructor(private modalService: NgbModal) { }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes,"En changes editar provee")
     if(changes['proveedorEntrada'].currentValue){
@@ -36,16 +36,16 @@ export class EditarProveedorComponent implements OnInit,OnChanges {
 
   editarProveedor(nombre:string){
     if(nombre!==''){
-      this.proveedorActual.nombre=nombre;
+      this.proveedorReferencia.nombre=nombre;
     }
     if(this.emails.length!==0){
-      this.proveedorActual.email=this.emails;
+      this.proveedorReferencia.email=this.emails;
     }
     if(this.numeros.length!==0){
-      this.proveedorActual.numero=this.numeros;
+      this.proveedorReferencia.numero=this.numeros;
     }
-
-    this.proveedorCambiado.emit(this.proveedorActual);
+    this.modalService.dismissAll(EditarProveedorComponent);
+    
   }
   agregarEmail(email:string){
     if(email!='')this.emails.push(email);
@@ -64,8 +64,8 @@ export class EditarProveedorComponent implements OnInit,OnChanges {
     this.numeros.splice(this.numeros.indexOf(numero),1);
   }
   limpiarVariablesLocales(){
+    this.modalService.dismissAll(EditarProveedorComponent);
     this.vacionumero='';
     this.vacioEmail='';
-    this.editarCancelado.emit(true);
   }
 }

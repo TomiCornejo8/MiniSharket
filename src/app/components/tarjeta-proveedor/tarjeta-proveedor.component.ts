@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Proveedor } from 'src/app/models/proveedor.model';
 import  Swal  from 'sweetalert2';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EditarProveedorComponent } from '../editar-proveedor/editar-proveedor.component';
 @Component({
   selector: 'app-tarjeta-proveedor',
   templateUrl: './tarjeta-proveedor.component.html',
   styleUrls: ['./tarjeta-proveedor.component.sass']
 })
-export class TarjetaProveedorComponent implements OnInit,OnChanges {
+export class TarjetaProveedorComponent implements OnInit {
 
   @Output() eliminarProveedor = new EventEmitter<Proveedor>();
   @Output() editarProvee = new EventEmitter<Proveedor>();
@@ -15,15 +17,11 @@ export class TarjetaProveedorComponent implements OnInit,OnChanges {
   editar=false
   w=window.sessionStorage;
   insumoFlag:boolean = false;
-
-  constructor() { }
-  ngOnChanges(changes: SimpleChanges): void {
-    if(this.editar===true){
-      this.proveedor=changes['proveedorEditar'].currentValue
-      this.editar=false
-      console.log(this.editar)
-    }
-  }
+ 
+  closeResult = '';
+  
+  constructor(private modalService: NgbModal) { }
+  
 
   ngOnInit(): void {
   }
@@ -32,10 +30,20 @@ export class TarjetaProveedorComponent implements OnInit,OnChanges {
     if(respuesta)this.eliminarProveedor.emit(this.proveedor)
   }
 
-  editarProveedor(){
-    this.editarProvee.emit(this.proveedor);
-    this.editar=true;
+  editarProveedor(proveedor:any){
+    alert("aqui");
+    this.proveedor=JSON.parse(JSON.stringify(proveedor));
   }
+
+  open() {
+		const modalRef=this.modalService.open(EditarProveedorComponent);
+    modalRef.componentInstance.proveedorActual=JSON.parse(JSON.stringify(this.proveedor));
+    modalRef.componentInstance.emails=JSON.parse(JSON.stringify(this.proveedor.email));
+    modalRef.componentInstance.numeros=JSON.parse(JSON.stringify(this.proveedor.numero));
+    modalRef.componentInstance.proveedorReferencia=this.proveedor;
+	}
+
+
 
   insumoBtn(){
     if(this.insumoFlag){
@@ -44,7 +52,6 @@ export class TarjetaProveedorComponent implements OnInit,OnChanges {
       this.insumoFlag = true;
     }
   }
-
 
 
 
