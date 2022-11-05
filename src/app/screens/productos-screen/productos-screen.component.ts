@@ -11,7 +11,7 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
   styleUrls: ['./productos-screen.component.sass']
 })
 export class ProductosScreenComponent implements OnInit{
-
+ filtroActivo={nombre:"alfa" ,sentido:"az"};
  productoAEliminar:Producto;
  prodEditado:any;
   w=window.sessionStorage;
@@ -35,18 +35,67 @@ export class ProductosScreenComponent implements OnInit{
     }else{
       window.location.href="/inicio";
     }
-*/
+*/   
+      this.sortAlfa(1);
+
    }
-   enviarProductos(filtro:string) {
-      if(filtro === "rank"){
+
+   sortAlfa(sentido?:number){
+    // cuando el valor es 1 es de A==>Z
+    if(sentido === 1){
+      this.productos.sort((x:Producto,y:Producto) =>{
+        return x.nombre.localeCompare(y.nombre) ;
+    })
+    }
+    // cuando el valor es distinto de 1 es de Z==>A
+    else{
+      this.productos.sort((x:Producto,y:Producto) =>{
+        return y.nombre.localeCompare(x.nombre) ;
+    })
+    }
+        
+   }
+
+   sortRank(sentido?:number){
+      if( sentido === 1){
         this.productos.sort((x:Producto,y:Producto) =>{
           return (x.nVentas > y.nVentas) ?  1 :-1 ;
       });
       }
-      if(filtro === "alfa"){
+      else{
         this.productos.sort((x:Producto,y:Producto) =>{
-            return x.nombre.localeCompare(y.nombre) ;
-        });
+          return (x.nVentas > y.nVentas) ?  -1 :1 ;
+      });
+      }
+   }
+
+   filtroProductos(filtro:string) {
+    if(filtro === "rank"){
+        if(this.filtroActivo.nombre!=="rank"){
+          this.sortRank(1);
+          this.filtroActivo.sentido="mayor";
+        }
+        else{
+              if(this.filtroActivo.nombre==="rank" && this.filtroActivo.sentido==="mayor")
+              {
+                  this.sortRank(2);
+                  this.filtroActivo.sentido="menor"; }
+            else
+                {
+                  this.sortRank(1);
+                  this.filtroActivo.sentido="mayor"; }
+             }
+    
+      }
+    if(filtro === "alfa"){
+        if(this.filtroActivo.nombre==="alfa" && this.filtroActivo.sentido==="az"){
+            this.sortAlfa(2);
+            this.filtroActivo.sentido="za";
+        }
+        else{
+          this.sortAlfa(1);
+          this.filtroActivo.sentido="az";
+        }
       }
 	}
 
