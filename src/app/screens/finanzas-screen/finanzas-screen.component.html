@@ -1,6 +1,6 @@
 <div class="m-3 table-responsive">
     <table class="table table-bordered border-dark text-center">
-        <thead>
+        <thead id="cabezalTabla">
             <tr class="table-dark border-dark">
                 <th class="col-2">Fecha</th>
                 <th class="col-1">Venta/Gasto</th>
@@ -11,19 +11,21 @@
         </thead>
         <tbody>
             <tr class="table-success border-dark">
-                <td>DD-MM-AAAA</td>
-                <td>Venta</td>
-                <td><ul>
-                    <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                    <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                </ul></td>
-                <td>$TOTAL</td>
-                <td>
+                <td class="cuerpoTabla">DD-MM-AAAA</td>
+                <td class="cuerpoTabla">Venta</td>
+                <td class="cuerpoTabla">
+                    <ul>
+                        <li>STOCK x PRODUCTO $PRECIO c/u</li>
+                        <li>STOCK x PRODUCTO $PRECIO c/u</li>
+                    </ul>
+                </td>
+                <td class="cuerpoTabla">$TOTAL</td>
+                <td class="cuerpoTabla">
                     <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
                     <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
                 </td>
             </tr>
-            <tr class="table-danger border-dark">
+            <!-- <tr class="table-danger border-dark">
                 <td>DD-MM-AAAA</td>
                 <td>Gasto</td>
                 <td><ul>
@@ -35,7 +37,7 @@
                     <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
                     <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
                 </td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 </div>

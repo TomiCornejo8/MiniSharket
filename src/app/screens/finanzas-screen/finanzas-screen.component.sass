@@ -1,2 +1,22 @@
+$celular: 650px
+// $computador: 992px
+
 ul
     list-style: none
+
+#cabezalTabla
+    @media screen and (max-width: $celular)
+        display: none
+
+
+.cuerpoTabla
+    border-bottom: solid
+    border-width: 1px
+    @media screen and (max-width: $celular)
+        display: flex
+        justify-content: space-between
+        align-items: center
+        text-align: right
+        &::before
+            content: attr(label)
+            width: 30%
