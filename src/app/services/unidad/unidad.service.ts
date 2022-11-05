@@ -10,7 +10,7 @@ export class UnidadService {
 
   constructor(private http:HttpClient) { }
 
-  get(id:number):Observable<any>{
+  get(id:string):Observable<any>{
     let url = this.url + id;
     return this.http.get(url);
   }

@@ -51,5 +51,16 @@ def producto_minimarket_api_view(request,minimarket=None):
     
     return Response({'message':'This minimarket dont have any Producto'},status = status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def producto_proveedor_api_view(request,proveedor=None):
+    
+    productos = Producto.objects.filter(proveedor = proveedor).all()
+    if productos:
+        if request.method == 'GET':
+            producto_serializer = ProductoSerializer(productos,many = True)
+            return Response(producto_serializer.data,status = status.HTTP_200_OK)
+    
+    return Response({'message':'This proveedor dont have any Producto'},status = status.HTTP_400_BAD_REQUEST)
+
 
 

@@ -11,7 +11,7 @@ export class CategoriaService {
   constructor(private http:HttpClient) { }
 
   list(minimarket:number):Observable<any>{
-    this.url = this.url + "minimarket/" + minimarket;
-    return this.http.get(this.url);
+    let url = this.url + "minimarket/" + minimarket;
+    return this.http.get(url);
   }
 }
