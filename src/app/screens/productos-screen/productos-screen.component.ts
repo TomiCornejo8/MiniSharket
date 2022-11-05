@@ -1,10 +1,12 @@
 import { Component,OnInit  } from '@angular/core';
 import { Categoria } from 'src/app/models/categoria.model';
 import { Producto } from 'src/app/models/producto.model';
+import { Proveedor } from 'src/app/models/proveedor.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
 
@@ -15,16 +17,15 @@ import { UnidadService } from 'src/app/services/unidad/unidad.service';
 })
 export class ProductosScreenComponent implements OnInit{
  filtroActivo={nombre:"alfa" ,sentido:"az"};
- productoAEliminar:Producto;
- prodEditado:any;
   w=window.sessionStorage;
   productos:Producto[] =[];
   dataSesion = sessionStorage.getItem('usuario');
   carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
   cant:number = 0;
   categorias:Categoria[];
+  proveedoresDP: Proveedor[];
 
-  constructor(private productoService:ProductoService,private categoriaService:CategoriaService){}
+  constructor(private productoService:ProductoService,private categoriaService:CategoriaService,private proveedorService:ProveedorService){}
 
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
@@ -38,6 +39,13 @@ export class ProductosScreenComponent implements OnInit{
         this.categoriaService.list(minimarket).subscribe(data =>{
           this.categorias = data;
           this.buscarCategorias();
+        });
+      }
+      if(this.dataSesion){
+        let minimarket = JSON.parse(this.dataSesion || "[]").id;
+        this.proveedorService.get(minimarket).subscribe(data=>{
+          this.proveedoresDP = data;
+          this.buscarProveedor();
         });
       }
 
@@ -57,8 +65,24 @@ export class ProductosScreenComponent implements OnInit{
           }
         }) 
       })
-    })
+    }
+    )
   }
+  buscarProveedor(){
+      this.productos.forEach(producto =>{
+        this.proveedoresDP.forEach(proveedor =>{
+          let auxProve= proveedor.id.toLocaleString();
+          console.log(producto.proveedor.toString()  === auxProve,producto.proveedor)
+          if(producto.proveedor.toString()  === auxProve ){
+            producto.proveedor=proveedor.nombre;
+          }
+        })  
+    }
+    )
+  }
+
+
+
 
    sortAlfa(sentido?:number){
     // cuando el valor es 1 es de A==>Z
@@ -138,8 +162,5 @@ export class ProductosScreenComponent implements OnInit{
   //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
   eliminarProductoI(producto:Producto){
       this.productos.splice(this.productos.indexOf(producto),1);  
-  }
-  guardarProductoActivo(producto:any){
-    this.productoAEliminar=producto;
   }
 }
