@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
       this.sesion = true;
       this.icono = JSON.parse(datos || "[]").icono;
     }else{
-      this.sesion = true;
+      this.sesion = false;
     }
   }
 
