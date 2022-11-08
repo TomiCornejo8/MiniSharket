@@ -1,40 +1,43 @@
 <!-- Modal -->
-<div class="modal fade" id="crearProveedor" tabindex="-1" aria-labelledby="crearProveedorLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content bg-primary text-white">
+<div id="crearProveedor" class="modal fade" tabindex="-1" aria-labelledby="crearProveedorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-primary text-white">
   
-        <div class="modal-header">
-          <h5 class="modal-title" id="crearProveedorLabel"><b>Crear proveedor 🛍</b></h5>
-        </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearProveedorLabel"><b>Crear proveedor 🛍</b></h5>
+      </div>
   
-        <div class="modal-body">
-          <!-- Nombre proveedor -->
+      <div class="modal-body">
+        <!-- Nombre proveedor -->
+        <div class="seccion">
           <label for="nombre" class="form-label">Nombre(*)</label>
           <input [(ngModel)]="nombre" (keyup)="validarVacio()" id="nombre" type="text" class="form-control">
+        </div>
 
           <!-- Email proveedor -->
-          <div>
-            <label for="email" class="form-label">Email(*)</label>
-            <div>
-              <input [(ngModel)]="email" (keyup)="validarVacio()" id="email" type="text" class="form-control">
-              <button (click)="agregarEmail()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
-            </div>
-            <!-- <div>{{emails}}</div> -->
+        <div class="seccion">
+          <label for="email" class="form-label">Email(*)</label>
+          <div class="formBoton">
+            <input id="email" [(ngModel)]="email" (keyup)="validarVacio()" type="text" class="form-control">
+            <button (click)="agregarEmail()" type="button" class="btn btn-dark bg-gradient ms-3 border border-dark">+</button>
           </div>
+          <!-- <div>{{emails}}</div> -->
+        </div>
 
           <!-- Numero de contacto proveedor -->
-          <div>
-            <label for="numero" class="form-label">Numero de contacto(*)</label>
-            <input [(ngModel)]="numero" (keyup)="validarVacio()" id="numero" type="text" class="form-control">
-            <button (click)="agregarNumero()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
+        <div class="seccion">
+          <label for="numero" class="form-label">Numero de contacto(*)</label>
+          <div class="formBoton">
+            <input id="numero" [(ngModel)]="numero" (keyup)="validarVacio()" type="text" class="form-control">
+            <button (click)="agregarNumero()" type="button" class="btn btn-dark bg-gradient ms-3 border border-dark">+</button>
           </div>
-  
-        <div class="modal-footer">
-          <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
-          <!-- <div>{{numeros}}</div> arreglar para que se vean segun se agregan -->
         </div>
-  
       </div>
+      <div class="modal-footer">
+        <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+        <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-dark bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
+      </div>
+  
     </div>
   </div>
+</div>
