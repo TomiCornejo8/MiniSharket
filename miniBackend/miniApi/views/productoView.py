@@ -43,7 +43,7 @@ def producto_detail_api_view(request,id=None):
 @api_view(['GET'])
 def producto_minimarket_api_view(request,minimarket=None):
     
-    productos = Producto.objects.filter(minimarket = minimarket).all()
+    productos = Producto.objects.all().prefetch_related('unidad')
     if productos:
         if request.method == 'GET':
             producto_serializer = ProductoSerializer(productos,many = True)

@@ -30,30 +30,39 @@ export class RegistroScreenComponent implements OnInit {
   }
 
   sesion() {
-    this.usuarioService.getNombre(this.usuario).subscribe(data=>{
-      if(data.existe == "false"){
-        if (this.tipo == 1) {
-          this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo).subscribe(data => {
-            sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
-            window.location.href = "/inicio";
-          });
-        }else{
+    if(!this.usuarioService.getNombre(this.usuario)){
+      if (this.tipo == 1) {
+        this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo);
+        sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+        window.location.href = "/inicio";
+      // else{
 
-          this.usuarioService.getCodigo(this.minimarket,this.codigo).subscribe(data=>{
-            if(data){
-              this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo,data.id).subscribe(data => {
-                sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
-                window.location.href = "/inicio";
-              });
-            }else{
-              alert("Minimarket o codigo no corresponden");
-            }
-          });
-        }
-      }else{
-        alert(data.existe + " Nombre de usuario ya esta en uso");
       }
-    });
+    }
+    // this.usuarioService.getNombre(this.usuario).subscribe(data=>{
+    //   if(data.existe == "false"){
+    //     if (this.tipo == 1) {
+    //       this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo).subscribe(data => {
+    //         sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+    //         window.location.href = "/inicio";
+    //       });
+    //     }else{
+
+    //       this.usuarioService.getCodigo(this.minimarket,this.codigo).subscribe(data=>{
+    //         if(data){
+    //           this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo,data.id).subscribe(data => {
+    //             sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+    //             window.location.href = "/inicio";
+    //           });
+    //         }else{
+    //           alert("Minimarket o codigo no corresponden");
+    //         }
+    //       });
+    //     }
+    //   }else{
+    //     alert(data.existe + " Nombre de usuario ya esta en uso");
+    //   }
+    // });
   }
 
   revisar() {

@@ -25,13 +25,13 @@ def usuario_api_view(request):
         usuario_serializer = UsuarioSerializer(data = request.data)
         if usuario_serializer.is_valid():
             usuario_serializer.save()
-            return Response(usuario_serializer.data,status = status.HTTP_201_CREATED)
-        return Response(usuario_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
+            return Response(usuario_serializer.data,status = status.HTTP_200_OK)
+        return Response(usuario_serializer.errors,status = status.HTTP_200_OK)
     
 @api_view(['GET','PUT','DELETE'])
 def usuario_detail_api_view(request,nombre=None,clave=None):
     
-    usuario = Usuario.objects.filter(nombre = nombre).first()
+    usuario = Usuario.objects.select_related('tipo').get(nombre = nombre)
 
     if usuario:
         if(check_password_hash(usuario.clave,clave)):
@@ -64,14 +64,14 @@ def usuario_codigo_api_view(request,nombre=None,codigo=None):
             if usuario.codigo == codigo:
                 usuario_serializer = UsuarioCodigoSerializer(usuario)
                 return Response(usuario_serializer.data,status = status.HTTP_200_OK)
-    return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)
+    return Response({'id':'0'},status = status.HTTP_200_OK)
 
 @api_view(['GET'])
 def usuario_check_api_view(request,nombre=None):
     usuario = Usuario.objects.filter(nombre = nombre).first()
     if request.method == 'GET':
         if usuario:
-            return Response({"existe":"true"},status = status.HTTP_200_OK)
+            return Response({"existe":True},status = status.HTTP_200_OK)
         else:
-            return Response({"existe":"false"},status = status.HTTP_200_OK)
+            return Response({"existe":False},status = status.HTTP_200_OK)
     return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)

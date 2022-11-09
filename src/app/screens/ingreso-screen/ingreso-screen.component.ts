@@ -10,27 +10,26 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class IngresoScreenComponent implements OnInit {
 
-  nombre:string = "";
-  clave:string = "";
-  verificacion:boolean = true;
+  nombre: string = "";
+  clave: string = "";
+  verificacion: boolean = true;
 
-  constructor(private usuarioService:UsuarioService) { }
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
   }
 
-  ingresar(){
-    this.usuarioService.get(this.nombre,this.clave).subscribe(data=>{
-      if(data){
-        sessionStorage.setItem('usuario',JSON.stringify({"id":data.id,"nombre":data.nombre,"icono":data.icono,"tipo":data.tipo,"codigo":data.codigo}));
-        window.location.href="/inicio";
-        this.verificacion = true;
-      }else{
-        // alert("No se pudo ingresar 🤨");
-        this.verificacion = false;
+  ingresar() {
+    // let data = this.usuarioService.get(this.nombre, this.clave);
+    // if (data) {
+    //   sessionStorage.setItem('usuario', JSON.stringify({ "id": data.id, "nombre": data.nombre, "icono": data.icono, "tipo": data.tipo, "codigo": data.codigo }));
+    //   window.location.href = "/inicio";
+    //   this.verificacion = true;
+    // } else {
+    //   // alert("No se pudo ingresar 🤨");
+    //   this.verificacion = false;
 
-      }
-    });
+    // }
   }
 
 }

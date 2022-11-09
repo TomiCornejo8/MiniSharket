@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+
 
 @Component({
   selector: 'app-inicio-screen',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioScreenComponent implements OnInit {
 
-  constructor() { }
+  constructor(private t:UsuarioService) { }
 
   ngOnInit(): void {
+  }
+
+  check(){
+    // this.t.get("DoñaRosa","rosita").
+  }
+
+  check1(){
+    alert(this.t.post("MrPollo","egg56","",1,"123"));
   }
 
 }
