@@ -20,6 +20,9 @@
               <button (click)="agregarEmail()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
             </div>
             <!-- <div>{{emails}}</div> -->
+            <ul>
+              <li *ngFor="let item of emails; let i = index;">{{item}} <button (click)="quitarE(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1 m-1">❌</button></li>
+            </ul>
           </div>
 
           <!-- Numero de contacto proveedor -->
@@ -27,6 +30,9 @@
             <label for="numero" class="form-label">Numero de contacto(*)</label>
             <input [(ngModel)]="numero" (keyup)="validarVacio()" id="numero" type="text" class="form-control">
             <button (click)="agregarNumero()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
+            <ul>
+              <li *ngFor="let item of numeros; let i = index;">{{item}} <button (click)="quitarN(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1 m-1">❌</button></li>
+            </ul>
           </div>
   
         <div class="modal-footer">

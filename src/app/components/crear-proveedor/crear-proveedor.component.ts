@@ -35,27 +35,49 @@ export class CrearProveedorComponent implements OnInit {
     this.bandera = false;
   }
 
-  validarVacio(){
-    if(this.nombre == '' || this.email.length == 0 || this.numero.length == 0){
-      this.bandera = false;
-    }else{
-      this.bandera = true;
+  validarVacio():void{
+    if(this.nombre != ''){
+      if(this.emails.length > 0 || this.email != ''){
+        if(this.numeros.length > 0 || this.numero != ''){
+          this.bandera = true;
+          return;
+        }
+      }
     }
+    this.bandera = false;
+    return;
   }
 
   crear(){
-    this.emails.push(this.email);
-    this.numeros.push(this.numero);
+    if (this.email != '') this.emails.push(this.email);
+    if (this.numero != '') this.numeros.push(this.numero);
     this.crearProveedor.emit(new Proveedor(this.nombre,this.emails,this.numeros));
     this.limpiar();
   }
 
   agregarEmail(){
-    this.emails.push(this.email);
-    this.email = '';
+    if(this.email != ''){
+      this.emails.push(this.email);
+      this.email = '';
+      this.validarVacio();
+    }
   }
 
   agregarNumero(){
-    this.numeros.push(this.numero);
+    if(this.numero != ''){
+      this.numeros.push(this.numero);
+      this.numero = '';
+      this.validarVacio();
+    }
+  }
+
+  quitarN(i:number){
+    this.numeros.splice(i,1);
+    this.validarVacio();
+  }
+
+  quitarE(i:number){
+    this.emails.splice(i,1);
+    this.validarVacio();
   }
 }
