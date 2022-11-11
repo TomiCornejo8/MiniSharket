@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Categoria } from 'src/app/models/categoria.model';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 
 @Component({
   selector: 'app-filtro-productos',
@@ -7,18 +9,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class FiltroProductosComponent implements OnInit {
   @Output() enviarFiltro=new EventEmitter<string>;
-  categorias:string[] = ["C1","C2","C3"];
-  Hola:any;
-  constructor() { }
+  @Input() categorias:Categoria[] = [];
 
-  ngOnInit(): void {
-    sessionStorage.setItem('categoriasProductos',JSON.stringify(this.categorias));
-  }
+  constructor(private categoriaService:CategoriaService){}
 
-  crearCategoria(categoria:string){
-    this.categorias.push(categoria);
-    sessionStorage.setItem('categoriasProductos',JSON.stringify(this.categorias));
-  }
+  ngOnInit(): void {}
 
   filtroActual(value:string){
     this.enviarFiltro.emit(value);
