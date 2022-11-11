@@ -5,8 +5,8 @@
                 <button (click)="confirmBox()" class="btn btn-dark bg-gradient border-secondary float-end p-2" type="button" >❌</button>
                 <button (click)="abrirModalEditarProveedor()" class="btn btn-dark bg-gradient border-secondary float-end me-3 p-2" type="button" >📝</button>
                 <h2 class="card-title">{{proveedor.nombre}}</h2>
-                <p *ngFor='let correo of proveedor.email' class="card-text">Email: {{correo}}</p>
-                <p *ngFor='let telefono of proveedor.numero' class="card-text">Telefono: {{telefono}}</p>
+                <p *ngFor='let correo of proveedor.email' class="card-text">E-mail: {{correo}}</p>
+                <p *ngFor='let telefono of proveedor.numero' class="card-text">Teléfono: {{telefono}}</p>
                 <p> 
                     <button (click)="insumoBtn()" class="btn btn-dark bg-gradient border border-primary" type="button">Insumos</button>
                 </p>
