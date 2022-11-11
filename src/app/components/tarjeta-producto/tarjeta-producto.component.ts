@@ -38,6 +38,7 @@ export class TarjetaProductoComponent implements OnInit{
 		const modalRef=this.modalService.open(EditarProductoComponent);
     modalRef.componentInstance.productoActual=JSON.parse(JSON.stringify(this.producto));
     modalRef.componentInstance.productoReferencia=this.producto;
+    // sessionStorage.setItem("editado",JSON.stringify(this.producto));
 	}
 
   agregar(){

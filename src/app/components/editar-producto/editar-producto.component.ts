@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChanges} from '@angular/core';
+import { Component,Input, OnInit} from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -6,6 +6,9 @@ import { Categoria } from 'src/app/models/categoria.model';
 import { Proveedor } from 'src/app/models/proveedor.model';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { ProductoService } from 'src/app/services/producto/producto.service';
+import { Unidad } from 'src/app/models/unidad.model';
+import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
 @Component({
   selector: 'app-editar-producto',
@@ -22,17 +25,19 @@ export class EditarProductoComponent implements OnInit{
   productoReferencia:Producto;
   img:string="";
   proveedoresDP: Proveedor[] ;
-  unidadesDP: string[] = ["Unidades", "Kilogramos", "Gramos"];
+  unidadesDP:Unidad[];
   valueImg="";
   dataSesion = sessionStorage.getItem('usuario');
 
 
-  constructor( private sanitizer: DomSanitizer,private modalService: NgbModal,
-              private proveedorService:ProveedorService,private categoriaService:CategoriaService) {   
-  }
+  constructor( private sanitizer: DomSanitizer,
+    private modalService: NgbModal,
+    private proveedorService:ProveedorService,
+    private categoriaService:CategoriaService,
+    private productoService:ProductoService,
+    private unidadService:UnidadService){}
 
   ngOnInit(): void { 
-    
     if(this.dataSesion){
       let minimarket = JSON.parse(this.dataSesion || "[]").id;
       this.categoriaService.list(minimarket).subscribe(data =>{
@@ -46,7 +51,11 @@ export class EditarProductoComponent implements OnInit{
         this.proveedoresDP = data;
       });
     }
-}
+
+    this.unidadService.list().subscribe(data =>{
+      this.unidadesDP = (data as Unidad[]);
+    });
+  }
   editar(nombre:string,stock:string,precio:string){
     
       if(nombre!==""){
@@ -67,6 +76,27 @@ export class EditarProductoComponent implements OnInit{
       this.productoReferencia.unidad=this.productoActual.unidad;
       this.productoReferencia.categorias=this.productoActual.categorias;
       this.modalService.dismissAll(EditarProductoComponent);
+      // this.productoService.put(this.productoReferencia).subscribe(data=>{
+      //   console.log(data);
+      // });
+      let auxUni = this.productoReferencia.unidad;
+      this.unidadesDP.forEach(x =>{
+        if(x.unidad == this.productoReferencia.unidad){
+          this.productoReferencia.unidad = x.id.toString();
+          return;
+        }
+      });
+      // let auxPro = this.productoReferencia.proveedor;
+      // this.proveedoresDP.forEach(x =>{
+      //   if(x.nombre == this.productoReferencia.proveedor){
+      //     this.productoReferencia.proveedor = x.id.toString();
+      //     return;
+      //   }
+      // });
+      alert(this.productoReferencia.proveedor);
+      this.productoReferencia.unidad = auxUni;
+      // this.productoReferencia.proveedor = auxPro;
+
   }
 
   seleccionarCategoria(categoria:any){
@@ -78,10 +108,12 @@ export class EditarProductoComponent implements OnInit{
 
 
 seleccionarProveedor(proveedor:any){
+  alert("holaXD");
   this.productoActual.proveedor=proveedor;
+  alert("hola");
 }
 seleccionarUnidad(unidad:any){
-  this.productoActual.unidad=unidad;
+  this.productoActual.unidad=unidad.unidad  ;
 }
 eliminarMemoriaProducto(){
   this.modalService.dismissAll(EditarProductoComponent);
@@ -122,8 +154,5 @@ extractBase64 = async ($event: any) => new Promise((resolve, reject) => {
     return null;
   }
 });
-
-
-
 }
 

@@ -16,7 +16,7 @@
             <label for="unidadP" class="form-label">Tipo de unidad(*)</label>
             <select id="unidadP" class="form-select" aria-label="Default select example">
               <option value="">Selecciona una unidad</option>
-              <option *ngFor="let unidad of unidadesDP" (click)="seleccionarUnidad(unidad)"><div *ngIf="unidad==productoActual.unidad"> Actualmente seleccionado ---> </div>{{unidad}}</option>
+              <option *ngFor="let unidad of unidadesDP" (click)="seleccionarUnidad(unidad)"><div *ngIf="unidad.unidad==productoActual.unidad"> Actualmente seleccionado ---> </div>{{unidad.unidad}}</option>
             </select>
             <!-- Stock -->
             <label for="stock" class="form-label">Stock</label>

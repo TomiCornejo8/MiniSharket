@@ -28,4 +28,18 @@ export class ProductoService {
     "categorias":producto.categorias};
     return this.http.post(this.url,value);
   }
+
+  put(producto:Producto){
+    let url = this.url + producto.id;
+    let value = {"nombre":producto.nombre,
+    "stock":producto.stock,
+    "precio":producto.precio,
+    "nVentas":producto.nVentas,
+    "img":producto.img,
+    "minimarket":producto.minimarket,
+    "unidad":producto.unidad,
+    "proveedor":producto.proveedor,
+    "categorias":producto.categorias};
+    return this.http.put(url,value);
+  }
 }
