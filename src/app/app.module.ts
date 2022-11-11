@@ -13,7 +13,6 @@ import { InicioScreenComponent } from './screens/inicio-screen/inicio-screen.com
 import { FormsModule } from '@angular/forms';
 import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-producto.component';
 import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
-import { CategoriaComponent } from './components/categoria/categoria.component';
 import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.component';
 import { TarjetaProveedorComponent } from './components/tarjeta-proveedor/tarjeta-proveedor.component';
 import { ListaInsumoComponent } from './components/lista-insumo/lista-insumo.component';
@@ -28,6 +27,9 @@ import { CrearProveedorComponent } from './components/crear-proveedor/crear-prov
 import { FinanzasScreenComponent } from './screens/finanzas-screen/finanzas-screen.component';
 import { EditarProveedorComponent } from './components/editar-proveedor/editar-proveedor.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoriaService } from './services/categoria/categoria.service';
+import { ProductoService } from './services/producto/producto.service';
+import { ProveedorService } from './services/proveedor/proveedor.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,6 @@ import { HttpClientModule } from '@angular/common/http';
     InicioScreenComponent,
     TarjetaProductoComponent,
     FiltroProductosComponent,
-    CategoriaComponent,
     CarritoVentaComponent,
     TarjetaProveedorComponent,
     ListaInsumoComponent,
@@ -62,7 +63,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ProductoService,CategoriaService,ProveedorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,7 +2,7 @@
 <!-- data-bs-toggle="modal" data-bs-target="#crearCategoria" -->
   
   <!-- Modal -->
-  <div class="modal fade" id="crearCategoria" tabindex="-1" aria-labelledby="crearCategoriaLabel" aria-hidden="true">
+  <div class="" id="crearCategoria" tabindex="-1" a>
     <div class="modal-dialog">
       <div class="modal-content bg-primary text-white">
 
@@ -17,7 +17,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button (click)="cerrar()"type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
           <button (click)="crear()" [disabled]="categoria == ''" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
         </div>
 

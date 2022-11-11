@@ -25,7 +25,8 @@ export class ProductosScreenComponent implements OnInit{
   categorias:Categoria[];
   proveedoresDP: Proveedor[];
 
-  constructor(private productoService:ProductoService,private categoriaService:CategoriaService,private proveedorService:ProveedorService){}
+  constructor(private productoService:ProductoService,private categoriaService:CategoriaService,
+              private proveedorService:ProveedorService){}
 
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
@@ -33,20 +34,21 @@ export class ProductosScreenComponent implements OnInit{
       let minimarket = JSON.parse(datos || "[]").id; //Se obtiene el id del usuario logueado
       this.productoService.get(minimarket).subscribe(data=>{
         this.productos = data;
+        
       });
       
       if(this.dataSesion){
         let minimarket = JSON.parse(this.dataSesion || "[]").id;
         this.categoriaService.list(minimarket).subscribe(data =>{
           this.categorias = data;
-          this.buscarCategorias();
+          this.arreglarCategorias();
         });
       }
       if(this.dataSesion){
         let minimarket = JSON.parse(this.dataSesion || "[]").id;
         this.proveedorService.get(minimarket).subscribe(data=>{
           this.proveedoresDP = data;
-          this.buscarProveedor();
+          this.arreglaProveedor();
         });
       }
 
@@ -56,7 +58,8 @@ export class ProductosScreenComponent implements OnInit{
     
     this.sortAlfa(1);
   }
-  buscarCategorias(){
+
+  arreglarCategorias(){
     this.productos.forEach(producto =>{
       producto.categorias.forEach(categoria =>{
         this.categorias.forEach(backCate =>{
@@ -69,28 +72,29 @@ export class ProductosScreenComponent implements OnInit{
     }
     )
   }
-  buscarProveedor(){
+  arreglaProveedor(){
       this.productos.forEach(producto =>{
-        this.UnidadConvertir();
         this.proveedoresDP.forEach(proveedor =>{
           let auxProve= proveedor.id.toLocaleString();
-          if(producto.proveedor.toString()  === auxProve ){
-            producto.proveedor=proveedor.nombre;
+          if(producto.proveedor!= null){
+            if(producto.proveedor.toString() === auxProve ){
+              producto.proveedor=proveedor.nombre;
+            }
           }
+          
         })  
     }
     )
   }
-UnidadConvertir(){
+
+  arreglarUnidad(){
   if(this.productos)
     this.productos.forEach(producto=>{
         producto.unidad= producto.unidad == "1" ? "Unidad" : producto.unidad; 
         producto.unidad= producto.unidad == "2" ? "Kilogramo" : producto.unidad; 
         producto.unidad= producto.unidad == "3" ? "Gramo" : producto.unidad; 
     })
-}
-
-
+  }
 
    sortAlfa(sentido?:number){
     // cuando el valor es 1 es de A==>Z
