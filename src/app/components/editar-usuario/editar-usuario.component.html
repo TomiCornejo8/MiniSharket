@@ -11,19 +11,6 @@
         </div>
 
         <div class="modal-body">
-<<<<<<< HEAD
-            <input id="nombre" type="text" class="form-control">
-            <label for="nombre" class="form-label">Nombre</label>
-
-            <input id="claveNueva" type="password" class="form-control">
-            <label for="claveNueva" class="form-label">Nueva contraseña</label>
-
-            <input id="claveNueva2" type="password" class="form-control">
-            <label for="claveNueva2" class="form-label">Repetir nueva contraseña</label>
-
-            <input id="icono" type="file" class="form-control">
-            <label for="icono" class="form-label">Ícono</label>
-=======
             <label for="nombre" class="form-label" >Nombre</label>
             <input id="nombre" type="text" class="form-control" value="{{datoUsuarioValor.nombre}}" #nombreUsuario>
             <div *ngIf="flagPassUser==false"  >
@@ -50,7 +37,6 @@
             </div>
             <label for="icono" class="form-label">Icono</label>
             <input id="icono" [(ngModel)]="valueImg" (change)="captureFile($event)" type="file" class="form-control" value="{{datoUsuarioValor.icono}}" >
->>>>>>> origin/nico
         </div>
 
         <div class="modal-footer">
