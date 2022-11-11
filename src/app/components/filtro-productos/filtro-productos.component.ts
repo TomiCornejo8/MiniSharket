@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categoria } from 'src/app/models/categoria.model';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import Swal from 'sweetalert2';
 import { CrearCategoriaComponent } from '../crear-categoria/crear-categoria.component';
 import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.component';
@@ -12,12 +13,21 @@ import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.c
 })
 export class FiltroProductosComponent implements OnInit {
   @Output() enviarFiltro=new EventEmitter<string>;
-  categorias:Categoria[] = [new Categoria(1,"C1"),new Categoria(2,"C2"),new Categoria(3,"C3")];
-  Hola:any;
-  constructor(private modalService: NgbModal) { }
+  categorias:Categoria[];
+  // = [new Categoria(1,"C1"),new Categoria(2,"C2"),new Categoria(3,"C3")];
+
+  constructor(private modalService: NgbModal,
+    private categoriaService:CategoriaService) { }
 
   ngOnInit(): void {
-    sessionStorage.setItem('categoriasProductos',JSON.stringify(this.categorias));
+    let data = sessionStorage.getItem('usuario');
+    if(data){
+      let minimarket = JSON.parse(data || "[]").id;
+      this.categoriaService.list(minimarket).subscribe(data =>{
+        this.categorias = (data as Categoria[]);
+      });
+    }
+    
   }
 /*
   crearCategoria(categoria:string){
