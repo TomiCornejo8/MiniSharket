@@ -9,34 +9,18 @@ import { EditarProductoComponent } from '../editar-producto/editar-producto.comp
   templateUrl: './tarjeta-producto.component.html',
   styleUrls: ['./tarjeta-producto.component.sass']
 })
-export class TarjetaProductoComponent implements OnInit,OnChanges {
+export class TarjetaProductoComponent implements OnInit{
 
   @Output() eliminarProducto = new EventEmitter<Producto>();
   @Output() agregarCarrito = new EventEmitter<Producto>();
-  @Output() editarProductoFlag = new EventEmitter<Producto>();
   @Input() producto:Producto;
   @Input() productoEditar:any;
-  editar=false;
-  eliminarP=false;
+ 
   w=window.sessionStorage;
 
   constructor(private modalService: NgbModal, private unidadService:UnidadService) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if(this.editar===true){
-        this.producto=changes["productoEditar"].currentValue;
-        this.editar=false
-    }
-    if(this.eliminarP===true){
-      if(changes["respuestaEliminar"].currentValue === true ){
-        console.log("Tarjeta productos ===>",this.producto)
-        this.eliminarProducto.emit(this.producto)
-        this.eliminarP=false;
-      }
-      
-  }
-  this.eliminarP=false;
-  }
+  
 
   ngOnInit(): void {
     if(this.producto.id != 0){
@@ -48,20 +32,13 @@ export class TarjetaProductoComponent implements OnInit,OnChanges {
       });
     }
   }
-  /*
-  eliminar(respuesta:any){
-    if(respuesta)this.eliminarProducto.emit(this.producto)
-  }*/
+ 
 
   abrirModalEditarProducto() {
 		const modalRef=this.modalService.open(EditarProductoComponent);
     modalRef.componentInstance.productoActual=JSON.parse(JSON.stringify(this.producto));
     modalRef.componentInstance.productoReferencia=this.producto;
 	}
-  editarProducto(){
-    this.editarProductoFlag.emit(this.producto);
-    this.editar=true;
-  }
 
   agregar(){
     this.agregarCarrito.emit(this.producto);

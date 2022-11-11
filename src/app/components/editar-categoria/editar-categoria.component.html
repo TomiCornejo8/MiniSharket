@@ -2,7 +2,7 @@
 <!-- data-bs-toggle="modal" data-bs-target="#editarCategoria" -->
   
   <!-- Modal -->
-  <div class="modal fade" id="editarCategoria" tabindex="-1" aria-labelledby="editarCategoriaLabel" aria-hidden="true">
+  <div class="" id="editarCategoria" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content bg-primary text-white">
 
@@ -11,14 +11,14 @@
         </div>
 
         <div class="modal-body">
-            <!-- Input categoría -->
-            <input id="categoriaE" type="text" class="form-control">
+            <!-- Input categoria -->
+            <input id="categoriaE" type="text" class="form-control" value="{{categoriaValor.categoria}}" #valor>
             <label for="categoriaE" class="form-label">Categoría</label>    
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark">Editar</button>
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="btn btn-secondary bg-gradient border border-dark"  (click)="editar(valor.value)">Editar</button>
         </div>
 
       </div>

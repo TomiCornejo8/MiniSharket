@@ -26,6 +26,10 @@ import { CrearProveedorComponent } from './components/crear-proveedor/crear-prov
 import { FinanzasScreenComponent } from './screens/finanzas-screen/finanzas-screen.component';
 import { EditarProveedorComponent } from './components/editar-proveedor/editar-proveedor.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoriaService } from './services/categoria/categoria.service';
+import { ProductoService } from './services/producto/producto.service';
+import { ProveedorService } from './services/proveedor/proveedor.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -56,9 +60,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
-  providers: [],
+  providers: [ProductoService,CategoriaService,ProveedorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

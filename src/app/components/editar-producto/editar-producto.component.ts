@@ -2,6 +2,10 @@ import { Component, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChange
 import { Producto } from 'src/app/models/producto.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Categoria } from 'src/app/models/categoria.model';
+import { Proveedor } from 'src/app/models/proveedor.model';
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 
 @Component({
   selector: 'app-editar-producto',
@@ -12,23 +16,36 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class EditarProductoComponent implements OnInit{
 
   @Input() productoEntrada:any;
-  categorias:string[] = ["C1","C2","C3"];
+  categorias:Categoria[] = [];
   w=window.sessionStorage;
   productoActual:Producto = new Producto();
   productoReferencia:Producto;
   img:string="";
-  proveedoresDP: string[] = ["P1", "P2", "P3"];
-  unidadesDP: string[] = ["Unidad", "Kilogramo", "Gramo"];
+  proveedoresDP: Proveedor[] ;
+  unidadesDP: string[] = ["Unidades", "Kilogramos", "Gramos"];
   valueImg="";
+  dataSesion = sessionStorage.getItem('usuario');
 
-  constructor( private sanitizer: DomSanitizer,private modalService: NgbModal) {   
+
+  constructor( private sanitizer: DomSanitizer,private modalService: NgbModal,
+              private proveedorService:ProveedorService,private categoriaService:CategoriaService) {   
   }
 
-  
-
- 
-
   ngOnInit(): void { 
+    
+    if(this.dataSesion){
+      let minimarket = JSON.parse(this.dataSesion || "[]").id;
+      this.categoriaService.list(minimarket).subscribe(data =>{
+        this.categorias = data;
+
+      });
+    }
+    if(this.dataSesion){
+      let minimarket = JSON.parse(this.dataSesion || "[]").id;
+      this.proveedorService.get(minimarket).subscribe(data=>{
+        this.proveedoresDP = data;
+      });
+    }
 }
   editar(nombre:string,stock:string,precio:string){
     

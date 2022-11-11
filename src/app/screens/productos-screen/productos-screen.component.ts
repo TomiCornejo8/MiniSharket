@@ -1,10 +1,12 @@
 import { Component,OnInit  } from '@angular/core';
 import { Categoria } from 'src/app/models/categoria.model';
 import { Producto } from 'src/app/models/producto.model';
+import { Proveedor } from 'src/app/models/proveedor.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { UnidadService } from 'src/app/services/unidad/unidad.service';
 
 
@@ -14,16 +16,18 @@ import { UnidadService } from 'src/app/services/unidad/unidad.service';
   styleUrls: ['./productos-screen.component.sass']
 })
 export class ProductosScreenComponent implements OnInit{
-  filtroActivo={nombre:"alfa" ,sentido:"az"};
+ filtroActivo={nombre:"alfa" ,sentido:"az"};
   w=window.sessionStorage;
   productos:Producto[] =[];
-  categorias:Categoria[] = [];
-
+  dataSesion = sessionStorage.getItem('usuario');
   carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
   cant:number = 0;
+  categorias:Categoria[];
+  proveedoresDP: Proveedor[];
 
   constructor(private productoService:ProductoService,
-    private categoriaService:CategoriaService){}
+    private categoriaService:CategoriaService,
+    private proveedorService:ProveedorService){}
 
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
@@ -31,10 +35,28 @@ export class ProductosScreenComponent implements OnInit{
       let minimarket = JSON.parse(datos || "[]").id; //Se obtiene el id del usuario logueado
       this.productoService.get(minimarket).subscribe(data=>{
         this.productos = data;
+        
       });
+      
+      if(this.dataSesion){
+        let minimarket = JSON.parse(this.dataSesion || "[]").id;
+        this.categoriaService.list(minimarket).subscribe(data =>{
+          this.categorias = data;
+          this.arreglarCategorias();
+        });
+      }
+      if(this.dataSesion){
+        let minimarket = JSON.parse(this.dataSesion || "[]").id;
+        this.proveedorService.get(minimarket).subscribe(data=>{
+          this.proveedoresDP = data;
+          this.arreglaProveedor();
+        });
+      }
+
     }else{
       window.location.href="/inicio";
     }
+    
     this.sortAlfa(1);
     
     let dataSesion = sessionStorage.getItem('usuario');
@@ -46,6 +68,42 @@ export class ProductosScreenComponent implements OnInit{
     }
   }
 
+  arreglarCategorias(){
+    this.productos.forEach(producto =>{
+      producto.categorias.forEach(categoria =>{
+        this.categorias.forEach(backCate =>{
+          let auxCate= backCate.id.toLocaleString();
+          if(categoria.toString()  === auxCate ){
+            producto.categorias[producto.categorias.indexOf(categoria)]=backCate.categoria;
+          }
+        }) 
+      })
+    }
+    )
+  }
+  arreglaProveedor(){
+      this.productos.forEach(producto =>{
+        this.proveedoresDP.forEach(proveedor =>{
+          let auxProve= proveedor.id.toLocaleString();
+          if(producto.proveedor!= null){
+            if(producto.proveedor.toString() === auxProve ){
+              producto.proveedor=proveedor.nombre;
+            }
+          }
+          
+        })  
+    }
+    )
+  }
+
+  arreglarUnidad(){
+  if(this.productos)
+    this.productos.forEach(producto=>{
+        producto.unidad= producto.unidad == "1" ? "Unidad" : producto.unidad; 
+        producto.unidad= producto.unidad == "2" ? "Kilogramo" : producto.unidad; 
+        producto.unidad= producto.unidad == "3" ? "Gramo" : producto.unidad; 
+    })
+  }
 
    sortAlfa(sentido?:number){
     // cuando el valor es 1 es de A==>Z
