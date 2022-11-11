@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoriaService } from './services/categoria/categoria.service';
 import { ProductoService } from './services/producto/producto.service';
 import { ProveedorService } from './services/proveedor/proveedor.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ProveedorService } from './services/proveedor/proveedor.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [ProductoService,CategoriaService,ProveedorService],
   bootstrap: [AppComponent]
