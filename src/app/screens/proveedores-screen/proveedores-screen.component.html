@@ -5,7 +5,7 @@
 
 
 <!-- Proveedores -->
-<div class="ms-3">
+<div id="tarjetaProveedor">
     <app-tarjeta-proveedor  (eliminarProveedor)="eliminarProveedor($event)" 
     *ngFor="let proveedor of proveedores" [proveedor]="proveedor" ></app-tarjeta-proveedor>
 </div>

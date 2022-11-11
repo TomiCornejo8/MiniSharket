@@ -29,14 +29,11 @@ export class TarjetaProveedorComponent implements OnInit {
     if(respuesta)this.eliminarProveedor.emit(this.proveedor)
   }
 
-
   abrirModalEditarProveedor() {
 		const modalRef=this.modalService.open(EditarProveedorComponent);
     modalRef.componentInstance.proveedorActual=JSON.parse(JSON.stringify(this.proveedor));
     modalRef.componentInstance.proveedorReferencia=this.proveedor;
 	}
-
-
 
   insumoBtn(){
     if(this.insumoFlag){
@@ -45,12 +42,6 @@ export class TarjetaProveedorComponent implements OnInit {
       this.insumoFlag = true;
     }
   }
-
-
-
-
-
-
   
   confirmBox(){  
     Swal.fire({  

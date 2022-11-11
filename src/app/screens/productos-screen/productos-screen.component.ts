@@ -16,12 +16,7 @@ export class ProductosScreenComponent implements OnInit{
  productoAEliminar:Producto;
  prodEditado:any;
   w=window.sessionStorage;
-  productos:Producto[] =
-  [
-    new Producto("Queso mantecoso","Unidad",40,1,"Calo"),
-    new Producto("Jamon","Unidad",25,1,"San Jorge"),
-    new Producto("Palta","Kilogramo",50,1,"La feria")
-  ];
+  productos:Producto[] = [];
 
   carrito:RegistroFinanciero = new RegistroFinanciero("Venta");
   cant:number = 0;

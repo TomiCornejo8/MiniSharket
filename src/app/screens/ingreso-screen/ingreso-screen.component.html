@@ -3,26 +3,26 @@
         <h5 class="Ingresar text-center">Iniciar sesión</h5>
 
         <!-- <form action=""> -->
-            <!-- imput de nombre -->
-            <div id="nombre">
-                <label><p class="card-text">Nombre</p></label>
-                <input type="text" class="form-control" [(ngModel)]="nombre">
-            </div>
+        <!-- imput de nombre -->
+        <div id="nombre">
+            <label><p class="card-text">Nombre</p></label>
+            <input type="text" class="form-control" [(ngModel)]="nombre">
+        </div>
 
-            <!-- imput de contraseña -->
-            <div id="clave">
-                <label><p class="card-text">Contraseña</p></label>
-                <input type="password" class="form-control" [(ngModel)]="clave">
-            </div>
+        <!-- imput de contraseña -->
+        <div id="clave">
+            <label><p class="card-text">Contraseña</p></label>
+            <input type="password" class="form-control" [(ngModel)]="clave">
+        </div>
 
-            <!-- Boton de aceptar -->
-            <div class="text-center">
-                    <!-- texto que aparece cuando no se ingresa correctamente--> 
-                <div *ngIf="!verificacion">
-                    <p>Ingreso de datos incorrectos</p>
-                </div>
-                <button [disabled]="nombre=='' || clave==''" (click)="ingresar()" type="button" class="btn btn-dark bg-gradient">Ingresar</button>
+        <!-- Boton de aceptar -->
+        <div class="text-center">
+            <!-- texto que aparece cuando no se ingresa correctamente--> 
+            <div *ngIf="!verificacion">
+                <p id="falloIngreso">Ingreso de datos incorrectos</p>
             </div>
+            <button [disabled]="nombre=='' || clave==''" (click)="ingresar()" type="button" class="btn btn-dark bg-gradient">Ingresar</button>
+        </div>
     </div>
 
 </div>

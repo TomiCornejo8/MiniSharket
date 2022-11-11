@@ -1,16 +1,18 @@
 <!-- Modal -->
-<div class="modal fade" id="crearProveedor" tabindex="-1" aria-labelledby="crearProveedorLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content bg-primary text-white">
+<div id="crearProveedor" class="modal fade" tabindex="-1" aria-labelledby="crearProveedorLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-primary text-white">
   
-        <div class="modal-header">
-          <h5 class="modal-title" id="crearProveedorLabel"><b>Crear proveedor 🛍</b></h5>
-        </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearProveedorLabel"><b>Crear proveedor 🛍</b></h5>
+      </div>
   
-        <div class="modal-body">
-          <!-- Nombre proveedor -->
+      <div class="modal-body">
+        <!-- Nombre proveedor -->
+        <div class="seccion">
           <label for="nombre" class="form-label">Nombre(*)</label>
           <input [(ngModel)]="nombre" (keyup)="validarVacio()" id="nombre" type="text" class="form-control">
+        </div>
 
           <!-- Email proveedor -->
           <div>
@@ -24,6 +26,8 @@
               <li *ngFor="let item of emails; let i = index;">{{item}} <button (click)="quitarE(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1 m-1">❌</button></li>
             </ul>
           </div>
+          <!-- <div>{{emails}}</div> -->
+        </div>
 
           <!-- Numero de contacto proveedor -->
           <div>
@@ -34,13 +38,12 @@
               <li *ngFor="let item of numeros; let i = index;">{{item}} <button (click)="quitarN(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1 m-1">❌</button></li>
             </ul>
           </div>
-  
-        <div class="modal-footer">
-          <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
-          <!-- <div>{{numeros}}</div> arreglar para que se vean segun se agregan -->
-        </div>
-  
+      
+      <div class="modal-footer">
+        <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+        <button [disabled]="!bandera" (click)="crear()" type="button" class="btn btn-dark bg-gradient border border-dark" data-bs-dismiss="modal">Crear</button>
       </div>
+  
     </div>
   </div>
+</div>

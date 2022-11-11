@@ -41,10 +41,10 @@
           <option *ngFor="let proveedori of proveedoresDP">{{proveedori.nombre}}</option>
         </select>
 
-        <!-- Seleccionar categoria -->
-        <label for="CategoriaP" class="form-label">Categoria</label>
+        <!-- Seleccionar categoría -->
+        <label for="CategoriaP" class="form-label">Categoría</label>
         <select [(ngModel)]="categoria" (ngModelChange)="nuevaCategoria()" id="categoriaP" class="form-select" aria-label="Default select example">
-          <option [ngValue]="dCategoria">Selecciona una categoria</option>
+          <option [ngValue]="dCategoria">Selecciona una categoría</option>
           <option *ngFor="let categoriai of categoriasDP" [ngValue]="categoriai">{{categoriai.categoria}}</option>
         </select>
       

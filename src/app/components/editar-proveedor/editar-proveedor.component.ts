@@ -30,21 +30,26 @@ export class EditarProveedorComponent implements OnInit {
     this.modalService.dismissAll(EditarProveedorComponent);
     
   }
+
   agregarEmail(email:string){
     if(email!='')this.proveedorActual.email.push(email);
     this.vacioEmail="";
   }
+
   eliminarEmail(email:string){
     this.proveedorActual.email.splice(this.proveedorActual.email.indexOf(email),1);
   }
+
   agregarNumero(numero:string){
     if(numero!='')
     { this.proveedorActual.numero.push(numero);
     this.vacionumero="";}
   }
+
   eliminarNumero(numero:string){
     this.proveedorActual.numero.splice( this.proveedorActual.numero.indexOf(numero),1);
   }
+  
   limpiarVariablesLocales(){
     this.modalService.dismissAll(EditarProveedorComponent);
     this.vacionumero='';
