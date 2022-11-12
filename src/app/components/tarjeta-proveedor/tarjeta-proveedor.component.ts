@@ -48,8 +48,8 @@ export class TarjetaProveedorComponent implements OnInit {
       html:
       "<span style='font-size: 33px'>Esta seguro que quiere eliminar el proveedor "+"<b>"+this.proveedor.nombre+"</b> </span>", 
       text: 'No podra ser recuperado',    
-      showCancelButton: true,  
-      confirmButtonText: 'Si,eliminar',  
+      showCancelButton: true,
+      confirmButtonText: 'Si,eliminar',
       cancelButtonText: 'No,cancelar'  
     }).then((result) => {  
       if (result.value) { 

@@ -23,12 +23,11 @@
           <!--Listado de emails-->
           <div class="eliminarEtiqueta">
             <div *ngFor="let proveedorEmail of proveedorActual.email">
-              <p class="border border-dark">{{proveedorEmail}}</p>
-              <button type="button" (click)="eliminarEmail(proveedorEmail)" class="btn-danger bg-gradient border border-dark">X</button>
+              <p>{{proveedorEmail}}</p>
+              <button type="button" (click)="eliminarEmail(proveedorEmail)" class="btn btn-dark bg-gradient border border-dark p-1">❌</button>
             </div>
           </div>
             
-          <!-- <div>{{emails}}</div> -->
         </div>
 
         <!-- Numero de contacto proveedor -->
@@ -44,8 +43,8 @@
           <!--Listado de numeros de contacto-->
           <div class="eliminarEtiqueta">
             <div *ngFor="let proveedorNumero of proveedorActual.numero ">
-              <p class="border border-dark">{{proveedorNumero}}</p>
-              <button type="button" (click)="eliminarNumero(proveedorNumero)" class="btn-danger bg-gradient border border-dark">X</button>
+              <p>{{proveedorNumero}}</p>
+              <button type="button" (click)="eliminarNumero(proveedorNumero)" class="btn btn-dark bg-gradient border border-dark p-1">❌</button>
             </div>
           </div>
         </div>
