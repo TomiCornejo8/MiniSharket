@@ -1,129 +1,178 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit ,Output, SimpleChanges} from '@angular/core';
-import { Producto } from 'src/app/models/producto.model';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit, Input} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Categoria } from 'src/app/models/categoria.model';
+import { Producto } from 'src/app/models/producto.model';
 import { Proveedor } from 'src/app/models/proveedor.model';
+import { Unidad } from 'src/app/models/unidad.model';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
+import { UnidadService } from 'src/app/services/unidad/unidad.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 
 @Component({
   selector: 'app-editar-producto',
   templateUrl: './editar-producto.component.html',
-  styleUrls:[ './editar-producto.component.sass']
+  styleUrls: ['./editar-producto.component.sass']
 })
 
 export class EditarProductoComponent implements OnInit{
 
-  @Input() productoEntrada:any;
-  categorias:Categoria[] = [];
-  w=window.sessionStorage;
-  productoActual:Producto = new Producto();
-  productoReferencia:Producto;
-  img:string="";
-  proveedoresDP: Proveedor[] ;
-  unidadesDP: string[] = ["Unidades", "Kilogramos", "Gramos"];
-  valueImg="";
-  dataSesion = sessionStorage.getItem('usuario');
+  //Producto de referencia
+  @Input() producto:Producto;
 
+  // Variables
+  img: string;
+  nombre: string;
+  unidad: string;
+  stock: number;
+  precio: number;
+  proveedor: string;
+  categorias: Categoria[] = [];
 
-  constructor( private sanitizer: DomSanitizer,private modalService: NgbModal,
-              private proveedorService:ProveedorService,private categoriaService:CategoriaService) {   
+  // Extras
+  textoImg: string;
+  categoria: Categoria;
+  bandera:boolean = false;
+  dCategoria:Categoria = new Categoria(0,"");
+
+  //Dropdowns
+  unidadDP:Unidad[] = [];
+  proveedorDP:Proveedor[] = [];
+  categoriaDP:Categoria[] = [];
+
+  constructor(private sanitizer: DomSanitizer,
+    private modalService: NgbModal,
+    private unidadService:UnidadService,
+    private proveedorService:ProveedorService,
+    private categoriaService:CategoriaService,
+    private productoService:ProductoService){}
+
+  ngOnInit(): void {
+    this.img = this.producto.img;
+    this.nombre = this.producto.nombre;
+    this.unidad = this.producto.unidad;
+    this.stock = this.producto.precio;
+    this.precio = this.producto.precio;
+    this.proveedor = this.producto.proveedor;
+
+    // Dropsowns
+    this.unidadService.list().subscribe(data =>{
+      this.unidadDP = (data as Unidad[]);
+    });
+
+    let data = sessionStorage.getItem("usuario");
+    let minimarket = JSON.parse(data || "[]").id;
+    this.proveedorService.get(minimarket).subscribe(data =>{
+      this.proveedorDP = (data as Proveedor[]);
+    });
+
+    this.categoriaService.list(minimarket).subscribe(data =>{
+      this.categoriaDP = (data as Categoria[]);
+      for(let i= 0; i<this.producto.categorias.length; i++){
+        for(let j = 0; j<this.categoriaDP.length; j++){
+          if(this.producto.categorias[i] == this.categoriaDP[j].id.toString()){
+            this.categorias.push(this.categoriaDP[j]);
+            this.categoriaDP.splice(j,1);
+          }
+        }
+      }
+    });
+
+    this.categoria = this.dCategoria;
   }
 
-  ngOnInit(): void { 
-    
-    if(this.dataSesion){
-      let minimarket = JSON.parse(this.dataSesion || "[]").id;
-      this.categoriaService.list(minimarket).subscribe(data =>{
-        this.categorias = data;
-
-      });
+  validar(){
+    if(this.nombre == "" || this.stock == 0 || this.precio == 0){
+      this.bandera = false;
+    }else{
+      this.bandera = true;
     }
-    if(this.dataSesion){
-      let minimarket = JSON.parse(this.dataSesion || "[]").id;
-      this.proveedorService.get(minimarket).subscribe(data=>{
-        this.proveedoresDP = data;
-      });
-    }
-}
-  editar(nombre:string,stock:string,precio:string){
-    
-      if(nombre!==""){
-        this.productoReferencia.nombre=nombre;
-      }
-      if(stock!=null && Number.parseInt(stock)>=0){
-        this.productoReferencia.stock=Number.parseInt(stock);
-      }
-      if(precio!=null && Number.parseInt(precio)>=0){
-        this.productoReferencia.precio=Number.parseInt(precio);
-      }
-      if(this.img!==""){
-        this.productoReferencia.img=this.img;
-        this.valueImg='';
-        this.img='';
-      }
-      this.productoReferencia.proveedor=this.productoActual.proveedor;
-      this.productoReferencia.unidad=this.productoActual.unidad;
-      this.productoReferencia.categorias=this.productoActual.categorias;
-      this.modalService.dismissAll(EditarProductoComponent);
   }
 
-  seleccionarCategoria(categoria:any){
-    if(this.productoActual.categorias.indexOf(categoria)===-1){
-      this.productoActual.categorias.push(categoria);
+  nuevaCategoria(){
+    if (this.categoria.categoria != '') {
+      this.categorias.push(this.categoria);
+      this.categoriaDP.splice(this.categoriaDP.indexOf(this.categoria), 1);
+      this.categoria = this.dCategoria;
+      this.validar();
     }
-  
-}
+  }
 
+  quitarCategoria(i: number) {
+    this.categoriaDP.push(this.categorias[i]);
+    this.categorias.splice(i, 1);
+    this.categoria = this.dCategoria;
+    this.validar();
+  }
 
-seleccionarProveedor(proveedor:any){
-  this.productoActual.proveedor=proveedor;
-}
-seleccionarUnidad(unidad:any){
-  this.productoActual.unidad=unidad;
-}
-eliminarMemoriaProducto(){
-  this.modalService.dismissAll(EditarProductoComponent);
-  let  stringproductoEditar="productoEditar";
-  this.w.removeItem(stringproductoEditar); 
-}
+  editar(){
+    let bandera;
+    if(this.producto.img == this.img){
+      bandera = false;
+    }else{
+      bandera = true;
+    }
+    this.producto.img = this.img;
+    this.producto.nombre = this.nombre;
+    this.producto.unidad = this.unidad;
+    this.producto.precio = this.stock;
+    this.producto.precio = this.precio;
+    this.producto.proveedor = this.proveedor;
+    this.producto.categorias = this.categorias.map(x => x.id.toString());
 
-eliminarCategoria(categoria:any){
-  this.productoActual.categorias.splice(this.productoActual.categorias.indexOf(categoria),1);  
-}
+    let auxUnidad = this.producto.unidad;
+    this.unidadDP.forEach(x =>{
+      if(x.unidad == this.producto.unidad) this.producto.unidad = x.id.toString();
+    });
 
-captureFile(event: any) {
-  const img = event.target.files[0];
-  this.extractBase64(img).then((image: any) => {
-    this.img = image.base;
+    let auxProveedor = this.producto.proveedor;
+    this.proveedorDP.forEach(x =>{
+      if(x.nombre == this.producto.proveedor) this.producto.proveedor = x.id.toString();
+    });
+
+    this.productoService.put(this.producto,bandera).subscribe(data =>{
+      console.log(data);
+    });
+    this.producto.unidad = auxUnidad;
+    this.producto.proveedor = auxProveedor;
+
+    this.modalService.dismissAll(EditarProductoComponent);
+  }
+
+  cancelar(){
+    this.modalService.dismissAll(EditarProductoComponent);
+  }
+
+  captureFile(event: any) {
+    const img = event.target.files[0];
+    this.extractBase64(img).then((image: any) => {
+      this.img = image.base;
+      this.validar();
+    });
+  }
+
+  // Transforma las imagenes a base64
+  extractBase64 = async ($event: any) => new Promise((resolve, reject) => {
+    try {
+      const unsafeImg = window.URL.createObjectURL($event);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () => {
+        resolve({
+          base: reader.result
+        });
+      };
+      reader.onerror = error => {
+        resolve({
+          base: null
+        });
+      };
+      return reader.result;
+    } catch (e) {
+      return null;
+    }
   });
-}
-
-// Transforma las imagenes a base64
-extractBase64 = async ($event: any) => new Promise((resolve, reject) => {
-  try {
-    const unsafeImg = window.URL.createObjectURL($event);
-    const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-    const reader = new FileReader();
-    reader.readAsDataURL($event);
-    reader.onload = () => {
-      resolve({
-        base: reader.result
-      });
-    };
-    reader.onerror = error => {
-      resolve({
-        base: null
-      });
-    };
-    return reader.result;
-  } catch (e) {
-    return null;
-  }
-});
-
-
-
 }
 

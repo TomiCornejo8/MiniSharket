@@ -1,61 +1,61 @@
+<!-- Button trigger modal -->
+<!-- data-bs-toggle="modal" data-bs-target="#editarProducto" -->
 
-  <!-- Modal -->
-  <div  id="editarProducto" tabindex="-1" aria-labelledby="editarProductoLabel" aria-hidden="true" > 
-    <div class="modal-dialog">
-      <div class="modal-content bg-primary text-white">
+<!-- Modal -->
+<div id="editarProducto" tabindex="-1" aria-labelledby="editarProductoLabel" aria-hidden="true">
+  <div>
+    <div class="bg-primary text-white">
 
-        <div class="modal-header">
-          <h5 class="modal-title" id="editarProductoLabel"><b>Editar producto 🛍</b></h5>
-        </div>
+      <div class="modal-header">
+        <h5 class="modal-title" id="editarProductoLabel"><b>Editar producto 🛍</b></h5>
+      </div>
 
-        <div class="modal-body" #modalBody>
-            <!-- Nombre producto -->
-            <label for="nombreP" class="form-label">Nombre</label>
-            <input id="nombreP" type="text" class="form-control" #nombre value="{{productoActual.nombre}}">
-            
-            <label for="unidadP" class="form-label">Tipo de unidad(*)</label>
-            <select id="unidadP" class="form-select" aria-label="Default select example">
-              <option value="">Selecciona una unidad</option>
-              <option *ngFor="let unidad of unidadesDP" (click)="seleccionarUnidad(unidad)"><div *ngIf="unidad==productoActual.unidad"> Actualmente seleccionado ---> </div>{{unidad}}</option>
-            </select>
-            <!-- Stock -->
-            <label for="stock" class="form-label">Stock</label>
-            <input id="stock" type="number" class="form-control" #stock value="{{productoActual.stock}}">
-            
-            <!-- Precio -->
-            <label for="precio" class="form-label">Precio</label>
-            <input id="precio" type="number" class="form-control" #precio value="{{productoActual.precio}}">
+      <div class="modal-body">
+        <!-- Nombre producto -->
+        <label for="nombreP" class="form-label">Nombre(*)</label>
+        <input [(ngModel)]="nombre" (keyup)="validar()" id="nombreP" type="text" class="form-control">
 
-            <!-- Imagen -->
-            <label for="imagenP" class="form-label">Imagen</label> 
-            <input [(ngModel)]="valueImg" (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
-            <img *ngIf="img !=''" src="{{img}}" class="mb-1 w-25 h-25 rounded mx-auto d-block">
-            <!--Seleccionar proveedor-->
-            <label for="proveedor" class="form-label">Proveedor</label>
-            <select class="form-select" aria-label="Default select example">
-              <option value="{{productoActual.proveedor}}">Selecciona un provedor</option>
-              <option *ngFor="let proveedor of proveedoresDP" (click)="seleccionarProveedor(proveedor.nombre)"><div *ngIf="proveedor.nombre==productoActual.proveedor"> Actualmente seleccionado ---> </div>{{proveedor.nombre}}</option>
-            </select>  
-          <!-- Seleccionar categoria -->
-          <label for="CategoriaP" class="form-label">Categoria</label>
+        <!-- Seleccionar unidad -->
+        <label for="unidadP" class="form-label">Tipo de unidad(*)</label>
+        <select [(ngModel)]="unidad" (ngModelChange)="validar()" id="unidadP" class="form-select" aria-label="Default select example">
+          <option *ngFor="let unidadi of unidadDP">{{unidadi.unidad}}</option>
+        </select>
 
-          <select id="categoriaP1" class="form-select" aria-label="Default select example" >
-              <option selected >Selecciona una categoria</option>
-              <option *ngFor="let categoria of categorias" value="{{categoria}}" (click)="seleccionarCategoria(categoria.categoria)">{{categoria.categoria}}</option> 
-          </select>
-          <label for="CategoriaAc" class="form-label">Categorias activas</label>
-          <div style="background-color: white;height: 12rem;">
-            <div *ngFor="let categoria of productoActual.categorias" style="height: 3rem; width:5.8rem ; display: inline-flex;border:solid black 0.008rem">
-              <p style="color: black; width:2rem;height: 2.9rem">{{categoria}}</p><button type="button" style="height: 3rem;background-color: red;float: right;width: auto;" value="{{categoria}}" (click)="eliminarCategoria(categoria)">X</button>
-            </div>
-          </div>       
-        </div>
-          
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal" (click)="eliminarMemoriaProducto()">Cancelar</button>
-          <button (click)="editar(nombre.value,stock.value,precio.value)" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Editar</button>
-        </div>
+        <!-- Stock -->
+        <label for="stock" class="form-label">Stock(*)</label>
+        <input [(ngModel)]="stock" (keyup)="validar()" id="stock" type="number" class="form-control">
+        <!-- Precio -->
+        <label for="precio" class="form-label">Precio(*)</label>
+        <input [(ngModel)]="precio" (keyup)="validar()" id="precio" type="number" class="form-control">
 
+        <!-- Imagen -->
+        <label for="imagenP" class="form-label">Imagen</label>
+        <input [(ngModel)]="textoImg" (change)="captureFile($event)" id="imagenP" class="form-control" type="file" accept=".jpg, .png, .jpeg">
+        <img *ngIf="img != '' && img != 'null'" src="{{img}}" class="mb-1 w-25 h-25 rounded mx-auto d-block">
+
+        <!-- Seleccionar proveedor -->
+        <label for="proveedor" class="form-label">Proveedor</label>
+        <select [(ngModel)]="proveedor" (ngModelChange)="validar()" id="proveedor" class="form-select" aria-label="Default select example">
+          <option *ngIf="proveedor == ''" value="">Selecciona un proveedor</option>
+          <option *ngFor="let proveedori of proveedorDP">{{proveedori.nombre}}</option>
+        </select>
+
+        <!-- Seleccionar categoría -->
+        <label for="CategoriaP" class="form-label">Categoría</label>
+        <select [(ngModel)]="categoria" (ngModelChange)="nuevaCategoria()" id="categoriaP" class="form-select" aria-label="Default select example">
+          <option [ngValue]="dCategoria">Selecciona una categoría</option>
+          <option *ngFor="let categoriai of categoriaDP" [ngValue]="categoriai">{{categoriai.categoria}}</option>
+        </select>
+      
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let categoriaj of categorias; let i = index">{{categoriaj.categoria}} <button (click)="quitarCategoria(i)" type="button" class="btn btn-dark bg-gradient border-dark rounded-circle p-1 float-end">❌</button></li>
+        </ul>
+      </div>
+
+      <div class="modal-footer">
+        <button (click)="cancelar()" type="button" class="btn btn-secondary bg-gradient border border-dark">Cancelar</button>
+        <button [disabled]="!bandera" (click)="editar()" type="button" class="btn btn-secondary bg-gradient border border-dark">Editar</button>
       </div>
     </div>
+  </div>
 </div>

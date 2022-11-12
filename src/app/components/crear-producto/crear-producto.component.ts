@@ -151,9 +151,10 @@ export class CrearProductoComponent implements OnInit {
     let categoriaID = this.categorias.map(x => x.id.toString());
     let producto = new Producto(this.nombre,this.unidad,this.stock,this.precio,this.proveedor,categoriaID,this.img,false,0,JSON.parse(dataSesion || "[]").id);
     this.productoService.post(producto).subscribe(data =>{
-      console.log(data);
+      producto.id = (data as Producto).id;
+      producto.img = (data as Producto).img;
+      this.crearProducto.emit(producto);
     });
-    this.crearProducto.emit(producto);
     this.limpiar();
   }
 }
