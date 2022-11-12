@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
@@ -34,7 +35,7 @@ export class RegistroScreenComponent implements OnInit {
       if(data.existe == "false"){
         if (this.tipo == 1) {
           this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo).subscribe(data => {
-            sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+            sessionStorage.setItem('usuario', JSON.stringify({"id":(data as Usuario).id, "nombre": this.usuario, "icono": (data as Usuario).icono, "tipo": this.tipo, "codigo": this.codigo }));
             window.location.href = "/inicio";
           });
         }else{
@@ -42,7 +43,7 @@ export class RegistroScreenComponent implements OnInit {
           this.usuarioService.getCodigo(this.minimarket,this.codigo).subscribe(data=>{
             if(data){
               this.usuarioService.post(this.usuario, this.clave1, this.img, this.tipo, this.codigo,data.id).subscribe(data => {
-                sessionStorage.setItem('usuario', JSON.stringify({ "nombre": this.usuario, "icono": this.img, "tipo": this.tipo, "codigo": this.codigo }));
+                sessionStorage.setItem('usuario', JSON.stringify({"id":(data as Usuario).id, "nombre": this.usuario, "icono": (data as Usuario).icono, "tipo": this.tipo, "codigo": this.codigo }));
                 window.location.href = "/inicio";
               });
             }else{
