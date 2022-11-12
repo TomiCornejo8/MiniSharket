@@ -20,7 +20,7 @@
             <button type="button" class="botonAgregar btn btn-dark bg-gradient border border-dark ms-3" (click)="agregarEmail(correo.value)">Agregar</button>
           </div>
 
-          <!--boton rojo de eliminar un email-->
+          <!--Listado de emails-->
           <div class="eliminarEtiqueta">
             <div *ngFor="let proveedorEmail of proveedorActual.email">
               <p class="border border-dark">{{proveedorEmail}}</p>
@@ -41,7 +41,7 @@
             <button type="button" class="botonAgregar btn btn-dark bg-gradient border border-dark ms-3" (click)="agregarNumero(num.value)">Agregar</button>
           </div>
 
-          <!--boton rojo de eliminar un numero de contacto-->
+          <!--Listado de numeros de contacto-->
           <div class="eliminarEtiqueta">
             <div *ngFor="let proveedorNumero of proveedorActual.numero ">
               <p class="border border-dark">{{proveedorNumero}}</p>

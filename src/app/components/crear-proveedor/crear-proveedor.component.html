@@ -17,27 +17,33 @@
           <!-- Email proveedor -->
           <div>
             <label for="email" class="form-label">Email(*)</label>
-            <div>
+            <div class="formBoton">
               <input [(ngModel)]="email" (keyup)="validarVacio()" id="email" type="text" class="form-control">
-              <button (click)="agregarEmail()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
+              <button (click)="agregarEmail()" type="button" class="btn btn-dark bg-gradient border border-dark ms-3">Agregar</button>
             </div>
-            <!-- <div>{{emails}}</div> -->
-            <ul>
-              <li *ngFor="let item of emails; let i = index;">{{item}} <button (click)="quitarE(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1 m-1">❌</button></li>
+
+            <ul class="listado">
+              <li *ngFor="let item of emails; let i = index;">{{item}} 
+                <button (click)="quitarE(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1">❌</button>
+              </li>
             </ul>
           </div>
-          <!-- <div>{{emails}}</div> -->
-        </div>
 
           <!-- Numero de contacto proveedor -->
           <div>
             <label for="numero" class="form-label">Numero de contacto(*)</label>
-            <input [(ngModel)]="numero" (keyup)="validarVacio()" id="numero" type="text" class="form-control">
-            <button (click)="agregarNumero()" type="button" class="btn btn-secondary bg-gradient border border-dark">+</button>
-            <ul>
-              <li *ngFor="let item of numeros; let i = index;">{{item}} <button (click)="quitarN(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1 m-1">❌</button></li>
+            <div class="formBoton">
+              <input [(ngModel)]="numero" (keyup)="validarVacio()" id="numero" type="text" class="form-control">
+              <button (click)="agregarNumero()" type="button" class="btn btn-dark bg-gradient border border-dark ms-3">Agregar</button>
+            </div>
+            
+            <ul class="listado">
+              <li *ngFor="let item of numeros; let i = index;">{{item}} 
+                <button (click)="quitarN(i)" type="button" class="btn btn-dark bg-gradient border border-dark p-1">❌</button>
+              </li>
             </ul>
           </div>
+        </div>
       
       <div class="modal-footer">
         <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
