@@ -49,6 +49,8 @@ export class TarjetaProveedorComponent implements OnInit {
       "<span style='font-size: 33px'>Esta seguro que quiere eliminar el proveedor "+"<b>"+this.proveedor.nombre+"</b> </span>", 
       text: 'No podra ser recuperado',    
       showCancelButton: true,
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6c757d',
       confirmButtonText: 'Si,eliminar',
       cancelButtonText: 'No,cancelar'  
     }).then((result) => {  
