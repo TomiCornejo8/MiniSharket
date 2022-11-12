@@ -60,4 +60,9 @@ export class ProductoService {
     }
     return this.http.put(url, value);
   }
+
+  delete(i:number){
+    let url =  this.url + i;
+    return this.http.delete(url);
+  }
 }

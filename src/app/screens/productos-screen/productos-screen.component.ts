@@ -182,7 +182,10 @@ export class ProductosScreenComponent implements OnInit{
   //indexof: devuelve la posición del elemento entregado
   //splice: elimina un elemento desde el primer parametro hasta el segundo parametro
   eliminarProductoI(producto:Producto){
+    this.productoService.delete(producto.id).subscribe(data =>{
+      console.log(data);
       this.productos.splice(this.productos.indexOf(producto),1);  
+    });
   }
 
   crearCategoria(categoria:string){
