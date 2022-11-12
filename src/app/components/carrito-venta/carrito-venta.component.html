@@ -7,10 +7,11 @@
   <div class="offcanvas-body text-center">
     <button class="btn btn-primary bg-gradient border-dark rounded-circle p-4 mb-3" type="button">📸QR</button>
     <!-- Lista de productos -->
-    <ul class="list-group mb-2">
+    <ul id="listaCompra" class="list-group mb-2">
       <!-- <app-cola-producto (eliminarColaProducto)="eliminarColaProducto($event)" *ngFor="let producto of carrito" [producto]="producto"></app-cola-producto> -->
       <li *ngFor="let producto of carrito.lista" class="list-group-item ">
-        <span class="" style="width: 9rem;padding-right: 1%;">{{producto.nombre}}</span>
+        <span class="" >{{producto.nombre}}</span>
+
         <button type="button" (click)="restar(producto)"class="btn btn-dark bg-gradient border-dark rounded-circle p-1">➖</button>
         <input type="text" (change)="cambiarCantidad(producto)" [(ngModel)]="producto.cant" style="width: 2rem;">
         <button type="button" (click)="sumar(producto)" class="btn btn-dark bg-gradient border-dark rounded-circle p-1">➕</button>
