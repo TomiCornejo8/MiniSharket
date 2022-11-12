@@ -27,7 +27,7 @@ export class ProductoService {
       "unidad": producto.unidad,
       "proveedor": producto.proveedor,
       "categorias": producto.categorias
-    };    
+    };
     return this.http.post(this.url, value);
   }
 

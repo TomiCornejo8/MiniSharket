@@ -18,7 +18,7 @@ def producto_api_view(request):
         producto_serializer = ProductoSerializer(data = request.data)
         if producto_serializer.is_valid():
             producto_serializer.save()
-            return Response(producto_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(producto_serializer.data,status = status.HTTP_200_OK)
         return Response(producto_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
     
 @api_view(['PUT','DELETE'])
