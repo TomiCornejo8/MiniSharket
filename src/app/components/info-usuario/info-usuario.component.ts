@@ -12,6 +12,8 @@ export class InfoUsuarioComponent implements OnInit {
   user:Usuario=new Usuario("manuel","123","","",123,"1");
   icono:string = "";
   nombre:string = "";
+  tipo:number = 0;
+  codigo:string = "";
 
   constructor(private modalService: NgbModal) { }
 
@@ -20,6 +22,8 @@ export class InfoUsuarioComponent implements OnInit {
     if(datos){
       this.icono = JSON.parse(datos || "[]").icono;
       this.nombre = JSON.parse(datos || "[]").nombre;
+      this.tipo = JSON.parse(datos || "[]").tipo;
+      this.codigo = JSON.parse(datos || "[]").codigo;
     }
   }
 

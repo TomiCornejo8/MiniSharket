@@ -6,6 +6,9 @@
   <div class="offcanvas-body text-center">
     <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark" style="width:150px;height:150px;">
     <br>
+    <p *ngIf="tipo==1"><b>Tipo de cuenta:</b> Minimarket</p>
+    <p *ngIf="tipo==2"><b>Tipo de cuenta:</b> Vendedor</p>
+    <p *ngIf="tipo==1"><b>Codigo de cuenta:</b> {{codigo}}</p>
     <button type="button" class="btn btn-primary bg-gradient border-dark" (click)="abrirModalCrearCategoria()">Editar usuario📝</button>
     <br>
     <button type="button" class="btn btn-danger bg-gradient border-dark mt-2" data-bs-toggle="modal" data-bs-target="#revisarCredencial">Eliminar usuario❌</button>
