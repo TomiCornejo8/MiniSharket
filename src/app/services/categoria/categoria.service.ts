@@ -22,6 +22,12 @@ export class CategoriaService {
     return this.http.post(this.url,value);
   }
 
+  put(categoria:Categoria){
+    let url = this.url + categoria.id;
+    let value = {"categoria":categoria.categoria}
+    return this.http.put(url,value);
+  }
+
   delete(i:number){
     let url =  this.url + i;
     return this.http.delete(url);

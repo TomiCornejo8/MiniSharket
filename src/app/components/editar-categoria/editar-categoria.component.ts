@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Categoria } from 'src/app/models/categoria.model';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 
 @Component({
   selector: 'app-editar-categoria',
@@ -10,15 +11,17 @@ import { Categoria } from 'src/app/models/categoria.model';
 export class EditarCategoriaComponent implements OnInit {
   categoriaReferencia:Categoria;
   categoriaValor:Categoria;
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+    private categoriaService:CategoriaService){}
 
   ngOnInit(): void {
   }
   editar(categoria:string){
     this.categoriaReferencia.categoria=categoria;
-    console.log(categoria);
-    this.modalService.dismissAll(EditarCategoriaComponent);
-}
+    this.categoriaService.put(this.categoriaReferencia).subscribe(data=>{
+      this.modalService.dismissAll(EditarCategoriaComponent);
+    });
+  }
   cancelar(){
     this.modalService.dismissAll(EditarCategoriaComponent);
   }
