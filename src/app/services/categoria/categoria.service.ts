@@ -21,4 +21,9 @@ export class CategoriaService {
     "minimarket":categoria.minimarket};
     return this.http.post(this.url,value);
   }
+
+  delete(i:number){
+    let url =  this.url + i;
+    return this.http.delete(url);
+  }
 }

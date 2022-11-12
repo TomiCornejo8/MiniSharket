@@ -57,8 +57,11 @@ export class FiltroProductosComponent implements OnInit {
       confirmButtonText: 'Si,eliminar',  
       cancelButtonText: 'No,cancelar'  
     }).then((result) => {  
-      if (result.value) {  
-        this.categorias.splice(this.categorias.indexOf(categoria),1);
+      if (result.value) {
+        this.categoriaService.delete(categoria.id).subscribe(data=>{
+          console.log(data);
+          this.categorias.splice(this.categorias.indexOf(categoria),1);
+        });
       } 
     })  
   }  
