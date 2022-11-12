@@ -8,6 +8,10 @@ import { Proveedor } from 'src/app/models/proveedor.model';
 })
 export class ProveedoresScreenComponent implements OnInit {
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if (!datos) {
+      window.location.href = "/inicio";
+    }
   }
   w=window.sessionStorage;
   proveedores:Proveedor[] =[

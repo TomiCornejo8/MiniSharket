@@ -10,6 +10,10 @@ export class FinanzasScreenComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if (!datos) {
+      window.location.href = "/inicio";
+    }
   }
 
 }

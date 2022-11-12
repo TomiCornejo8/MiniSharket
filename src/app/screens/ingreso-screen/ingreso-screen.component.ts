@@ -17,6 +17,10 @@ export class IngresoScreenComponent implements OnInit {
   constructor(private usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if (datos) {
+      window.location.href = "/inicio";
+    }
   }
 
   ingresar(){
