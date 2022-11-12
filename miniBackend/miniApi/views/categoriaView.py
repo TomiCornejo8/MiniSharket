@@ -15,7 +15,7 @@ def categoria_api_view(request):
         categoria_serializer = CategoriaSerializer(data = request.data)
         if categoria_serializer.is_valid():
             categoria_serializer.save()
-            return Response(categoria_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(categoria_serializer.data,status = status.HTTP_200_OK)
         return Response(categoria_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT','DELETE'])
