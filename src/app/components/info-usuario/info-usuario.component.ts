@@ -14,6 +14,7 @@ export class InfoUsuarioComponent implements OnInit {
   nombre:string = "";
   tipo:number = 0;
   codigo:string = "";
+  trabajadores:Usuario[]=[];
 
   constructor(private modalService: NgbModal) { }
 
@@ -35,5 +36,8 @@ export class InfoUsuarioComponent implements OnInit {
 		const modalRef=this.modalService.open(EditarUsuarioComponent);
     modalRef.componentInstance.datoUsuarioValor=JSON.parse(JSON.stringify(this.user));
    modalRef.componentInstance.datoUsuarioReferencia=this.user;
-	}
+	} 
+  desvincular(trabajador:Usuario){
+    
+  }
 }
