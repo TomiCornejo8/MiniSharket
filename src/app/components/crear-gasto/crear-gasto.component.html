@@ -1,0 +1,78 @@
+  <div class="m-2">
+    <div class="m-auto" style="width: 32rem;">
+        <h1 class="m-auto" style="width: 16rem;"> Agregar Costo</h1>
+    </div>
+        <div class="mb-5">
+            <label for="proveedor" class="form-label">Fecha</label>
+            <form class="row row-cols-sm-auto m-auto my-3">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <input
+                                class="form-control"
+                                placeholder="yyyy-mm-dd"
+                                name="dp"
+                                [(ngModel)]="model"
+                                ngbDatepicker
+                                #d="ngbDatepicker"
+                                (ngModelChange)="selectToday()"/>
+                            <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" button></button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+            
+        <div class="mb-3">
+            <label for="proveedor" class="form-label">Proveedor</label>
+            <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
+            <option value="">Selecciona un provedor</option>
+            <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="proveedor" class="form-label">Productos</label>
+            <select [(ngModel)]="productoT" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
+            <option value="">Selecciona un provedor</option>
+            <option *ngFor="let producto of productosProveedoresDP" [ngValue]="producto">{{producto}}</option>
+            </select>
+        </div>
+        <div class="mb-3 " style="height: 20rem; overflow:auto">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre producto</th>
+                        <th scope="col">Proveedor</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Monto</th>
+                        <th scope="col">Botones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let country of countries;let i =index">
+                        <th scope="row">{{i}}</th>
+                        <td>
+                            <img
+                                [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
+                                class="me-2"
+                                style="width: 20px"
+                            />
+                            {{ country.name }}
+                        </td>
+                        <td>{{ country.area | number}}</td>
+                        <td>{{ country.population | number }}</td>
+                        <td>{{ country.area| number }}</td>
+                        <td><button>X</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Monto total</label>
+            <p>1000 clp</p>
+        </div>
+        <div>
+            <button>Cancelar</button>
+            <button>Crear</button>
+        </div>
+    </div> 
