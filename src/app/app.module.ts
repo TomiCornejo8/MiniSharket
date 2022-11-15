@@ -29,7 +29,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoriaService } from './services/categoria/categoria.service';
 import { ProductoService } from './services/producto/producto.service';
 import { ProveedorService } from './services/proveedor/proveedor.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CrearGastoComponent } from './components/crear-gasto/crear-gasto.component';
+import { EditarGastoComponent } from './components/editar-gasto/editar-gasto.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EditarCategoriaComponent,
     CrearProveedorComponent,
     FinanzasScreenComponent,
-    EditarProveedorComponent
+    EditarProveedorComponent,
+    CrearGastoComponent,
+    EditarGastoComponent
   ],
   imports: [
     BrowserModule,
