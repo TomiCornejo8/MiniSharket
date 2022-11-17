@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
+import { ProductoService } from 'src/app/services/producto/producto.service';
+import { RegistroFinancieroService } from 'src/app/services/registroFinanciero/registro-financiero.service';
 
 @Component({
   selector: 'app-carrito-venta',
@@ -12,38 +14,39 @@ export class CarritoVentaComponent implements OnInit {
   @Input() carrito:RegistroFinanciero;
   @Output() menosProducto = new EventEmitter();
 
-  constructor() { }
+  constructor(private productoService:ProductoService,
+    private registroFService:RegistroFinancieroService){}
 
   ngOnInit(): void {  }
 
   restar(producto:RegistroProducto){
-    if(producto.cant>0){
-      producto.cant--;
+    if(producto.cantidad>0){
+      producto.cantidad--;
       this.carrito.montoTotal -= producto.precio;
     }
   }
 
   sumar(producto:RegistroProducto){
-    if(producto.producto.stock > producto.cant){
-      producto.cant++;
+    if(producto.producto.stock > producto.cantidad){
+      producto.cantidad++;
       this.carrito.montoTotal += producto.precio;
     } 
   }
 
   cambiarCantidad(producto:RegistroProducto){
-    if(producto.cant <= 0){
-      producto.cant = 1;
-    }else if(producto.cant>producto.producto.stock){
-      producto.cant = producto.producto.stock;
+    if(producto.cantidad <= 0){
+      producto.cantidad = 1;
+    }else if(producto.cantidad>producto.producto.stock){
+      producto.cantidad = producto.producto.stock;
     }
     this.carrito.montoTotal = 0;
     this.carrito.lista.forEach(producto => {
-      this.carrito.montoTotal += producto.precio*producto.cant;
+      this.carrito.montoTotal += producto.precio*producto.cantidad;
     });
   }
   
   eliminar(producto:RegistroProducto){
-    this.carrito.montoTotal -= producto.precio*producto.cant;
+    this.carrito.montoTotal -= producto.precio*producto.cantidad;
     producto.producto.banderaCarrito = false;
     this.carrito.lista.splice(this.carrito.lista.indexOf(producto),1);
     this.menosProducto.emit();
@@ -58,8 +61,33 @@ export class CarritoVentaComponent implements OnInit {
   }
 
   subirCompra(){
-    //Subir BBDD
-    this.cancelar();
+    let dataSesion = sessionStorage.getItem('usuario');
+    this.carrito.minimarket = JSON.parse(dataSesion || "[]").id;
+    this.carrito.tipo = "1";
+
+    this.registroFService.post(this.carrito).subscribe(data=>{
+      let i = 0;
+      while(i<this.carrito.lista.length){
+        this.carrito.lista[i].producto.nVentas++;
+        this.carrito.lista[i].producto.stock -= this.carrito.lista[i].cantidad;
+  
+        if(this.carrito.lista[i].producto.stock != 0){
+          this.carrito.lista[i].producto.banderaCarrito = false;
+        }
+
+        // this.carrito.lista[i]
+  
+        this.productoService.put(this.carrito.lista[i].producto,false).subscribe(data=>{
+          console.log(data);
+        });
+
+        this.menosProducto.emit();
+        i++;
+      }
+    });
+
+    this.carrito.lista = [];
+    this.carrito.montoTotal = 0;
   }
 
 }

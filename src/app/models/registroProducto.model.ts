@@ -1,14 +1,14 @@
 import { Producto } from "./producto.model";
 
 export class RegistroProducto{
-    cant:number;
+    cantidad:number;
     nombre:string;
     precio:number;
     unidad:string;
     producto:Producto;
 
-    constructor(cant:number,nombre:string,precio:number,unidad:string,producto:Producto = new Producto("","",0,0)){
-        this.cant = cant;
+    constructor(cantidad:number,nombre:string,precio:number,unidad:string,producto:Producto = new Producto("","",0,0)){
+        this.cantidad = cantidad;
         this.nombre = nombre;
         this.precio = precio;
         this.unidad = unidad;

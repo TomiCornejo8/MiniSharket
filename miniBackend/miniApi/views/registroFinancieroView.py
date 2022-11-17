@@ -15,7 +15,7 @@ def registroFinanciero_api_view(request):
         registroFinanciero_serializer = RegistroFinancieroSerializer(data = request.data)
         if registroFinanciero_serializer.is_valid():
             registroFinanciero_serializer.save()
-            return Response(registroFinanciero_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(registroFinanciero_serializer.data,status = status.HTTP_200_OK)
         return Response(registroFinanciero_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT','DELETE'])

@@ -52,7 +52,7 @@ export class EditarProductoComponent implements OnInit{
     this.img = this.producto.img;
     this.nombre = this.producto.nombre;
     this.unidad = this.producto.unidad;
-    this.stock = this.producto.precio;
+    this.stock = this.producto.stock;
     this.precio = this.producto.precio;
     this.proveedor = this.producto.proveedor;
 
@@ -116,7 +116,7 @@ export class EditarProductoComponent implements OnInit{
     this.producto.img = this.img;
     this.producto.nombre = this.nombre;
     this.producto.unidad = this.unidad;
-    this.producto.precio = this.stock;
+    this.producto.stock = this.stock;
     this.producto.precio = this.precio;
     this.producto.proveedor = this.proveedor;
     this.producto.categorias = this.categorias.map(x => x.id.toString());
