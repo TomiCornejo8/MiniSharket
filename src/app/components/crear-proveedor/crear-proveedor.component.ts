@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Proveedor } from 'src/app/models/proveedor.model';
-
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
+import { Email } from "src/app/models/email.model";
+import { Telefono } from "src/app/models/telefono.model";
+import { EmailService } from 'src/app/services/email/email.service';
+import { TelefonoService } from 'src/app/services/telefono/telefono.service';
 @Component({
   selector: 'app-crear-proveedor',
   templateUrl: './crear-proveedor.component.html',
@@ -10,7 +14,7 @@ export class CrearProveedorComponent implements OnInit {
 
   @Output() crearProveedor = new EventEmitter<Proveedor>();
 
-  //Atributos de proveedor
+  //Atributos de proveedo
   nombre:string =''; 
   emails:string[] =[];
   numeros:string[] =[];
@@ -20,7 +24,9 @@ export class CrearProveedorComponent implements OnInit {
   //Bandera
   bandera:boolean = false;
 
-  constructor() { }
+  constructor(private proveedorService:ProveedorService,
+    private emailService:EmailService,
+    private telefonoService:TelefonoService) { }
 
   ngOnInit(): void {
   }
@@ -49,11 +55,33 @@ export class CrearProveedorComponent implements OnInit {
   }
 
   crear(){
-    if (this.email != '') this.emails.push(this.email);
-    if (this.numero != '') this.numeros.push(this.numero);
-    this.crearProveedor.emit(new Proveedor(this.nombre,this.emails,this.numeros));
+    if (this.email != '') {
+      this.emails.push(this.email);
+    }
+    if (this.numero != '') {
+      this.numeros.push(this.numero);
+    }
+    let datos = sessionStorage.getItem('usuario');
+    let minimarket = JSON.parse(datos || "[]").id;
+
+    this.proveedorService.post(this.nombre,minimarket).subscribe(data =>{
+      let proveedor = new Proveedor(this.nombre,[],[],(data as Proveedor).id,minimarket);
+      this.emails.forEach(email =>{
+        this.emailService.post(email,(data as Proveedor).id).subscribe(aux =>{
+          proveedor.email.push((aux as Email));
+        });
+        
+        this.numeros.forEach(numero =>{
+          this.telefonoService.post(numero,(data as Proveedor).id).subscribe(aux =>{
+            proveedor.numero.push((aux as Telefono));
+          });
+        });
+      this.crearProveedor.emit(proveedor);
+    });
+
     this.limpiar();
-  }
+  });
+}
 
   agregarEmail(){
     if(this.email != ''){

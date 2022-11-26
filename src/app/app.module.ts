@@ -15,7 +15,6 @@ import { TarjetaProductoComponent } from './components/tarjeta-producto/tarjeta-
 import { FiltroProductosComponent } from './components/filtro-productos/filtro-productos.component';
 import { CarritoVentaComponent } from './components/carrito-venta/carrito-venta.component';
 import { TarjetaProveedorComponent } from './components/tarjeta-proveedor/tarjeta-proveedor.component';
-import { ListaInsumoComponent } from './components/lista-insumo/lista-insumo.component';
 import { RevisarCredencialComponent } from './components/revisar-credencial/revisar-credencial.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
@@ -47,7 +46,6 @@ import { EditarGastoComponent } from './components/editar-gasto/editar-gasto.com
     FiltroProductosComponent,
     CarritoVentaComponent,
     TarjetaProveedorComponent,
-    ListaInsumoComponent,
     RevisarCredencialComponent,
     EditarUsuarioComponent,
     CrearProductoComponent,

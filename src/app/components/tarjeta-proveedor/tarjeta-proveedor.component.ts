@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Proveedor } from 'src/app/models/proveedor.model';
 import  Swal  from 'sweetalert2';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { EditarProveedorComponent } from '../editar-proveedor/editar-proveedor.component';
 @Component({
   selector: 'app-tarjeta-proveedor',
@@ -23,6 +23,7 @@ export class TarjetaProveedorComponent implements OnInit {
   
 
   ngOnInit(): void {
+    
   }
 
   eliminar(respuesta:any){

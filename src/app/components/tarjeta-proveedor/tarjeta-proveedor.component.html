@@ -5,8 +5,8 @@
                 <button (click)="confirmBox()" class="btn btn-dark bg-gradient border-secondary float-end p-2" type="button" >❌</button>
                 <button (click)="abrirModalEditarProveedor()" class="btn btn-dark bg-gradient border-secondary float-end me-3 p-2" type="button" >📝</button>
                 <h2 class="card-title">{{proveedor.nombre}}</h2>
-                <p *ngFor='let correo of proveedor.email' class="card-text">E-mail: {{correo}}</p>
-                <p *ngFor='let telefono of proveedor.numero' class="card-text">Teléfono: {{telefono}}</p>
+                <p *ngFor='let correo of proveedor.email' class="card-text">E-mail: {{correo.email}}</p>
+                <p *ngFor='let telefono of proveedor.numero' class="card-text">Teléfono: {{telefono.telefono}}</p>
                 <p> 
                     <button (click)="insumoBtn()" class="btn btn-dark bg-gradient border border-primary" type="button">Insumos</button>
                 </p>
@@ -14,12 +14,10 @@
         </div>
         <div *ngIf="insumoFlag" class="col-10 col-md-5 card mb-2 border border-primary border-5">
             <div class="card-body m-1">
-                <h2 class="card-title">Insumos: <button type="button" class="btn btn-dark bg-gradient float-end p-2">➕</button></h2>
+                <h2 class="card-title">Insumos:</h2>
                 <!-- Insumos -->
                 <ul class="list-group mt-3">
-                    <app-lista-insumo></app-lista-insumo>
-                    <app-lista-insumo></app-lista-insumo>
-                    <app-lista-insumo></app-lista-insumo>
+                    <li *ngFor="" class="list-group-item"></li>
                 </ul>
             </div>
         </div>

@@ -23,7 +23,7 @@
           <!--Listado de emails-->
           <div class="eliminarEtiqueta">
             <div *ngFor="let proveedorEmail of proveedorActual.email">
-              <p>{{proveedorEmail}}</p>
+              <p>{{proveedorEmail.email}}</p>
               <button type="button" (click)="eliminarEmail(proveedorEmail)" class="btn btn-dark bg-gradient border border-dark p-1">❌</button>
             </div>
           </div>
@@ -43,7 +43,7 @@
           <!--Listado de numeros de contacto-->
           <div class="eliminarEtiqueta">
             <div *ngFor="let proveedorNumero of proveedorActual.numero ">
-              <p>{{proveedorNumero}}</p>
+              <p>{{proveedorNumero.telefono}}</p>
               <button type="button" (click)="eliminarNumero(proveedorNumero)" class="btn btn-dark bg-gradient border border-dark p-1">❌</button>
             </div>
           </div>
