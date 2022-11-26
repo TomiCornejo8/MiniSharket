@@ -3,6 +3,8 @@ import { Proveedor } from 'src/app/models/proveedor.model';
 import  Swal  from 'sweetalert2';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { EditarProveedorComponent } from '../editar-proveedor/editar-proveedor.component';
+import { Producto } from 'src/app/models/producto.model';
+import { ProductoService } from 'src/app/services/producto/producto.service';
 @Component({
   selector: 'app-tarjeta-proveedor',
   templateUrl: './tarjeta-proveedor.component.html',
@@ -13,17 +15,16 @@ export class TarjetaProveedorComponent implements OnInit {
   @Output() eliminarProveedor = new EventEmitter<Proveedor>();
   @Input() proveedor:Proveedor;
   @Input() proveedorEditar:any;
+  productos:Producto[] = [];
   editar=false
   w=window.sessionStorage;
-  insumoFlag:boolean = false;
- 
   closeResult = '';
-  
-  constructor(private modalService: NgbModal) { }
+  insumoFlag=false;
+  constructor(private modalService: NgbModal,
+    private productoService:ProductoService) { }
   
 
   ngOnInit(): void {
-    
   }
 
   eliminar(respuesta:any){
@@ -37,10 +38,16 @@ export class TarjetaProveedorComponent implements OnInit {
 	}
 
   insumoBtn(){
-    if(this.insumoFlag){
-      this.insumoFlag = false;
-    }else{
-      this.insumoFlag = true;
+    if(this.productos.length == 0){
+      this.productoService.getProveedor(this.proveedor.id).subscribe(data =>{
+        this.productos = (data as Producto[]);
+      });
+    }
+    if(this.insumoFlag == false){
+      this.insumoFlag=true;
+    }
+    else{
+      this.insumoFlag=false;
     }
   }
   
