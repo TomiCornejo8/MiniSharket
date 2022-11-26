@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Proveedor } from 'src/app/models/proveedor.model';
+import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 interface Country {
 	id?: number;
@@ -97,15 +98,20 @@ const COUNTRIES: Country[] = [
 })
 export class CrearGastoComponent implements OnInit {
   model: NgbDateStruct;
-	date: { year: number; month: number };
+date: { year: number; month: number };
   proveedoresDP:Proveedor[];
   productosProveedoresDP:Proveedor[];
-  proveedor: string;
-  productoT: string;
-	constructor(private calendar: NgbCalendar,private proveedorService:ProveedorService) {}
+  proveedor: Country;
+  productoT: Country;
+  cantidadLocal:number=1;
+  montoLocal:number=0;
+  registroFinanciero:RegistroFinanciero;
+  
+	constructor(private calendar: NgbCalendar,private proveedorService:ProveedorService, private modalService:NgbModal) {}
 	pageSize = COUNTRIES.length;
 	collectionSize = COUNTRIES.length;
 	countries: Country[]=[];
+	countrii:Country[]=[];
 	
   ngOnInit(): void {
     this.model = this.calendar.getToday();
@@ -124,9 +130,36 @@ export class CrearGastoComponent implements OnInit {
   seleccionarProveedor(){
 
   }
+  seleccionarProducto(){
+  
+    if (this.countries.indexOf(this.productoT)==-1) {
+      this.countries.push(this.productoT);
+      //this.categoriaDP.splice(this.categoriaDP.indexOf(this.categoria), 1);\
+  }
+  }
   refreshCountries() {
 		COUNTRIES.forEach(country =>{
-      this.countries.push(country);
+      	this.countries.push(country);
+		  this.countrii.push(country);
     });
+	}
+
+	eliminarProducto(producto:any){
+		this.countries.splice(this.countries.indexOf(producto),1);  
+	}
+
+	cerrarModal(){
+		this.modalService.dismissAll(CrearGastoComponent);
+	}
+	editar(){
+
+		this.modalService.dismissAll(CrearGastoComponent);
+	}
+
+	cambioCantidad(){
+
+	}
+	cambioMonto(){
+
 	}
 }

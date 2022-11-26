@@ -25,15 +25,15 @@
             <label for="proveedor" class="form-label">Proveedor</label>
             <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
             <option value="">Selecciona un provedor</option>
-            <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
+            <option *ngFor="let proveedori of countries" [ngValue]="proveedori">{{proveedori}}</option>
             </select>
         </div>
 
         <div class="mb-3">
             <label for="proveedor" class="form-label">Productos</label>
-            <select [(ngModel)]="productoT" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
+            <select [(ngModel)]="productoT" (ngModelChange)="seleccionarProducto()" class="form-select" aria-label="Default select example">
             <option value="">Selecciona un provedor</option>
-            <option *ngFor="let producto of productosProveedoresDP" [ngValue]="producto">{{producto}}</option>
+            <option *ngFor="let producto of countrii" [ngValue]="producto">{{producto.name}}</option>
             </select>
         </div>
         <div class="mb-3 " style="height: 20rem; overflow:auto">
@@ -60,9 +60,9 @@
                             {{ country.name }}
                         </td>
                         <td>{{ country.area | number}}</td>
-                        <td>{{ country.population | number }}</td>
-                        <td>{{ country.area| number }}</td>
-                        <td><button>X</button></td>
+                        <td><input [(ngModel)]="cantidadLocal" type="number" (ngModelChange)="cambioCantidad()"></td>
+                        <td><input [(ngModel)]="montoLocal"  type="number" (ngModelChange)="cambioMonto()"></td>
+                        <td><button (click)="eliminarProducto(country)">X</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -72,7 +72,7 @@
             <p>1000 clp</p>
         </div>
         <div>
-            <button>Cancelar</button>
-            <button>Crear</button>
+            <button (click)="cerrarModal()">Cancelar </button>
+            <button (click)="editar()">Crear</button>
         </div>
     </div> 
