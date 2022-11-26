@@ -9,7 +9,7 @@ export class RegistroProducto{
     producto:Producto;
     registroFinanciero:number;
 
-    constructor(cantidad:number,nombre:string,precio:number,unidad:string,producto:Producto = new Producto("","",0,0),registroFinanciero:number = 0,id = 0){
+    constructor(cantidad:number=0,nombre:string,precio:number,unidad:string,producto:Producto = new Producto("","",0,0),registroFinanciero:number = 0,id = 0){
         this.cantidad = cantidad;
         this.nombre = nombre;
         this.precio = precio;

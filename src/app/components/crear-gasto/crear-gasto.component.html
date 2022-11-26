@@ -25,7 +25,7 @@
             <label for="proveedor" class="form-label">Proveedor</label>
             <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
             <option value="">Selecciona un provedor</option>
-            <option *ngFor="let proveedori of countries" [ngValue]="proveedori">{{proveedori}}</option>
+            <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
             </select>
         </div>
 
