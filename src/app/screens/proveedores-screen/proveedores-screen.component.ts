@@ -49,7 +49,10 @@ export class ProveedoresScreenComponent implements OnInit {
   }
 
   eliminarProveedor(proveedor:Proveedor){
-      this.proveedores.splice(this.proveedores.indexOf(proveedor),1);   
+    this.proveedorService.delete(proveedor.id).subscribe(data =>{
+      console.log(data);
+    });
+    this.proveedores.splice(this.proveedores.indexOf(proveedor),1);   
   }
   
  
