@@ -15,7 +15,7 @@ def telefono_api_view(request):
         telefono_serializer = TelefonoSerializer(data = request.data)
         if telefono_serializer.is_valid():
             telefono_serializer.save()
-            return Response(telefono_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(telefono_serializer.data,status = status.HTTP_200_OK)
         return Response(telefono_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])

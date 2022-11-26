@@ -1,34 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Proveedor } from 'src/app/models/proveedor.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProveedorService {
-  url:string = "http://127.0.0.1:8000/miniApi/proveedor/";
+export class TelefonoService {
+  url:string = "http://127.0.0.1:8000/miniApi/telefono/";
 
   constructor(private http:HttpClient) { }
 
   //Listar todos los proveedores
-  get(minimarket:number):Observable<any>{
-    let url = this.url +"minimarket/" + minimarket;
+  get(proveedor:number){
+    let url = this.url +"proveedor/" + proveedor;
     return this.http.get(url);
   }
 
-  post(nombre:string,minimarket:number){
+  post(telefono:string,proveedor:number){
     let value = {
-      "nombre":nombre,
-      "minimarket":minimarket
+      "telefono":telefono,
+      "proveedor":proveedor
     }
     return this.http.post(this.url, value);
   }
 
-  put(nombre:string,id:number){
+  put(telefono:string,id:number){
     let url = this.url + id;
     let value = {
-      "nombre":nombre
+      "telefono":telefono
     }
     return this.http.put(url, value);
   }

@@ -27,7 +27,7 @@ def producto_detail_api_view(request,id=None):
     producto = Producto.objects.filter(id = id).first()
     if producto:
         if request.method == 'PUT':
-            producto_serializer = ProductoSerializer(producto,data = request.data)
+            producto_serializer = ProductoSerializer(producto,data = request.data, partial=True)
             if producto_serializer.is_valid():
                 producto_serializer.save()
                 return Response(producto_serializer.data,status = status.HTTP_200_OK)
@@ -61,6 +61,3 @@ def producto_proveedor_api_view(request,proveedor=None):
             return Response(producto_serializer.data,status = status.HTTP_200_OK)
     
     return Response({'message':'This proveedor dont have any Producto'},status = status.HTTP_400_BAD_REQUEST)
-
-
-

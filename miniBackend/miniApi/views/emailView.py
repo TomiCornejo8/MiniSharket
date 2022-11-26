@@ -15,7 +15,7 @@ def email_api_view(request):
         email_serializer = EmailSerializer(data = request.data)
         if email_serializer.is_valid():
             email_serializer.save()
-            return Response(email_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(email_serializer.data,status = status.HTTP_200_OK)
         return Response(email_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])

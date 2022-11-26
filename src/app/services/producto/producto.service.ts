@@ -16,6 +16,11 @@ export class ProductoService {
     return this.http.get(url);
   }
 
+  getProveedor(proveedor: number){
+    let url = this.url + "proveedor/" + proveedor;
+    return this.http.get(url);
+  }
+
   post(producto: Producto) {
     let value = {
       "nombre": producto.nombre,

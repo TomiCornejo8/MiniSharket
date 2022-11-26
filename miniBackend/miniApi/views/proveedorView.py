@@ -15,7 +15,7 @@ def proveedor_api_view(request):
         proveedor_serializer = ProveedorSerializer(data = request.data)
         if proveedor_serializer.is_valid():
             proveedor_serializer.save()
-            return Response(proveedor_serializer.data,status = status.HTTP_201_CREATED)
+            return Response(proveedor_serializer.data,status = status.HTTP_200_OK)
         return Response(proveedor_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT','DELETE'])

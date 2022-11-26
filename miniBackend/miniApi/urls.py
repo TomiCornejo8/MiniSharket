@@ -38,20 +38,20 @@ urlpatterns = [
 
     path('email/',email_api_view),
     path('email/<int:id>',email_detail_api_view),
-    path('email/<int:proveedor>',email_proveedor_api_view),
+    path('email/proveedor/<int:proveedor>',email_proveedor_api_view),
 
     path('telefono/',telefono_api_view),
     path('telefono/<int:id>',telefono_detail_api_view),
-    path('telefono/<int:proveedor>',telefono_proveedor_api_view),
+    path('telefono/proveedor/<int:proveedor>',telefono_proveedor_api_view),
 
     path('registroFinanciero/',registroFinanciero_api_view),
     path('registroFinanciero/<int:id>',registroFinanciero_detail_api_view),
-    path('registroFinanciero/<int:minimarket>',registroFinanciero_minimarket_api_view),
+    path('registroFinanciero/minimarket/<int:minimarket>',registroFinanciero_minimarket_api_view),
 
     path('tiporegistro/',tipoRegistro_api_view),
     path('tiporegistro/<int:id>',tipoRegistro_detail_api_view),
 
     path('registroProducto/',registroProducto_api_view),
     path('registroProducto/<int:id>',registroProducto_detail_api_view),
-    path('registroProducto/<int:registroFinanciero>',registroProducto_registroFinanciero_api_view),
+    path('registroProducto/registroFinanciero/<int:registroFinanciero>',registroProducto_registroFinanciero_api_view),
 ]
