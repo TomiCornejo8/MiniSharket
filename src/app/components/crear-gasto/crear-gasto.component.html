@@ -21,13 +21,13 @@
         </form>
     </div>
             
-    <div class="mb-3">
-        <label for="proveedor" class="form-label">Proveedor</label>
-        <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
-        <option value="">Selecciona un provedor</option>
-        <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="proveedor" class="form-label">Proveedor</label>
+            <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
+            <option value="">Selecciona un provedor</option>
+            <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
+            </select>
+        </div>
 
     <div class="mb-3">
         <label for="proveedor" class="form-label">Productos</label>
