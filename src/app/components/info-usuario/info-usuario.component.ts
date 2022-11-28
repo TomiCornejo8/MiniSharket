@@ -28,13 +28,19 @@ export class InfoUsuarioComponent implements OnInit {
       this.tipo = JSON.parse(datos || "[]").tipo;
       this.codigo = JSON.parse(datos || "[]").codigo;
       let minimarket = JSON.parse(datos || "[]").id
-
+/*
       if(this.tipo == 1){
         this.usuarioS.getVendedores(minimarket).subscribe(data =>{
           console.log((data as Usuario[]));
-          this.trabajadores = (data as Usuario[]);
+          if((data as Usuario[]).length==1){
+            this.trabajadores[0] = (data as Usuario);
+          }
+          else{
+            this.trabajadores = (data as Usuario[]);
+          }
+          
         });
-      }
+      }*/
     }
   }
 

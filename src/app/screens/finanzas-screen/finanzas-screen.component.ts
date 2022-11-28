@@ -51,7 +51,7 @@ export class FinanzasScreenComponent implements OnInit {
                 for(let j=0;j<this.registros[i].lista.length;j++){
                   this.registros[i].lista[j].unidad = this.unidades.filter(e => e.id.toString() == this.registros[i].lista[j].unidad)[0].unidad;
                 }
-                console.log(this.registros[i].lista);
+                //console.log(this.registros[i].lista);
               });
             });            
           }
@@ -67,10 +67,17 @@ export class FinanzasScreenComponent implements OnInit {
   }
 
   calcularTotal(productos:RegistroProducto[]){
-    let suma = 0;
-    productos.forEach(producto =>{
-      suma += producto.cantidad * producto.precio;
-    });
-    return suma;
+    if(productos != undefined){
+      let suma = 0;
+      productos.forEach(producto =>{
+        suma += producto.cantidad * producto.precio;
+      });
+      return suma;
+    }
+    return null;
+  }
+
+  eliminarRegistro(registro:RegistroFinanciero){
+        this.registroFinanzasS.delete(registro.id).subscribe();
   }
 }
