@@ -66,6 +66,14 @@ export class ProductoService {
     return this.http.put(url, value);
   }
 
+  putStock(stock:number,id:number){
+    let url = this.url + id;
+    let value = {
+      "stock":stock
+    }
+    return this.http.put(url, value);
+  }
+
   delete(i:number){
     let url =  this.url + i;
     return this.http.delete(url);

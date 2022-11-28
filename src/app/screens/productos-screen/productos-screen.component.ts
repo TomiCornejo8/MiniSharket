@@ -7,8 +7,6 @@ import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
-import { UnidadService } from 'src/app/services/unidad/unidad.service';
-
 
 @Component({
   selector: 'app-productos-screen',

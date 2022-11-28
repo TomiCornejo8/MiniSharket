@@ -19,15 +19,17 @@ export class CarritoVentaComponent implements OnInit {
   @Input() carrito: RegistroFinanciero;
   @Output() menosProducto = new EventEmitter();
   unidades:Unidad[];
-  proveedores:Proveedor[];
 
   constructor(private productoService: ProductoService,
     private registroFService: RegistroFinancieroService,
     private registroPService: RegistroProductoService,
-    private unidadService:UnidadService,
-    private proveedorService:ProveedorService) { }
+    private unidadService:UnidadService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.unidadService.list().subscribe(data=>{
+      this.unidades = (data as Unidad[]);
+    });
+  }
 
   restar(producto: RegistroProducto) {
     if (producto.cantidad > 0) {
@@ -70,15 +72,6 @@ export class CarritoVentaComponent implements OnInit {
     this.carrito.montoTotal = 0;
   }
 
-  cargarInfo(minimarket:number){
-    this.unidadService.list().subscribe(data=>{
-      this.unidades = (data as Unidad[]);
-    });
-    this.proveedorService.get(minimarket).subscribe(data=>{
-      this.proveedores = (data as Proveedor[]);
-    });
-  }
-
   subirCompra() {
     let dataSesion = sessionStorage.getItem('usuario');
     this.carrito.minimarket = JSON.parse(dataSesion || "[]").id;
@@ -86,8 +79,6 @@ export class CarritoVentaComponent implements OnInit {
 
     this.registroFService.post(this.carrito.tipo, this.carrito.minimarket).subscribe(data => {
       console.log(data);
-
-      this.cargarInfo(this.carrito.minimarket);
 
       let i = 0;
       while (i < this.carrito.lista.length) {
@@ -98,17 +89,17 @@ export class CarritoVentaComponent implements OnInit {
           this.carrito.lista[i].producto.banderaCarrito = false;
         }
 
-        // this.productoService.put(this.carrito.lista[i].producto, false).subscribe(data => {
-        //   console.log(data);
-        // });
+        this.productoService.putStock(this.carrito.lista[i].producto.stock, this.carrito.lista[i].producto.id).subscribe(data => {
+          console.log(data);
+        });
 
         this.unidades.forEach(x =>{
           if(x.unidad == this.carrito.lista[i].unidad) this.carrito.lista[i].unidad = x.id.toString();
         });
 
-        // this.registroPService.post(this.carrito.lista[i], (data as RegistroFinanciero).id).subscribe(data => {
-        //   console.log(data);
-        // });
+        this.registroPService.post(this.carrito.lista[i], (data as RegistroFinanciero).id).subscribe(data => {
+          console.log(data);
+        });
 
         this.menosProducto.emit();
         i++;

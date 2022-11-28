@@ -1,6 +1,11 @@
 import { RegistroProducto } from "./registroProducto.model";
 
 export class RegistroFinanciero{
+    /*
+    fecha = models.DateField(auto_now=True)
+    tipo = models.ForeignKey(TipoRegistro,on_delete=models.DO_NOTHING)
+    minimarket = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+     */
     id:number;
     minimarket:number;
     tipo:string;

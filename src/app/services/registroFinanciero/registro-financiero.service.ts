@@ -10,6 +10,11 @@ export class RegistroFinancieroService {
 
   constructor(private http:HttpClient) { }
 
+  get(minimarket: number){
+    let url = this.url + "minimarket/" + minimarket;
+    return this.http.get(url);
+  }
+
   post(tipo:string,minimarket:number){
     let value = {"tipo":tipo,
     "minimarket":minimarket}
