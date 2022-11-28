@@ -65,4 +65,12 @@ export class FinanzasScreenComponent implements OnInit {
       //modalRef.componentInstance.proveedorReferencia=this.proveedor;
     
   }
+
+  calcularTotal(productos:RegistroProducto[]){
+    let suma = 0;
+    productos.forEach(producto =>{
+      suma += producto.cantidad * producto.precio;
+    });
+    return suma;
+  }
 }

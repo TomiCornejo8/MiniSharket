@@ -13,34 +13,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="table-success border-dark">
-                    <td class="cuerpoTabla">DD-MM-AAAA</td>
-                    <td class="cuerpoTabla">Venta</td>
+                <tr *ngFor="let registro of registros" [ngClass]="{'table-success': registro.tipo=='Venta'}" [ngClass]="{'table-danger': registro.tipo=='Gasto'}" class="border-dark">
+                    <td class="cuerpoTabla">{{registro.fecha}}</td>
+                    <td *ngIf="registro.tipo=='Venta'" class="cuerpoTabla">Venta</td>
+                    <td *ngIf="registro.tipo=='Gasto'" class="cuerpoTabla">Gasto/td>
                     <td class="cuerpoTabla">
                         <ul>
-                            <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                            <li>STOCK x PRODUCTO $PRECIO c/u</li>
+                            <li *ngFor="let producto of registro.lista">{{producto.cantidad}} x {{producto.nombre}} ${{producto.precio}} c/{{producto.unidad}}</li>
                         </ul>
                     </td>
-                    <td class="cuerpoTabla">$TOTAL</td>
+                    <td class="cuerpoTabla">${{calcularTotal(registro.lista)}}</td>
                     <td class="cuerpoTabla">
                         <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
                         <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
                     </td>
                 </tr>
-                <!-- <tr class="table-danger border-dark">
-                    <td>DD-MM-AAAA</td>
-                    <td>Gasto</td>
-                    <td><ul>
-                        <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                        <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                    </ul></td>
-                    <td>$TOTAL</td>
-                    <td>
-                        <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
-                        <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
-                    </td>
-                </tr> -->
             </tbody>
         </table>
     </div>
