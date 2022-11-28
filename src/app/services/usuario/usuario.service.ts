@@ -25,6 +25,11 @@ export class UsuarioService {
     return this.http.get(url);
   }
 
+  getVendedores(id:number){
+    let url = this.url + "vendedores/XD/BD/" + id;
+    return this.http.get(url);
+  }
+
   post(nombre:string,clave:string,icono:string,tipo:number,codigo:string,minimarket:number = 0){
     let value;
     if(minimarket == 0){

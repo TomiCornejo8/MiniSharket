@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.component';
 
 @Component({
@@ -14,9 +15,10 @@ export class InfoUsuarioComponent implements OnInit {
   nombre:string = "";
   tipo:number = 0;
   codigo:string = "";
-  trabajadores:Usuario[]=[];
+  trabajadores:Usuario[] = [];
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal,
+    private usuarioS:UsuarioService){}
 
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
@@ -25,6 +27,14 @@ export class InfoUsuarioComponent implements OnInit {
       this.nombre = JSON.parse(datos || "[]").nombre;
       this.tipo = JSON.parse(datos || "[]").tipo;
       this.codigo = JSON.parse(datos || "[]").codigo;
+      let minimarket = JSON.parse(datos || "[]").id
+
+      if(this.tipo == 1){
+        this.usuarioS.getVendedores(minimarket).subscribe(data =>{
+          console.log((data as Usuario[]));
+          this.trabajadores = (data as Usuario[]);
+        });
+      }
     }
   }
 
