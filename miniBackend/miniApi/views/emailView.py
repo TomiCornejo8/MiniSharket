@@ -40,4 +40,4 @@ def email_proveedor_api_view(request,proveedor=None):
             email_serializer = EmailSerializer(emails,many = True)
             return Response(email_serializer.data,status = status.HTTP_200_OK)
     
-    return Response({'message':'This proveedor dont have any Email'},status = status.HTTP_400_BAD_REQUEST)
+    return Response({'id':'0'},status = status.HTTP_200_OK)

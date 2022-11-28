@@ -40,4 +40,4 @@ def telefono_proveedor_api_view(request,proveedor=None):
             telefono_serializer = TelefonoSerializer(telefonos,many = True)
             return Response(telefono_serializer.data,status = status.HTTP_200_OK)
     
-    return Response({'message':'This proveedor dont have any Telefono'},status = status.HTTP_400_BAD_REQUEST)
+    return Response({'id':'0'},status = status.HTTP_200_OK)
