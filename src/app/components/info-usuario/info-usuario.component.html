@@ -14,13 +14,48 @@
     <button type="button" class="btn btn-danger bg-gradient border-dark mt-2" data-bs-toggle="modal" data-bs-target="#revisarCredencial">Eliminar usuario❌</button>
     <br>
     <button (click)="cerrar()" type="button" class="btn btn-secondary bg-gradient border-dark mt-2" data-bs-dismiss="offcanvas" aria-label="Close">Cerrar sesión🖐</button>
+
     <!--Aqui debe ir un ng if para que solo se muestre con usuario mnimarket  <div *ngIf="tipo==1" style="border: solid 3px;margin-top: 7%;"> -->
+<<<<<<< HEAD
     <div *ngFor="let trabajador of trabajadores" style="width: 20.7rem ;border: solid 5px;margin:auto;margin-top: 5%; height: 35rem; overflow: auto;display:flex;flex-wrap: wrap;">
       <div  class="card border border-dark " style="width:9rem;margin:0.5rem;height: 16rem;" >
         <img src="{{trabajador.icono}}"  class="card-img-top mb-3 "  style="width: 7.5rem; margin: auto;height: 8.5rem;" > 
         <p class="card-text ">{{trabajador.nombre}</p>
         <button style="border: solid 1px;width:6rem; margin: auto; height: 3rem ;margin-bottom: 1rem;">Desvincular</button>
       </div>
+=======
+    <div style="width: 20.7rem ;border: solid 5px;margin:auto;margin-top: 5%; height: 35rem; overflow: auto;display:flex;flex-wrap: wrap;">
+
+      <!-- Testeo de como se ve-->
+            <div  class="card border border-dark " style="width:9rem;margin:0.5rem;height: 16rem;" >
+              <img src="../../../assets/producto.png"  class="card-img-top mb-3 "  style="width: 7.5rem; margin: auto;height: 8.5rem;" > 
+              <p class="card-text ">Nombre del trabajador</p>
+              <button style="border: solid 1px;width:5.8rem; margin: auto; height: 3rem ;margin-bottom: 1rem;">Desvincular</button>
+            </div>
+            <div  class="card border border-dark " style="width:9rem;margin:0.5rem;height: 16rem;" >
+              <img src="../../../assets/producto.png"  class="card-img-top mb-3 "  style="width: 7.5rem; margin: auto;height: 8.5rem;" > 
+              <p class="card-text ">Nombre del trabajador</p>
+              <button style="border: solid 1px;width:5.8rem; margin: auto; height: 3rem ;margin-bottom: 1rem;">Desvincular</button>
+            </div>
+            <div  class="card border border-dark " style="width:9rem;margin:0.5rem;height: 16rem;" >
+              <img src="../../../assets/producto.png"  class="card-img-top mb-3 "  style="width: 7.5rem; margin: auto;height: 8.5rem;" > 
+              <p class="card-text ">Nombre del trabajador</p>
+              <button style="border: solid 1px;width:5.8rem; margin: auto; height: 3rem ;margin-bottom: 1rem;">Desvincular</button>
+            </div>
+            <div  class="card border border-dark " style="width:9rem;margin:0.5rem;height: 16rem;" >
+              <img src="../../../assets/producto.png"  class="card-img-top mb-3 "  style="width: 7.5rem; margin: auto;height: 8.5rem;" > 
+              <p class="card-text ">Nombre del trabajador</p>
+              <button style="border: solid 1px;width:5.8rem; margin: auto; height: 3rem ;margin-bottom: 1rem;">Desvincular</button>
+            </div>
+        <!--  Testeo de como se ve--->
+        
+        <div *ngFor="let trabajador of trabajadores" class="card border border-dark " style="width:9rem;margin:0.5rem;height: 16rem;">
+          <img src="{{trabajador.icono}}" class="card-img-top mb-3 "  style="width: 7.5rem; margin: auto;height: 8.5rem;" > 
+          <p class="card-text ">{{trabajador.nombre}}</p>
+          <button style="border: solid 1px;width:5.8rem; margin: auto; height: 3rem ;margin-bottom: 1rem;" (click)="desvincular(trabajador)">Desvincular</button>
+        </div>
+
+>>>>>>> origin/zorro
     </div>
   </div>
   
