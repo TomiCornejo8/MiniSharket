@@ -20,4 +20,17 @@ export class RegistroFinancieroService {
     "minimarket":minimarket}
     return this.http.post(this.url,value);
   }
+
+  put(fecha:string,id:number){
+    let url = this.url + id;
+    let value = {
+      "fecha":fecha
+    }
+    return this.http.put(url, value);
+  }
+
+  delete(id:number){
+    let url = this.url + id;
+    return this.http.delete(url);
+  }
 }

@@ -25,7 +25,7 @@ def registroProducto_detail_api_view(request,id=None):
 
     if registroProducto:
         if request.method == 'PUT':
-            registroProducto_serializer = RegistroProductoSerializer(registroProducto,data = request.data)
+            registroProducto_serializer = RegistroProductoSerializer(registroProducto,data = request.data, partial=True)
             if registroProducto_serializer.is_valid():
                 registroProducto_serializer.save()
                 return Response(registroProducto_serializer.data,status = status.HTTP_200_OK)

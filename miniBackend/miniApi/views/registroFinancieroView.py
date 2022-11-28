@@ -12,7 +12,7 @@ class RegistroFinancieroSerializer(serializers.ModelSerializer):
 @api_view(['POST'])
 def registroFinanciero_api_view(request):
     if request.method == 'POST':
-        registroFinanciero_serializer = RegistroFinancieroSerializer(data = request.data)
+        registroFinanciero_serializer = RegistroFinancieroSerializer(data = request.data, partial=True)
         if registroFinanciero_serializer.is_valid():
             registroFinanciero_serializer.save()
             return Response(registroFinanciero_serializer.data,status = status.HTTP_200_OK)

@@ -23,4 +23,18 @@ export class RegistroProductoService {
     "registroFinanciero":registroFinanciero}
     return this.http.post(this.url,value);
   }
+
+  put(registro:RegistroProducto){
+    let url = this.url + registro.id;
+    let value = {"cantidad":registro.cantidad,
+    "nombre":registro.nombre,
+    "precio":registro.precio,
+    "unidad":registro.unidad}
+    return this.http.put(url, value);
+  }
+
+  delete(id:number){
+    let url = this.url + id;
+    return this.http.delete(url);
+  }
 }
