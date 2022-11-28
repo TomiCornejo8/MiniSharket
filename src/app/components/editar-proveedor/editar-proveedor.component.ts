@@ -43,7 +43,7 @@ export class EditarProveedorComponent implements OnInit {
       });
 
       this.proveedorReferencia.email.forEach((email) =>{
-        if(this.proveedorActual.email.indexOf(email) == -1){
+        if(this.proveedorActual.email.filter(e => e.id === email.id).length === 0){
           this.emailService.delete(email.id).subscribe(data =>{
             console.log(data);
           });
@@ -60,8 +60,11 @@ export class EditarProveedorComponent implements OnInit {
           });
         }
       });
+
       this.proveedorReferencia.numero.forEach((numero) =>{
-        if(this.proveedorActual.numero.indexOf(numero) == -1){
+        console.log(this.proveedorActual.numero);
+        console.log(numero);
+        if(this.proveedorActual.numero.filter(e => e.id === numero.id).length === 0){
           this.telefonoService.delete(numero.id).subscribe(data =>{
             console.log(data);
           });

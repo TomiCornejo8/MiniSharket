@@ -30,11 +30,19 @@ export class ProveedoresScreenComponent implements OnInit {
 
         this.proveedores.forEach(proveedor=>{
           this.emailService.get(proveedor.id).subscribe(data=>{
-            proveedor.email = (data as Email[]);
+            if((data as Email).id == 0){
+              proveedor.email = []
+            }else{
+              proveedor.email = (data as Email[]);
+            }
           });
 
           this.telefonoService.get(proveedor.id).subscribe(data =>{
-            proveedor.numero = (data as Telefono[]);
+            if((data as Telefono).id == 0){
+              proveedor.numero = []
+            }else{
+              proveedor.numero = (data as Telefono[]);
+            }
           });
         });
 
