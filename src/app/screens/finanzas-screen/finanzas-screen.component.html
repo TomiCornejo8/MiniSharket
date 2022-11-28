@@ -1,46 +1,46 @@
-  <div>
-        <button (click)="abrirModalAgregarGasto()">Agregar Gasto+</button>
-  </div>
-  <div class="m-3 table-responsive">
-        <table class="table table-bordered border-dark text-center">
-            <thead id="cabezalTabla">
-                <tr class="table-dark border-dark">
-                    <th class="col-2">Fecha</th>
-                    <th class="col-1">Venta/Gasto</th>
-                    <th class="col-5">Lista</th>
-                    <th class="col-2">Total</th>
-                    <th class="col-2">Botones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="table-success border-dark">
-                    <td class="cuerpoTabla">DD-MM-AAAA</td>
-                    <td class="cuerpoTabla">Venta</td>
-                    <td class="cuerpoTabla">
-                        <ul>
-                            <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                            <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                        </ul>
-                    </td>
-                    <td class="cuerpoTabla">$TOTAL</td>
-                    <td class="cuerpoTabla">
-                        <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
-                        <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
-                    </td>
-                </tr>
-                <!-- <tr class="table-danger border-dark">
-                    <td>DD-MM-AAAA</td>
-                    <td>Gasto</td>
-                    <td><ul>
+<div class="mt-2 ms-5">
+    <button (click)="abrirModalAgregarGasto()" class="btn btn-dark bg-gradient border-dark me-1 ms-3" type="button">Agregar Gasto+</button>
+</div>
+<div class="m-3 table-responsive">
+    <table class="table table-bordered border-dark text-center">
+        <thead id="cabezalTabla">
+            <tr class="table-dark border-dark">
+                <th class="col-2">Fecha</th>
+                <th class="col-1">Venta/Gasto</th>
+                <th class="col-5">Lista</th>
+                <th class="col-2">Total</th>
+                <th class="col-2">Botones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-success border-dark">
+                <td class="cuerpoTabla">DD-MM-AAAA</td>
+                <td class="cuerpoTabla">Venta</td>
+                <td class="cuerpoTabla">
+                    <ul>
                         <li>STOCK x PRODUCTO $PRECIO c/u</li>
                         <li>STOCK x PRODUCTO $PRECIO c/u</li>
-                    </ul></td>
-                    <td>$TOTAL</td>
-                    <td>
-                        <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
-                        <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
-                    </td>
-                </tr> -->
-            </tbody>
-        </table>
-    </div>
+                    </ul>
+                </td>
+                <td class="cuerpoTabla">$TOTAL</td>
+                <td class="cuerpoTabla">
+                    <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
+                    <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
+                </td>
+            </tr>
+            <!-- <tr class="table-danger border-dark">
+                <td>DD-MM-AAAA</td>
+                <td>Gasto</td>
+                <td><ul>
+                    <li>STOCK x PRODUCTO $PRECIO c/u</li>
+                    <li>STOCK x PRODUCTO $PRECIO c/u</li>
+                </ul></td>
+                <td>$TOTAL</td>
+                <td>
+                    <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
+                    <button class="btn btn-dark bg-gradient border-dark  p-1" type="button">❌</button>
+                </td>
+            </tr> -->
+        </tbody>
+    </table>
+</div>

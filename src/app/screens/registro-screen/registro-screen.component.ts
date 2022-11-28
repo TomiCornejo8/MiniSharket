@@ -58,17 +58,30 @@ export class RegistroScreenComponent implements OnInit {
   }
 
   revisar() {
-    if (this.usuario == "" || this.clave1 == "" || this.clave2 == "" || this.codigo == "") {
-      this.bandera = false;
-    } else if (this.tipo == 2) {
-      if (this.minimarket == "" || this.codigo == "") {
+    // if (this.tipo == 1) {
+      if (this.usuario == '' || this.clave1 == '' || this.clave2 == '' || this.codigo == '') {
         this.bandera = false;
-      } else {
+      }else{
         this.bandera = true;
       }
-    } else {
-      this.bandera = true;
-    }
+    // }else{
+    //   if (this.usuario == '' || this.clave1 == '' || this.clave2 == '' || this.codigo == '' || this.minimarket == '') {
+    //     this.bandera = false;
+    //   }else{
+    //     this.bandera = true;
+    //   }
+    // }
+    // if (this.usuario == "" || this.clave1 == "" || this.clave2 == "" || this.codigo == "") {
+    //   this.bandera = false;
+    // } else if (this.tipo == 2) {
+    //   if (this.minimarket == "" || this.codigo == "") {
+    //     this.bandera = false;
+    //   } else {
+    //     this.bandera = true;
+    //   }
+    // } else {
+    //   this.bandera = true;
+    // }
   }
 
   cambioTipo(val: number) {
