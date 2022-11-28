@@ -78,8 +78,11 @@ def usuario_check_api_view(request,nombre=None):
 
 @api_view(['GET'])
 def usuario_vendedor_api_view(request,minimarket=None):
+    
     usuario = Usuario.objects.filter(minimarket = minimarket).first()
-    if request.method == 'GET':
-        usuario_serializer = UsuarioSerializer(usuario)
-        return Response(usuario_serializer.data,status = status.HTTP_200_OK)
+
+    if usuario:
+        if request.method == 'GET':
+            usuario_serializer = UsuarioSerializer(usuario)
+            return Response(usuario_serializer.data,status = status.HTTP_200_OK)
     return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)

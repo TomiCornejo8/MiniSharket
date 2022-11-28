@@ -16,7 +16,7 @@ urlpatterns = [
     path('usuario/<str:nombre>/<str:clave>',usuario_detail_api_view),
     path('usuario/verificar/<str:nombre>/<str:codigo>',usuario_codigo_api_view),
     path('usuario/<str:nombre>',usuario_check_api_view),
-    path('usuario/vendedores/<str:minimarket>',usuario_vendedor_api_view),
+    path('usuario/vendedores/XD/BD/<int:minimarket>',usuario_vendedor_api_view),
 
     path('tipocuenta/',tipoCuenta_api_view),
     path('tipocuenta/<int:id>',tipoCuenta_detail_api_view),
