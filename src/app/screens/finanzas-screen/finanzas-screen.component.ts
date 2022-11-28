@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrearGastoComponent } from 'src/app/components/crear-gasto/crear-gasto.component';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
+import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { TipoRegistro } from 'src/app/models/tipoRegistro.model';
 import { Unidad } from 'src/app/models/unidad.model';
 import { RegistroFinancieroService } from 'src/app/services/registroFinanciero/registro-financiero.service';
@@ -34,13 +35,26 @@ export class FinanzasScreenComponent implements OnInit {
       let minimarket = JSON.parse(datos || "[]").id;
       this.registroFinanzasS.get(minimarket).subscribe(data =>{
         this.registros = (data as RegistroFinanciero[]);
-        console.log(this.registros);
+
         this.tipoRegistroS.get().subscribe(data =>{
           this.tipo = (data as TipoRegistro[]);
+
           for(let i=0; i<this.registros.length;i++){
-            this.registros[i].tipo = this.tipo.filter(e => e.id.toString() === this.registros[i].tipo)[0].tipo;
+            this.registros[i].tipo = this.tipo.filter(e => e.id.toString() == this.registros[i].tipo)[0].tipo;
+
+            this.registroProductoS.get(this.registros[i].id).subscribe(data =>{
+              this.registros[i].lista = (data as RegistroProducto[]);
+
+              this.unidadS.list().subscribe(data =>{
+                this.unidades = (data as Unidad[]);
+
+                for(let j=0;j<this.registros[i].lista.length;j++){
+                  this.registros[i].lista[j].unidad = this.unidades.filter(e => e.id.toString() == this.registros[i].lista[j].unidad)[0].unidad;
+                }
+                console.log(this.registros[i].lista);
+              });
+            });            
           }
-          console.log(this.registros);
         });
       });
     }
