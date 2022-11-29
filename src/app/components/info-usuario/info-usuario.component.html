@@ -1,14 +1,14 @@
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="infoUsuario" aria-labelledby="infoUsuarioLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title"><b>{{nombre}}</b></h5>
+    <h5 class="offcanvas-title"><b>{{user.nombre}}</b></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body text-center">
-    <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark" style="width:150px;height:150px; margin-bottom: 1rem;">
+    <img src="http://127.0.0.1:8000{{user.icono}}" class="rounded-circle border border-3 border-dark" style="width:150px;height:150px; margin-bottom: 1rem;">
     <br>
-    <p *ngIf="tipo==1"><b>Tipo de cuenta:</b> Minimarket</p>
-    <p *ngIf="tipo==2"><b>Tipo de cuenta:</b> Vendedor</p>
-    <p *ngIf="tipo==1"><b>Codigo de cuenta:</b> {{codigo}}</p>
+    <p *ngIf="user.tipo=='1'"><b>Tipo de cuenta:</b> Minimarket</p>
+    <p *ngIf="user.tipo=='2'"><b>Tipo de cuenta:</b> Vendedor</p>
+    <p *ngIf="user.tipo=='1'"><b>Codigo de cuenta:</b> {{user.codigo}}</p>
 
     <!-- ALERT  -->
     <div *ngIf="banderaAlert" class="alert alert-warning alert-dismissible fade show" role="alert">

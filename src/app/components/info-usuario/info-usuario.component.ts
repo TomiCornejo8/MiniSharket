@@ -10,11 +10,7 @@ import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.compone
   styleUrls: ['./info-usuario.component.sass']
 })
 export class InfoUsuarioComponent implements OnInit {
-  user:Usuario=new Usuario("manuel","123","","",123,"1");
-  icono:string = "";
-  nombre:string = "";
-  tipo:number = 0;
-  codigo:string = "";
+  user:Usuario;
   
   trabajadores:Usuario[];
   idBorrar:number = 0;
@@ -27,17 +23,18 @@ export class InfoUsuarioComponent implements OnInit {
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
     if(datos){
-      this.icono = JSON.parse(datos || "[]").icono;
-      this.nombre = JSON.parse(datos || "[]").nombre;
-      this.tipo = JSON.parse(datos || "[]").tipo;
-      this.codigo = JSON.parse(datos || "[]").codigo;
+      let icono = JSON.parse(datos || "[]").icono;
+      let nombre = JSON.parse(datos || "[]").nombre;
+      let tipo = JSON.parse(datos || "[]").tipo;
+      let codigo = JSON.parse(datos || "[]").codigo;
       this.minimarket = JSON.parse(datos || "[]").id;
+      this.user = new Usuario(nombre,icono,codigo,tipo.toString(),this.minimarket);
       this.listar();
     }
   }
 
   listar(){
-    if(this.tipo == 1){
+    if(this.user.tipo == '1'){
       this.usuarioS.getVendedores(this.minimarket).subscribe(data =>{
         this.trabajadores = (data as Usuario[]);
       });
@@ -53,7 +50,7 @@ export class InfoUsuarioComponent implements OnInit {
   abrirModalCrearCategoria() {
 		const modalRef=this.modalService.open(EditarUsuarioComponent);
     modalRef.componentInstance.datoUsuarioValor=JSON.parse(JSON.stringify(this.user));
-   modalRef.componentInstance.datoUsuarioReferencia=this.user;
+    modalRef.componentInstance.datoUsuarioReferencia=this.user;
 	} 
   desvincular(trabajador:Usuario){
     this.idBorrar = trabajador.id;

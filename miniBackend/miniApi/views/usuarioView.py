@@ -46,11 +46,6 @@ def usuario_detail_api_view(request,nombre=None,clave=None):
                     usuario_serializer.save()
                     return Response(usuario_serializer.data,status = status.HTTP_200_OK)
                 return Response(usuario_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
-
-            elif request.method == 'DELETE':
-                usuario.icono.delete(save=True)
-                usuario.delete()
-                return Response({'message':'Usuario deleted'},status = status.HTTP_200_OK)
         else:
             return Response({'message':'Usuario dont have accces'},status = status.HTTP_204_NO_CONTENT)
 
@@ -79,10 +74,20 @@ def usuario_check_api_view(request,nombre=None):
 @api_view(['GET'])
 def usuario_vendedor_api_view(request,minimarket=None):
     
-    usuario = Usuario.objects.filter(minimarket = minimarket).first()
+    usuario = Usuario.objects.filter(minimarket = minimarket).all()
 
     if usuario:
         if request.method == 'GET':
-            usuario_serializer = UsuarioSerializer(usuario)
+            usuario_serializer = UsuarioSerializer(usuario,many = True)
             return Response(usuario_serializer.data,status = status.HTTP_200_OK)
+    return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def usuario_d_api_view(request,id=None):
+    usuario = Usuario.objects.filter(id = id).first()
+    if usuario:
+        if request.method == 'DELETE':
+            usuario.icono.delete(save=True)
+            usuario.delete()
+            return Response({'message':'Usuario deleted'},status = status.HTTP_200_OK)
     return Response({'message':'This usuario doesnt exist'},status = status.HTTP_400_BAD_REQUEST)

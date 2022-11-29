@@ -6,7 +6,7 @@ from .views.telefonoView import telefono_api_view, telefono_detail_api_view, tel
 from .views.proveedorView import proveedor_api_view, proveedor_detail_api_view, proveedor_minimarket_api_view
 from .views.categoriaView import categoria_api_view, categoria_detail_api_view, categoria_minimarket_api_view
 from .views.productoView import producto_api_view, producto_detail_api_view, producto_minimarket_api_view, producto_proveedor_api_view
-from .views.usuarioView import usuario_api_view, usuario_check_api_view, usuario_codigo_api_view, usuario_detail_api_view, usuario_vendedor_api_view
+from .views.usuarioView import usuario_api_view, usuario_check_api_view, usuario_codigo_api_view, usuario_d_api_view, usuario_detail_api_view, usuario_vendedor_api_view
 from .views.unidadView import unidad_api_view, unidad_detail_api_view
 from .views.tipoRegistroView import tipoRegistro_api_view, tipoRegistro_detail_api_view
 from .views.tipoCuentaView import tipoCuenta_api_view, tipoCuenta_detail_api_view
@@ -17,6 +17,7 @@ urlpatterns = [
     path('usuario/verificar/<str:nombre>/<str:codigo>',usuario_codigo_api_view),
     path('usuario/<str:nombre>',usuario_check_api_view),
     path('usuario/vendedores/XD/BD/<int:minimarket>',usuario_vendedor_api_view),
+    path('usuario/d/d/d/d/<int:id>',usuario_d_api_view),
 
     path('tipocuenta/',tipoCuenta_api_view),
     path('tipocuenta/<int:id>',tipoCuenta_detail_api_view),
