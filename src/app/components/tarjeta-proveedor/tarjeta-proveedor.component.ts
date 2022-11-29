@@ -54,18 +54,17 @@ export class TarjetaProveedorComponent implements OnInit {
   confirmBox(){  
     Swal.fire({  
       html:
-      "<span style='font-size: 33px'>Esta seguro que quiere eliminar el proveedor "+"<b>"+this.proveedor.nombre+"</b> </span>", 
-      text: 'No podra ser recuperado',    
+      "<span style='font-size: 33px'>Esta seguro que quiere eliminar el proveedor "+"<b>"+this.proveedor.nombre+"</b> </span>",    
       showCancelButton: true,
       confirmButtonColor: '#dc3545',
       cancelButtonColor: '#6c757d',
       confirmButtonText: 'Si,eliminar',
-      cancelButtonText: 'No,cancelar'  
+      cancelButtonText: 'No,cancelar'
     }).then((result) => {  
       if (result.value) { 
         this.eliminarProveedor.emit(this.proveedor);
       }  
     })  
-  }  
+  }
 
 }
