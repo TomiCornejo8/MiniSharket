@@ -33,7 +33,7 @@ export class ProductosScreenComponent implements OnInit{
       let minimarket = JSON.parse(datos || "[]").id; //Se obtiene el id del usuario logueado
       this.productoService.get(minimarket).subscribe(data=>{
         this.productos = data;
-        
+        this.sortAlfa(1);
       });
       
       if(this.dataSesion){
@@ -55,7 +55,6 @@ export class ProductosScreenComponent implements OnInit{
       window.location.href="/inicio";
     }
     
-    this.sortAlfa(1);
     
     let dataSesion = sessionStorage.getItem('usuario');
     if(dataSesion){

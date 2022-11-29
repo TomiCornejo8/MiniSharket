@@ -13,12 +13,12 @@ export class RegistroFinanciero{
     lista:RegistroProducto[];
     montoTotal:number;
 
-    constructor(tipo:string,fecha:string = "",lista:RegistroProducto[] = [],montoTotal:number = 0,minimarket:number = 0, id:number = 0){
-        this.tipo = tipo;
-        this.fecha = fecha;
-        this.lista = lista;
-        this.montoTotal = montoTotal;
-        this.minimarket = minimarket;
-        this.id = id;
+    constructor(tipo?:string,fecha?:string ,lista?:RegistroProducto[] ,montoTotal?:number ,minimarket?:number , id?:number ){
+        this.tipo = tipo != null ? tipo: '';
+        this.fecha = fecha != null ? fecha: '';
+        this.lista = lista != null ? lista: [];
+        this.montoTotal = montoTotal != null ? montoTotal : 0;
+        this.minimarket = minimarket != null ? minimarket : 0;
+        this.id = id != null ? id : 0;
     }
 }

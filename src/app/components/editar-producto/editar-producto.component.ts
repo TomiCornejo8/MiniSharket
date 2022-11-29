@@ -113,6 +113,9 @@ export class EditarProductoComponent implements OnInit{
     }else{
       bandera = true;
     }
+    if(this.stock > 0  && this.producto.stock == 0){
+      this.producto.banderaCarrito=false;
+    }
     this.producto.img = this.img;
     this.producto.nombre = this.nombre;
     this.producto.unidad = this.unidad;
@@ -122,6 +125,10 @@ export class EditarProductoComponent implements OnInit{
     this.producto.categorias = this.categorias.map(x => x.id.toString());
 
     let auxUnidad = this.producto.unidad;
+    
+      
+    
+    
     this.unidadDP.forEach(x =>{
       if(x.unidad == this.producto.unidad) this.producto.unidad = x.id.toString();
     });

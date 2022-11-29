@@ -21,19 +21,19 @@
         </form>
     </div>
             
-    <div class="mb-3">
-        <label for="proveedor" class="form-label">Proveedor</label>
-        <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
-        <option value="">Selecciona un provedor</option>
-        <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
-        </select>
-    </div>
+        <div class="mb-3">
+            <label for="proveedor" class="form-label">Proveedor</label>
+            <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor(proveedor)" class="form-select" aria-label="Default select example">
+            <option value="">Selecciona un provedor</option>
+            <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
+            </select>
+        </div>
 
     <div class="mb-3">
         <label for="proveedor" class="form-label">Productos</label>
-        <select [(ngModel)]="productoT" (ngModelChange)="seleccionarProveedor()" class="form-select" aria-label="Default select example">
-        <option value="">Selecciona un provedor</option>
-        <option *ngFor="let producto of productosProveedoresDP" [ngValue]="producto">{{producto}}</option>
+        <select [(ngModel)]="productoT"  class="form-select" (ngModelChange)="seleccionarProducto()" Default select example>
+        <option value="">Selecciona un producto</option>
+        <option *ngFor="let producto of productosProveedoresDP" [ngValue]="producto">{{producto.nombre}}</option>
         </select>
     </div>
 
@@ -49,33 +49,35 @@
                     <th scope="col">Botones</th>
                 </tr>
             </thead>
+
             <tbody>
-                <tr *ngFor="let country of countries;let i =index">
+                <tr *ngFor="let producto of tablaProductos.lista;let i =index">
                     <th scope="row">{{i}}</th>
                     <td>
                         <img
-                            [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag"
+                            [src]="'http://127.0.0.1:8000/' + producto.producto.img"
                             class="me-2"
                             style="width: 20px"
                         />
-                            {{ country.name }}
+                            {{ producto.producto.nombre }}
                     </td>
-                    <td>{{ country.area | number}}</td>
-                    <td>{{ country.population | number }}</td>
-                    <td>{{ country.area| number }}</td>
-                    <td><button type="button" class="btn btn-dark bg-gradient border border-dark p-1">❌</button></td>
+                    <td>{{producto.producto.proveedor}}</td>
+                    <td><input type="number" value="{{producto.cantidad}}" [(ngModel)]="producto.cantidad"></td>
+                    <td><input type="number" value="{{producto.precio}}" [(ngModel)]="producto.precio"  (ngModelChange)="cambioMonto()"></td>
+                    <td><button type="button" class="btn btn-dark bg-gradient border border-dark p-1" (click)='eliminarProducto(producto)'>❌</button></td>
                 </tr>
             </tbody>
+         
         </table>
     </div>
 
     <div class="mb-3">
         <label for="" class="form-label">Monto total</label>
-        <p>1000 clp</p>
+        <p>{{montoLocal}}</p>
     </div>
 </div>
 
 <div class="modal-footer bg-primary border-primary text-white">
-    <button type="button" class="btn btn-secondary bg-gradient border border-dark">Cancelar</button>
-    <button type="button" class="btn btn-dark bg-gradient border border-dark">Crear</button>
+    <button type="button" class="btn btn-secondary bg-gradient border border-dark" (click)="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-dark bg-gradient border border-dark" (click)="crear()">Crear</button>
 </div>
