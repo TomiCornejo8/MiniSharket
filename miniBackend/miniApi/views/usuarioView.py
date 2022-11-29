@@ -28,7 +28,7 @@ def usuario_api_view(request):
             return Response(usuario_serializer.data,status = status.HTTP_200_OK)
         return Response(usuario_serializer.errors,status = status.HTTP_400_BAD_REQUEST)
     
-@api_view(['GET','PUT','DELETE'])
+@api_view(['GET','PUT'])
 def usuario_detail_api_view(request,nombre=None,clave=None):
     
     usuario = Usuario.objects.filter(nombre = nombre).first()
@@ -40,8 +40,9 @@ def usuario_detail_api_view(request,nombre=None,clave=None):
                 return Response(usuario_serializer.data,status = status.HTTP_200_OK)
 
             elif request.method == 'PUT':
-                request.data['clave'] = generate_password_hash(request.data['clave'],'sha256',30)
-                usuario_serializer = UsuarioSerializer(usuario,data = request.data)
+                if request.data['clave'] != "":
+                    request.data['clave'] = generate_password_hash(request.data['clave'],'sha256',30)
+                usuario_serializer = UsuarioSerializer(usuario,data = request.data, partial=True)
                 if usuario_serializer.is_valid():
                     usuario_serializer.save()
                     return Response(usuario_serializer.data,status = status.HTTP_200_OK)
