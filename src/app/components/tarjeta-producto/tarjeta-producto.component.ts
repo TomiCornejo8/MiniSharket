@@ -14,7 +14,6 @@ export class TarjetaProductoComponent implements OnInit{
   @Output() eliminarProducto = new EventEmitter<Producto>();
   @Output() agregarCarrito = new EventEmitter<Producto>();
   @Input() producto:Producto;
-  @Input() productoEditar:any;
  
   w=window.sessionStorage;
 
@@ -30,6 +29,9 @@ export class TarjetaProductoComponent implements OnInit{
       this.unidadService.get(this.producto.unidad).subscribe(data =>{
         this.producto.unidad = data.unidad;
       });
+    }
+    if(this.producto.stock == 0){
+      this.producto.banderaCarrito=true;
     }
   }
  

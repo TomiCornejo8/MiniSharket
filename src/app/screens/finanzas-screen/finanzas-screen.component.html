@@ -22,7 +22,7 @@
                             <li *ngFor="let producto of registro.lista">{{producto.cantidad}} x {{producto.nombre}} ${{producto.precio}} c/{{producto.unidad}}</li>
                         </ul>
                     </td>
-                    <td class="cuerpoTabla">${{calcularTotal(registro.lista)}}</td>
+                    <td class="cuerpoTabla">${{calcularTotal(registro.lista,registro.tipo)}}</td>
                     <td class="cuerpoTabla">
                         <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
                         <button class="btn btn-dark bg-gradient border-dark  p-1" type="button" (click)="eliminarRegistro(registro)">❌</button>

@@ -8,6 +8,7 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { RegistroFinancieroService } from 'src/app/services/registroFinanciero/registro-financiero.service';
 import { RegistroProductoService } from 'src/app/services/registroProducto/registro-producto.service';
+import  Swal  from 'sweetalert2';
 @Component({
   selector: 'app-crear-gasto',
   templateUrl: './crear-gasto.component.html',
@@ -24,6 +25,7 @@ export class CrearGastoComponent implements OnInit {
   cantidadLocal:number=1;
   montoLocal:number=0;
   proveedorNombre='';
+  registroReferencia:RegistroFinanciero []= [];
 	constructor(private calendar: NgbCalendar,private proveedorService:ProveedorService,
     private registroPService: RegistroProductoService,
     private productoService:ProductoService,private registroFService: RegistroFinancieroService, private modalService:NgbModal) {}
@@ -74,20 +76,30 @@ export class CrearGastoComponent implements OnInit {
 	cerrarModal(){
 		this.modalService.dismissAll(CrearGastoComponent);
 	}
-	editar(){
-    this.tablaProductos.tipo="2"
-    this.tablaProductos.fecha=this.model.day+this.model.month+this.model.year+"";
-    this.tablaProductos.montoTotal=this.montoLocal;
-    this.registroFService.post(this.tablaProductos.tipo, this.tablaProductos.minimarket).subscribe(data => {
-      this.tablaProductos.lista.forEach(producto =>{
-        let produc = (producto as RegistroProducto)
-        this.registroPService.post(produc, (data as RegistroFinanciero).id).subscribe(data => {
+	crear(){
+    if(this.tablaProductos.lista.length != 0 && this.montoLocal != 0){
+         this.tablaProductos.tipo="2"
+         this.tablaProductos.fecha=this.model.day+this.model.month+this.model.year+"";
+         this.tablaProductos.montoTotal=this.montoLocal;
+         this.registroFService.post(this.tablaProductos.tipo, this.tablaProductos.minimarket).subscribe(data => {
+         this.tablaProductos.lista.forEach(producto =>{
+         let produc = (producto as RegistroProducto)
+         this.registroPService.post(produc, (data as RegistroFinanciero).id).subscribe(data => {
           console.log(data);
         });
       })
     
     })
 		this.modalService.dismissAll(CrearGastoComponent);
+
+    }
+    if(this.tablaProductos.lista.length == 0){
+      this.gastoVacio();
+    }
+    if(this.montoLocal== 0 && this.tablaProductos.lista.length > 0){
+      this.MontoCero();
+    }
+    
 	}
 
 	cambioMonto(){
@@ -96,4 +108,17 @@ export class CrearGastoComponent implements OnInit {
         this.montoLocal+= producto.precio;
     })
 	}
+
+  gastoVacio(){  
+    Swal.fire({ 
+      text: 'La tabla de gasto no puede estar vacia',  
+      
+    }) 
+  } 
+  MontoCero(){  
+    Swal.fire({ 
+      text: 'El monto no puede ser 0',  
+      
+    }) 
+  } 
 }

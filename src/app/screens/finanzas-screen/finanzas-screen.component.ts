@@ -9,6 +9,7 @@ import { RegistroFinancieroService } from 'src/app/services/registroFinanciero/r
 import { RegistroProductoService } from 'src/app/services/registroProducto/registro-producto.service';
 import { TipoRegistroService } from 'src/app/services/tipoRegistro/tipo-registro.service';
 import { UnidadService } from 'src/app/services/unidad/unidad.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-finanzas-screen',
@@ -61,23 +62,48 @@ export class FinanzasScreenComponent implements OnInit {
   }
   abrirModalAgregarGasto(){
       const modalRef=this.modalService.open(CrearGastoComponent,{ size: 'lg' });
-     // modalRef.componentInstance.proveedorActual=JSON.parse(JSON.stringify(this.proveedor));
-      //modalRef.componentInstance.proveedorReferencia=this.proveedor;
+     // modalRef.componentInstance.registroReferencia=this.registros;
     
   }
 
-  calcularTotal(productos:RegistroProducto[]){
-    if(productos != undefined){
+  calcularTotal(productos:RegistroProducto[] , tipo :any){
+    if(productos != undefined && tipo ==="Venta" ){
       let suma = 0;
       productos.forEach(producto =>{
         suma += producto.cantidad * producto.precio;
       });
       return suma;
     }
-    return null;
+    if(productos != undefined && tipo ==="Gasto" ){
+      let suma = 0;
+      productos.forEach(producto =>{
+        suma += producto.precio;
+      });
+      return suma;
+    }
+    return 0;
   }
 
   eliminarRegistro(registro:RegistroFinanciero){
-        this.registroFinanzasS.delete(registro.id).subscribe();
+    this.eliminar(registro)    
   }
+  eliminar(registro:RegistroFinanciero){  
+    registro.montoTotal= this. calcularTotal(registro.lista,registro.tipo) ;
+    console.log(registro)
+    Swal.fire({ 
+      html:
+      "<span style='font-size: 33px'>Esta seguro que quiere eliminar el registro con fecha"+"<b> "+registro.fecha+"</b> </span>"+
+      "<span style='font-size: 33px'>del tipo"+"<b> "+registro.tipo+"</b> </span>"+
+      "<span style='font-size: 33px'>con el siguiente Monto"+"<b> "+registro.montoTotal+"</b> </span>", 
+      text: 'No podra ser recuperado',  
+      showCancelButton: true,  
+      confirmButtonText: 'Si,eliminar',  
+      cancelButtonText: 'No,cancelar'  
+    }).then((result) => {  
+      if (result.value) {  
+        this.registros.splice(this.registros.indexOf(registro),1);
+        this.registroFinanzasS.delete(registro.id).subscribe();
+      } 
+    })  
+  }  
 }
