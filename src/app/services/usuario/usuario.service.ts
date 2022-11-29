@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Usuario } from 'src/app/models/usuario.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,43 @@ export class UsuarioService {
   delete(id:number){
     let url = this.url + "d/d/d/d/" + id;
     return this.http.delete(url);
+  }
+  
+  /*
+  opción 1 = Modificar img y contraseña
+  opción 2 = Modificar img
+  opción 3 = Modificar contraseña
+  */
+  put(nombre:string,clave:string,usuario:Usuario,opcion:number){
+    let url = this.url + nombre + "/" + clave;
+    let value;
+    if(opcion == 1){
+      value = {
+        "nombre":usuario.nombre,
+        "clave":usuario.clave,
+        "icono":usuario.icono,
+        "codigo":usuario.codigo
+      }
+    }else if(opcion == 2){
+      value = {
+        "nombre":usuario.nombre,
+        "clave":usuario.clave,
+        "icono":usuario.icono,
+        "codigo":usuario.codigo
+      }
+    }else if(opcion == 3){
+      value = {
+        "nombre":usuario.nombre,
+        "clave":usuario.clave,
+        "codigo":usuario.codigo
+      }
+    }else if(opcion == 4){
+      value = {
+        "nombre":usuario.nombre,
+        "clave":usuario.clave,
+        "codigo":usuario.codigo
+      }
+    }
+    return this.http.put(url, value);
   }
 }

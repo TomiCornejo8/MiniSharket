@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Usuario } from 'src/app/models/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -18,25 +19,50 @@ export class EditarUsuarioComponent implements OnInit {
   img:string='';
   valueImg:string='';
   clave:string='';
-  constructor(private modalService: NgbModal , private sanitizer:DomSanitizer) { }
+  banderaAlert:boolean = false;
+  comp:string;
+
+  constructor(private modalService: NgbModal, 
+    private sanitizer:DomSanitizer,
+    private usuarioS:UsuarioService){}
 
   ngOnInit(): void {
-    this.pass='';
-    this.passRep='';
+    this.pass = '';
+    this.passRep = '';
   }
 
 
-  editar(nombre:string){
-    if(nombre!=''){
-        this.datoUsuarioReferencia.nombre=nombre;
+  editar(nombre:string,codigo:string){
+    let nombreXD = this.datoUsuarioReferencia.nombre;
+
+    if(nombre != ''){
+      this.datoUsuarioReferencia.nombre=nombre;
     }
-    if(this.img!==""){
+    if(codigo != ''){
+      this.datoUsuarioReferencia.codigo=codigo;
+    }
+    if(this.img !== ""){
       this.datoUsuarioReferencia.icono=this.img;
       this.valueImg='';
       this.img='';
     }
     if(this.pass.localeCompare(this.passRep)==0 && this.pass!='' && this.passRep!=''){
       this.datoUsuarioReferencia.clave=this.pass;
+    }
+    if(this.pass != '' && this.img !==""){
+      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,1).subscribe(data =>{
+        this.datoUsuarioReferencia.icono = (data as Usuario).icono;
+      });
+    }else if(this.img !==""){
+      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,2).subscribe(data =>{
+        this.datoUsuarioReferencia.icono = (data as Usuario).icono;
+      });
+    }else if(this.pass != ''){
+      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,3).subscribe(data =>{
+      });
+    }else{
+      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,4).subscribe(data =>{
+      });    
     }
     this.modalService.dismissAll(EditarUsuarioComponent);
     this.flagPassUser=false;
@@ -47,9 +73,15 @@ export class EditarUsuarioComponent implements OnInit {
     this.flagPassUser=false;
   }
   comprobar(){
-    if(this.clave.localeCompare(this.datoUsuarioValor.clave)==0) this.flagPassUser=true;
-
-    this.limpiar();
+    this.usuarioS.get(this.datoUsuarioReferencia.nombre,this.clave).subscribe(data =>{
+      this.comp = this.clave;
+      if(data){ 
+        this.flagPassUser=true;
+      }else{
+        this.banderaAlert = true;
+      }
+      this.limpiar();
+    });
   }
   limpiar(){
     this.clave="";
