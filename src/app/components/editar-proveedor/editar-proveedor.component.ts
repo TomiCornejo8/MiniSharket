@@ -6,6 +6,7 @@ import { Telefono } from 'src/app/models/telefono.model';
 import { EmailService } from 'src/app/services/email/email.service';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { TelefonoService } from 'src/app/services/telefono/telefono.service';
+import  Swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-proveedor',
@@ -33,6 +34,7 @@ export class EditarProveedorComponent implements OnInit {
       });
       this.proveedorReferencia.nombre=nombre;
     }
+
     if(this.proveedorActual.email.length!==0){
       this.proveedorActual.email.forEach(email =>{
         if(email.id == 0){
@@ -52,6 +54,7 @@ export class EditarProveedorComponent implements OnInit {
 
       this.proveedorReferencia.email=this.proveedorActual.email;
     }
+
     if(this.proveedorActual.numero.length!==0){
       this.proveedorActual.numero.forEach(numero =>{
         if(numero.id == 0){
@@ -73,6 +76,7 @@ export class EditarProveedorComponent implements OnInit {
 
       this.proveedorReferencia.numero=this.proveedorActual.numero;
     }
+
     this.modalService.dismissAll(EditarProveedorComponent);
     
   }
@@ -104,4 +108,5 @@ export class EditarProveedorComponent implements OnInit {
     this.vacionumero='';
     this.vacioEmail='';
   }
+
 }
