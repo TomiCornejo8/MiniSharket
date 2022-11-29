@@ -4,10 +4,12 @@ import { Producto } from 'src/app/models/producto.model';
 import { Proveedor } from 'src/app/models/proveedor.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
+import { Unidad } from 'src/app/models/unidad.model';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { RegistroFinancieroService } from 'src/app/services/registroFinanciero/registro-financiero.service';
 import { RegistroProductoService } from 'src/app/services/registroProducto/registro-producto.service';
+import { UnidadService } from 'src/app/services/unidad/unidad.service';
 import Swal from 'sweetalert2';
 
 
@@ -31,18 +33,26 @@ export class EditarGastoComponent implements OnInit {
   proveedorNombre='';
   productosProveedores:Producto[]=[];
   listaValor:RegistroProducto[]=[];
+  unidadesDP:Unidad[]=[]
+  productos:Producto[]=[]
+
 	constructor(private calendar: NgbCalendar,private proveedorService:ProveedorService,
     private registroPService: RegistroProductoService,
-    private productoService:ProductoService,private registroFService: RegistroFinancieroService, private modalService:NgbModal) {}
+    private productoService:ProductoService,private registroFService: RegistroFinancieroService, private modalService:NgbModal,
+    private unidadService:UnidadService) {}
 
   ngOnInit(): void {
     this.model = this.calendar.getToday();
     let i=0;
+    (this.tablaProductos);
     this.tablaProductos.lista.forEach(regis =>{
+      regis.producto = new Producto();
       regis.producto=this.tablaProductosValor.lista[i].producto;
       i++
+      this.montoLocal+=regis.precio;
     }
     );
+    (this.tablaProductos);
     let dataSesion = sessionStorage.getItem('usuario');
     if(dataSesion){
       let minimarket = JSON.parse(dataSesion || "[]").id;
@@ -52,11 +62,12 @@ export class EditarGastoComponent implements OnInit {
       });
       
     }
-   
-
+    this.unidadService.list().subscribe(data =>{
+      this.unidadesDP = data;
+    });
   }
   selectToday() {
-    console.log(this.model)
+    (this.model)
 	}
   seleccionarProveedor(proveedor:Proveedor){
     this.proveedorNombre=proveedor.nombre;
@@ -91,18 +102,30 @@ export class EditarGastoComponent implements OnInit {
 
 	editar(){
     if(this.tablaProductos.lista.length != 0 && this.montoLocal != 0){
+      let fechaAux=this.tablaProductos.fecha;
          this.tablaProductos.tipo="2"
          this.tablaProductos.fecha=this.model.day+this.model.month+this.model.year+"";
          this.tablaProductos.montoTotal=this.montoLocal;
-         this.registroFService.post(this.tablaProductos.tipo, this.tablaProductos.minimarket).subscribe(data => {
+         this.registroFService.put(fechaAux, this.tablaProductos.id).subscribe(data => {
          this.tablaProductos.lista.forEach(producto =>{
+   
          let produc = (producto as RegistroProducto)
-         this.registroPService.post(produc, (data as RegistroFinanciero).id).subscribe(data => {
+         this.unidadesDP.forEach(unidad=>{
+          if(unidad.unidad.localeCompare(produc.unidad)== 0){
+            produc.unidad= ""+unidad.id ;
+          }
+        })
+       if(produc.id==0){
+          this.registroPService.post(produc,this.tablaProductos.id).subscribe();
+       }
+       else{
+        this.registroPService.put(produc).subscribe(data => {
           console.log(data);
-          this.tablaProductosValor=(data as RegistroFinanciero);
         });
+       }
+         
       })
-    
+      this.tablaProductosValor=(data as RegistroFinanciero);
     })
     
 		this.modalService.dismissAll(EditarGastoComponent);
