@@ -122,9 +122,12 @@ export class EditarProductoComponent implements OnInit{
     this.producto.categorias = this.categorias.map(x => x.id.toString());
 
     let auxUnidad = this.producto.unidad;
-    if(this.producto.stock > 0){
-      this.producto.banderaCarrito=false;
-    }
+    
+      if(this.stock > 0 && this.producto.banderaCarrito == true ){
+          this.producto.banderaCarrito=false;
+        }
+    
+    
     this.unidadDP.forEach(x =>{
       if(x.unidad == this.producto.unidad) this.producto.unidad = x.id.toString();
     });
