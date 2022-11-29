@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrearGastoComponent } from 'src/app/components/crear-gasto/crear-gasto.component';
+import { EditarGastoComponent } from 'src/app/components/editar-gasto/editar-gasto.component';
+import { Producto } from 'src/app/models/producto.model';
+import { Proveedor } from 'src/app/models/proveedor.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { TipoRegistro } from 'src/app/models/tipoRegistro.model';
 import { Unidad } from 'src/app/models/unidad.model';
+import { ProductoService } from 'src/app/services/producto/producto.service';
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { RegistroFinancieroService } from 'src/app/services/registroFinanciero/registro-financiero.service';
 import { RegistroProductoService } from 'src/app/services/registroProducto/registro-producto.service';
 import { TipoRegistroService } from 'src/app/services/tipoRegistro/tipo-registro.service';
@@ -26,7 +31,9 @@ export class FinanzasScreenComponent implements OnInit {
     private registroFinanzasS:RegistroFinancieroService,
     private registroProductoS:RegistroProductoService,
     private tipoRegistroS:TipoRegistroService,
-    private unidadS:UnidadService){}
+    private unidadS:UnidadService,
+    private proveedorService:ProveedorService,
+    private productoService:ProductoService){}
 
   ngOnInit(): void {
     let datos = sessionStorage.getItem('usuario');
@@ -60,11 +67,44 @@ export class FinanzasScreenComponent implements OnInit {
       });
     }
   }
+  obtenerProductos(registro:RegistroFinanciero){
+    let datos = sessionStorage.getItem('usuario');
+    let productosProveedores:Producto[]=[]
+    let proveedoresDP :Proveedor[]=[];
+    if(datos){
+      let minimarket = JSON.parse(datos || "[]").id;
+      this.proveedorService.get(minimarket).subscribe(data =>{
+        proveedoresDP = (data as Proveedor[]);
+        
+          proveedoresDP.forEach( provee=>{
+          this.productoService.getProveedor(provee .id).subscribe(producto =>{
+            productosProveedores= (producto as Producto[]);
+            
+            registro.lista.forEach(registro =>{
+              productosProveedores.forEach(producto =>{
+                  if(registro.nombre.localeCompare(producto.nombre) == 0){
+                    registro.producto=producto;
+                  }
+              })
+            })
+          })
+        })
+      });     
+    }
+    return registro;
+  }
   abrirModalAgregarGasto(){
       const modalRef=this.modalService.open(CrearGastoComponent,{ size: 'lg' });
      // modalRef.componentInstance.registroReferencia=this.registros;
     
   }
+  abrirModalEditarGasto(registro:RegistroFinanciero){
+    const modalRef=this.modalService.open(EditarGastoComponent,{ size: 'lg' });
+    registro=this.obtenerProductos(registro);
+    modalRef.componentInstance.tablaProductosValor=registro;
+    modalRef.componentInstance.tablaProductos= JSON.parse(JSON.stringify(registro));
+
+}
 
   calcularTotal(productos:RegistroProducto[] , tipo :any){
     if(productos != undefined && tipo ==="Venta" ){
