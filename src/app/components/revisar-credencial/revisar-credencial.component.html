@@ -11,13 +11,13 @@
         </div>
 
         <div class="modal-body">
-          <input id="clave" type="password" class="form-control">
+          <input [(ngModel)]="clave" (keyup)="validarVacio()" id="clave" type="password" class="form-control">
           <label for="clave" class="form-label">Contraseña actual</label>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-danger bg-secondary bg-gradient border border-dark">Revisar</button>
+          <button (click)="limpiar()" type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal">Cancelar</button>
+          <button [disabled]="!bandera" type="button" class="btn btn-danger bg-secondary bg-gradient border border-dark" data-bs-dismiss="modal" (click)="revisarClave()">Revisar</button>
         </div>
 
       </div>

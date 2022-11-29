@@ -15,7 +15,11 @@ export class InfoUsuarioComponent implements OnInit {
   nombre:string = "";
   tipo:number = 0;
   codigo:string = "";
-  trabajadores:Usuario[] = [];
+  
+  trabajadores:Usuario[];
+  idBorrar:number = 0;
+  minimarket:number;
+  banderaAlert:boolean = false;
 
   constructor(private modalService: NgbModal,
     private usuarioS:UsuarioService){}
@@ -27,14 +31,18 @@ export class InfoUsuarioComponent implements OnInit {
       this.nombre = JSON.parse(datos || "[]").nombre;
       this.tipo = JSON.parse(datos || "[]").tipo;
       this.codigo = JSON.parse(datos || "[]").codigo;
-      let minimarket = JSON.parse(datos || "[]").id
+      this.minimarket = JSON.parse(datos || "[]").id;
+      this.listar();
+    }
+  }
 
-      if(this.tipo == 1){
-        this.usuarioS.getVendedores(minimarket).subscribe(data =>{
-          console.log((data as Usuario[]));
-          this.trabajadores = (data as Usuario[]);
-        });
-      }
+  listar(){
+    if(this.tipo == 1){
+      this.usuarioS.getVendedores(this.minimarket).subscribe(data =>{
+        this.trabajadores = (data as Usuario[]);
+      });
+    }else{
+      this.trabajadores = []
     }
   }
 
@@ -48,6 +56,24 @@ export class InfoUsuarioComponent implements OnInit {
    modalRef.componentInstance.datoUsuarioReferencia=this.user;
 	} 
   desvincular(trabajador:Usuario){
-    
+    this.idBorrar = trabajador.id;
+  }
+
+  eliminarCuenta(){
+    this.idBorrar = this.minimarket;
+  }
+
+  eliminar(validar:boolean){
+    if(validar){
+      this.usuarioS.delete(this.idBorrar).subscribe(data =>{
+        if(this.idBorrar == this.minimarket){
+          this.cerrar();
+        }else{
+          this.listar();
+        }
+      });
+    }else{
+      this.banderaAlert = true;
+    }
   }
 }

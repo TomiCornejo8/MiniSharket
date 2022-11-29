@@ -39,4 +39,9 @@ export class UsuarioService {
     }
     return this.http.post(this.url,value);
   }
+
+  delete(id:number){
+    let url = this.url + "d/d/d/d/" + id;
+    return this.http.delete(url);
+  }
 }
