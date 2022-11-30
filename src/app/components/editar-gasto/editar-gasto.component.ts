@@ -130,6 +130,7 @@ export class EditarGastoComponent implements OnInit {
          
       })
       this.tablaProductosValor=(data as RegistroFinanciero);
+      window.location.href = "/finanzas";
     })
     
 		this.modalService.dismissAll(EditarGastoComponent);
