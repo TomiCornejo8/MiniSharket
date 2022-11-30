@@ -14,7 +14,7 @@ import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.c
 export class FiltroProductosComponent implements OnInit {
   @Output() enviarFiltro=new EventEmitter<string>;
   categorias:Categoria[];
-  // = [new Categoria(1,"C1"),new Categoria(2,"C2"),new Categoria(3,"C3")];
+  tipo:boolean;
 
   constructor(private modalService: NgbModal,
     private categoriaService:CategoriaService) { }
@@ -23,6 +23,11 @@ export class FiltroProductosComponent implements OnInit {
     let data = sessionStorage.getItem('usuario');
     if(data){
       let minimarket = JSON.parse(data || "[]").id;
+      if(JSON.parse(data || "[]").tipo == 1){
+        this.tipo = true;
+      }else{
+        this.tipo = false;
+      }
       this.categoriaService.list(minimarket).subscribe(data =>{
         this.categorias = (data as Categoria[]);
       });

@@ -1,5 +1,5 @@
   <div class="mt-2 ms-5">
-        <button (click)="abrirModalAgregarGasto()"  class="btn btn-dark bg-gradient border-dark me-1 ms-3" type="button">Agregar Gasto+</button>
+        <button *ngIf="tipoX" (click)="abrirModalAgregarGasto()"  class="btn btn-dark bg-gradient border-dark me-1 ms-3" type="button">Agregar Gasto+</button>
   </div>
   <div class="m-3 table-responsive">
         <table class="table table-bordered border-dark text-center">
@@ -9,7 +9,7 @@
                     <th class="col-1">Venta/Gasto</th>
                     <th class="col-5">Lista</th>
                     <th class="col-2">Total</th>
-                    <th class="col-2">Botones</th>
+                    <th *ngIf="tipoX" class="col-2">Botones</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                         </ul>
                     </td>
                     <td class="cuerpoTabla">${{calcularTotal(registro.lista,registro.tipo)}}</td>
-                    <td class="cuerpoTabla">
+                    <td *ngIf="tipoX" class="cuerpoTabla">
                         <button class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button" (click)="abrirModalEditarGasto(registro)">📝</button>
                         <button class="btn btn-dark bg-gradient border-dark  p-1" type="button" (click)="eliminarRegistro(registro)">❌</button>
                     </td>

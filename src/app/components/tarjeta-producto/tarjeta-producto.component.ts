@@ -14,6 +14,8 @@ export class TarjetaProductoComponent implements OnInit{
   @Output() eliminarProducto = new EventEmitter<Producto>();
   @Output() agregarCarrito = new EventEmitter<Producto>();
   @Input() producto:Producto;
+
+  tipo:boolean;
  
   w=window.sessionStorage;
 
@@ -22,6 +24,12 @@ export class TarjetaProductoComponent implements OnInit{
   
 
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if(JSON.parse(datos || "[]").tipo == 1){
+      this.tipo = true;
+    }else{
+      this.tipo = false;
+    }
     if(this.producto.id != 0){
       if(this.producto.img != null){
         this.producto.img = "http://127.0.0.1:8000" + this.producto.img;

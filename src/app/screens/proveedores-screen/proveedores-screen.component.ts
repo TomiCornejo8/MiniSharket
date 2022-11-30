@@ -12,6 +12,8 @@ import { TelefonoService } from 'src/app/services/telefono/telefono.service';
   styleUrls: ['./proveedores-screen.component.sass']
 })
 export class ProveedoresScreenComponent implements OnInit {
+
+  tipo:boolean;
   
   constructor(private proveedorService:ProveedorService,
     private emailService:EmailService,
@@ -23,6 +25,11 @@ export class ProveedoresScreenComponent implements OnInit {
       window.location.href = "/inicio";
     }else{
       let minimarket = JSON.parse(datos || "[]").id;
+      if(JSON.parse(datos || "[]").tipo == 1){
+        this.tipo = true;
+      }else{
+        this.tipo = false;
+      }
 
       this.proveedorService.get(minimarket).subscribe(data=>{
         

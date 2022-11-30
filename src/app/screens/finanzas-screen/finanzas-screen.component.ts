@@ -26,6 +26,7 @@ export class FinanzasScreenComponent implements OnInit {
   registros:RegistroFinanciero[];
   unidades:Unidad[];
   tipo:TipoRegistro[];
+  tipoX:boolean;
   
   constructor(private modalService: NgbModal,
     private registroFinanzasS:RegistroFinancieroService,
@@ -41,6 +42,11 @@ export class FinanzasScreenComponent implements OnInit {
       window.location.href = "/inicio";
     }else{
       let minimarket = JSON.parse(datos || "[]").id;
+      if(JSON.parse(datos || "[]").tipo == 1){
+        this.tipoX = true;
+      }else{
+        this.tipoX = false;
+      }
       this.registroFinanzasS.get(minimarket).subscribe(data =>{
         this.registros = (data as RegistroFinanciero[]);
 

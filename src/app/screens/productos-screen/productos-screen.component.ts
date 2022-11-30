@@ -22,6 +22,7 @@ export class ProductosScreenComponent implements OnInit{
   cant:number = 0;
   categorias:Categoria[];
   proveedoresDP: Proveedor[];
+  tipo:boolean;
 
   constructor(private productoService:ProductoService,
     private categoriaService:CategoriaService,
@@ -31,6 +32,11 @@ export class ProductosScreenComponent implements OnInit{
     let datos = sessionStorage.getItem('usuario');
     if(datos){
       let minimarket = JSON.parse(datos || "[]").id; //Se obtiene el id del usuario logueado
+      if(JSON.parse(datos || "[]").tipo == 1){
+        this.tipo = true;
+      }else{
+        this.tipo = false;
+      }
       this.productoService.get(minimarket).subscribe(data=>{
         this.productos = data;
         this.sortAlfa(1);

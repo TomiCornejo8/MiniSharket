@@ -20,11 +20,18 @@ export class TarjetaProveedorComponent implements OnInit {
   w=window.sessionStorage;
   closeResult = '';
   insumoFlag=false;
+  tipo:boolean;
   constructor(private modalService: NgbModal,
     private productoService:ProductoService) { }
   
 
   ngOnInit(): void {
+    let datos = sessionStorage.getItem('usuario');
+    if(JSON.parse(datos || "[]").tipo == 1){
+      this.tipo = true;
+    }else{
+      this.tipo = false;
+    }
   }
 
   eliminar(respuesta:any){

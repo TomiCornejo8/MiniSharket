@@ -14,7 +14,7 @@
 <div class="ms-4">
     <!-- Botonera de productos -->
     <div class="mt-2 ms-4">
-        <button class="btn btn-dark bg-gradient border-dark me-1 ms-2" type="button" data-bs-toggle="modal" data-bs-target="#crearProducto">Producto➕</button>
+        <button *ngIf="tipo" class="btn btn-dark bg-gradient border-dark me-1 ms-2" type="button" data-bs-toggle="modal" data-bs-target="#crearProducto">Producto➕</button>
         <button class="btn btn-dark bg-gradient border-dark me-1" type="button">Exportar QR📱</button>
     </div>
 
