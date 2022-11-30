@@ -40,8 +40,7 @@ def usuario_detail_api_view(request,nombre=None,clave=None):
                 return Response(usuario_serializer.data,status = status.HTTP_200_OK)
 
             elif request.method == 'PUT':
-                if request.data['clave'] != "":
-                    request.data['clave'] = generate_password_hash(request.data['clave'],'sha256',30)
+                request.data['clave'] = generate_password_hash(request.data['clave'],'sha256',30)
                 usuario_serializer = UsuarioSerializer(usuario,data = request.data, partial=True)
                 if usuario_serializer.is_valid():
                     usuario_serializer.save()
