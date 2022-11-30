@@ -1,19 +1,23 @@
-<div id="contTarjetaProducto" class="card bg-primary border-dark m-2">
-    <div class="cont mt-1">
-        <button *ngIf="tipo" (click)="abrirModalEditarProducto()" class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
-        <button *ngIf="tipo" (click)="confirmBox()" class="btn btn-dark bg-gradient border-dark  p-1"  type="button">❌</button>
-    </div>
-
-    <h5 id="nombreProducto" class="mt-2 mb-0 text-white text-center"><b>{{producto.nombre}}</b></h5>
-    <img *ngIf="producto.img == '' || producto.img == null" height="250px" src="../../../assets/producto.png" class="card-img-top">
-    <img *ngIf="producto.img != '' && producto.img != null" height="250px" src="{{producto.img}}" class="card-img-top">
-
-    <div class="cont card-body">
-        <p class="m-0 text-white"><b>Stock: </b>{{producto.stock}} {{producto.unidad}}</p>
-        <p class="m-0 text-white">${{producto.precio}} x {{producto.unidad}}</p>
-    </div>
-    <div class="cont">
-        <button [disabled]="producto.banderaCarrito" (click)="agregar()" class="btn btn-dark bg-gradient border-dark mb-1" type="button">Agregar</button>
+<div class="container d-flex mt-4 ms-5">
+    <div class="row col-12">
+        <div id="contTarjetaProducto" class="card bg-primary border-dark m-2 col-10 col-md-5">
+            <div class="cont mt-1">
+                <button *ngIf="tipo" (click)="abrirModalEditarProducto()" class="btn btn-dark bg-gradient border-dark me-1 p-1" type="button">📝</button>
+                <button *ngIf="tipo" (click)="confirmBox()" class="btn btn-dark bg-gradient border-dark  p-1"  type="button">❌</button>
+            </div>
+        
+            <h5 id="nombreProducto" class="mt-2 mb-0 text-white text-center"><b>{{producto.nombre}}</b></h5>
+            <img *ngIf="producto.img == '' || producto.img == null" height="250px" src="../../../assets/producto.png" class="card-img-top">
+            <img *ngIf="producto.img != '' && producto.img != null" height="250px" src="{{producto.img}}" class="card-img-top">
+        
+            <div class="cont card-body pb-1">
+                <p class="m-0 text-white"><b>Stock: </b>{{producto.stock}} {{producto.unidad}}</p>
+                <p class="m-0 text-white">${{producto.precio}} x {{producto.unidad}}</p>
+            </div>
+            <div class="cont">
+                <button [disabled]="producto.banderaCarrito" (click)="agregar()" class="btn btn-dark bg-gradient border-dark mb-1" type="button">Agregar</button>
+            </div>
+        </div>
     </div>
 </div>
 

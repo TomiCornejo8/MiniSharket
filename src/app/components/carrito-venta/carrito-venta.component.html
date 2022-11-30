@@ -13,7 +13,7 @@
         <span class="" >{{producto.nombre}}</span>
 
         <button type="button" (click)="restar(producto)"class="btn btn-dark bg-gradient border-dark rounded-circle p-1">➖</button>
-        <input type="text" (change)="cambiarCantidad(producto)" [(ngModel)]="producto.cantidad" style="width: 2rem;">
+        <input type="text" (change)="cambiarCantidad(producto)" [(ngModel)]="producto.cantidad">
         <button type="button" (click)="sumar(producto)" class="btn btn-dark bg-gradient border-dark rounded-circle p-1">➕</button>
         <button type="button" (click)="eliminar(producto)" class="btn btn-dark bg-gradient border-dark rounded-circle p-1 ms-1">❌</button>
       </li>

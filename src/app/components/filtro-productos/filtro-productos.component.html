@@ -30,8 +30,8 @@
     <!-- Aqui se agregan las categorias -->
     <div id="listadoCategorias" class="form-check d-flex flex-column d-grid gap-2">
       <span  *ngFor="let categoriai of categorias">
-        <input class="form-check-input mt-2" type="checkbox" value="" checked>
-        <label class="form-check-label" for="flexCheckChecked">{{categoriai.categoria}}
+        <input class="form-check-input mt-2 caja" type="checkbox" value="" checked>
+        <label class="form-check-label textoCaja" for="flexCheckChecked">{{categoriai.categoria}}
           <button *ngIf="tipo" class="btn btn-dark bg-gradient border-dark p-1 me-2" type="button" (click)="abrirModalEditarCategoria(categoriai)">📝</button>
           <button *ngIf="tipo" class="btn btn-dark bg-gradient border-dark p-1" type="button" (click)="eliminar(categoriai)">❌</button>
         </label>
