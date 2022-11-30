@@ -7,7 +7,7 @@
         </button>
 
         <a class="navbar-brand" [routerLink]="['/inicio']" >
-            <img id="navImagen" src="../../../assets/Sharky.png" alt="">
+            <img class="navImagen" src="../../../assets/Sharky.png" alt="">
             Mini Sharket
         </a>
 
@@ -15,13 +15,13 @@
         manteniendose en la parte de arriba -->
         <div *ngIf="pantalla && sesion">
             <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
-                <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
+                <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark navImagen">
             </a>
         </div>
 
         <!--el div con id opciones es para que el boton hamburguesa reconozca lo que debe colapsar-->
-        <div class="collapse navbar-collapse" id="opciones">
-            <div class="navbar-nav mb-1" id="navbar">
+        <div id="opciones" class="collapse navbar-collapse" >
+            <div id="navbar" class="navbar-nav mb-1" >
 
                 <!--boton de Inicio-->
                 <div class="nav-item btn-dark border-dark bg-gradient">
@@ -58,7 +58,7 @@
         <!--pantalla al ser verdadero osea pantalla > a 991 este cargara la seccion del usuario al final del navbar-->
         <div *ngIf="!pantalla && sesion">
             <a href="#" class="nav-link active" data-bs-toggle="offcanvas" data-bs-target="#infoUsuario" aria-controls="infoUsuario">
-                <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark" style="width:35px;height:35px;">
+                <img src="http://127.0.0.1:8000{{icono}}" class="rounded-circle border border-3 border-dark navImagen">
             </a>
         </div>
     </div>
