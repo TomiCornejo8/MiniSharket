@@ -44,7 +44,6 @@ export class ProductoService {
         "nombre": producto.nombre,
         "stock": producto.stock,
         "precio": producto.precio,
-        "nVentas": producto.nVentas,
         "img": producto.img,
         "minimarket": producto.minimarket,
         "unidad": producto.unidad,
@@ -56,7 +55,6 @@ export class ProductoService {
         "nombre": producto.nombre,
         "stock": producto.stock,
         "precio": producto.precio,
-        "nVentas": producto.nVentas,
         "minimarket": producto.minimarket,
         "unidad": producto.unidad,
         "proveedor": producto.proveedor,
@@ -66,10 +64,11 @@ export class ProductoService {
     return this.http.put(url, value);
   }
 
-  putStock(stock:number,id:number){
+  putStock(stock:number,id:number,venta:number){
     let url = this.url + id;
     let value = {
-      "stock":stock
+      "stock":stock,
+      "nVentas":venta
     }
     return this.http.put(url, value);
   }

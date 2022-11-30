@@ -137,19 +137,22 @@ export class ProductosScreenComponent implements OnInit{
    }
 
    filtroProductos(filtro:string) {
-    if(filtro === "rank"){
-        if(this.filtroActivo.nombre!=="rank"){
+    if(filtro.localeCompare("rank") === 0){
+        if(this.filtroActivo.nombre.localeCompare("rank") === -1){
           this.sortRank(1);
+          this.filtroActivo.nombre="rank"
           this.filtroActivo.sentido="mayor";
         }
         else{
-              if(this.filtroActivo.nombre==="rank" && this.filtroActivo.sentido==="mayor")
+              if(filtro.localeCompare("rank") === 0 && this.filtroActivo.sentido.localeCompare("mayor")===0)
               {
                   this.sortRank(2);
+                  this.filtroActivo.nombre="rank"
                   this.filtroActivo.sentido="menor"; }
             else
                 {
                   this.sortRank(1);
+                  this.filtroActivo.nombre="rank"
                   this.filtroActivo.sentido="mayor"; }
              }
     
@@ -157,10 +160,12 @@ export class ProductosScreenComponent implements OnInit{
     if(filtro === "alfa"){
         if(this.filtroActivo.nombre==="alfa" && this.filtroActivo.sentido==="az"){
             this.sortAlfa(2);
+            this.filtroActivo.nombre="alfa"
             this.filtroActivo.sentido="za";
         }
         else{
           this.sortAlfa(1);
+          this.filtroActivo.nombre="alfa"
           this.filtroActivo.sentido="az";
         }
       }
