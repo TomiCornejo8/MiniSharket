@@ -34,11 +34,10 @@ export class FiltroProductosComponent implements OnInit {
     }
     
   }
-/*
-  crearCategoria(categoria:string){
-    this.categorias.push(categoria);
-    sessionStorage.setItem('categoriasProductos',JSON.stringify(this.categorias));
-  }*/
+
+  enviarCategoria(id:number){
+    
+  }
 
   filtroActual(value:string){
     this.enviarFiltro.emit(value);
