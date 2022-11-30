@@ -20,7 +20,7 @@ import Swal from 'sweetalert2';
 })
 export class EditarGastoComponent implements OnInit {
 
-  model: NgbDateStruct;
+  model: NgbDateStruct ;
   date: { year: number; month: number };
   proveedoresDP:Proveedor[];
   productosProveedoresDP:Producto[]=[];
@@ -42,17 +42,15 @@ export class EditarGastoComponent implements OnInit {
     private unidadService:UnidadService) {}
 
   ngOnInit(): void {
+    let time=this.tablaProductos.fecha.split('-');
     this.model = this.calendar.getToday();
-    let i=0;
-    (this.tablaProductos);
+    this.model.year=+time[0]
+    this.model.month=+time[1]
+    this.model.day=+time[2]
     this.tablaProductos.lista.forEach(regis =>{
-      regis.producto = new Producto();
-      regis.producto=this.tablaProductosValor.lista[i].producto;
-      i++
-      this.montoLocal+=regis.precio;
+    this.montoLocal+=regis.precio;
     }
     );
-    (this.tablaProductos);
     let dataSesion = sessionStorage.getItem('usuario');
     if(dataSesion){
       let minimarket = JSON.parse(dataSesion || "[]").id;
@@ -66,9 +64,6 @@ export class EditarGastoComponent implements OnInit {
       this.unidadesDP = data;
     });
   }
-  selectToday() {
-    (this.model)
-	}
   seleccionarProveedor(proveedor:Proveedor){
     this.proveedorNombre=proveedor.nombre;
 	  this.productoService.getProveedor(proveedor.id).subscribe(producto =>{
@@ -78,9 +73,18 @@ export class EditarGastoComponent implements OnInit {
   seleccionarProducto(){
 	let existeProducto=0;
 	this.tablaProductos.lista.forEach( producto =>{
-		if(producto.producto.nombre.localeCompare(this.productoT.nombre) == 0 ){
-			existeProducto++;
-		}
+    if(producto.producto!= undefined)
+    {
+      if(producto.producto.nombre.localeCompare(this.productoT.nombre) == 0 ){
+        existeProducto++;
+      }
+    }
+    else{
+      if(producto.nombre.localeCompare(this.productoT.nombre) == 0 ){
+        existeProducto++;
+      }
+    }
+		
 	})
     if (existeProducto == 0) {
       this.productoT.proveedor=this.proveedorNombre;

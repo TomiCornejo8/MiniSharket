@@ -73,32 +73,6 @@ export class FinanzasScreenComponent implements OnInit {
       });
     }
   }
-  obtenerProductos(registro:RegistroFinanciero){
-    let datos = sessionStorage.getItem('usuario');
-    let productosProveedores:Producto[]=[]
-    let proveedoresDP :Proveedor[]=[];
-    if(datos){
-      let minimarket = JSON.parse(datos || "[]").id;
-      this.proveedorService.get(minimarket).subscribe(data =>{
-        proveedoresDP = (data as Proveedor[]);
-        
-          proveedoresDP.forEach( provee=>{
-          this.productoService.getProveedor(provee .id).subscribe(producto =>{
-            productosProveedores= (producto as Producto[]);
-            
-            registro.lista.forEach(registro =>{
-              productosProveedores.forEach(producto =>{
-                  if(registro.nombre.localeCompare(producto.nombre) == 0){
-                    registro.producto=producto;
-                  }
-              })
-            })
-          })
-        })
-      });     
-    }
-    return registro;
-  }
   abrirModalAgregarGasto(){
       const modalRef=this.modalService.open(CrearGastoComponent,{ size: 'lg' });
      // modalRef.componentInstance.registroReferencia=this.registros;
@@ -106,9 +80,6 @@ export class FinanzasScreenComponent implements OnInit {
   }
   abrirModalEditarGasto(registro:RegistroFinanciero){
     const modalRef=this.modalService.open(EditarGastoComponent,{ size: 'lg' ,backdrop : 'static',keyboard : false});
-    registro=this.obtenerProductos(registro);
-   
-    
     modalRef.componentInstance.tablaProductosValor=registro;
     modalRef.componentInstance.tablaProductos= JSON.parse(JSON.stringify(registro));
 

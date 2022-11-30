@@ -13,8 +13,7 @@
                         name="dp"
                         [(ngModel)]="model"
                         ngbDatepicker
-                        #d="ngbDatepicker"
-                    (ngModelChange)="selectToday()"/>
+                        #d="ngbDatepicker" />
                     <button class="btn btn-outline-secondary bi bi-calendar3 bg-light" (click)="d.toggle()" button>📅</button>
                 </div>
             </div>
@@ -43,7 +42,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre producto</th>
-                    <th scope="col">Proveedor</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Monto</th>
                     <th scope="col">Botones</th>
@@ -53,15 +51,7 @@
             <tbody>
                 <tr *ngFor="let producto of tablaProductos.lista;let i =index">
                     <th scope="row">{{i}}</th>
-                    <td>
-                        <img
-                            [src]="'http://127.0.0.1:8000/' + producto.producto.img"
-                            class="me-2"
-                            style="width: 20px"
-                        />
-                            {{ producto.producto.nombre }}
-                    </td>
-                    <td>{{producto.producto.proveedor}}</td>
+                    <td>{{ producto.nombre }}</td>
                     <td><input type="number" value="{{producto.cantidad}}" [(ngModel)]="producto.cantidad"></td>
                     <td><input type="number" value="{{producto.precio}}" [(ngModel)]="producto.precio"  (ngModelChange)="cambioMonto()"></td>
                     <td><button type="button" class="btn btn-dark bg-gradient border border-dark p-1" (click)='eliminarProducto(producto)'>❌</button></td>
