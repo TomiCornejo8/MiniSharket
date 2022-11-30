@@ -16,19 +16,19 @@
       <button (click)="banderaAlert=false" type="button" class="btn-close"></button>
     </div>
 
-    <button type="button" class="btn btn-primary bg-gradient border-dark" (click)="abrirModalCrearCategoria()">Editar usuario📝</button>
+    <button type="button" class="btn btn-primary bg-gradient border-dark buttonIng" (click)="abrirModalCrearCategoria()">Editar usuario📝</button>
     <br>
-    <button type="button" class="btn btn-danger bg-gradient border-dark mt-2" data-bs-toggle="modal" data-bs-target="#revisarCredencial" (click)="eliminarCuenta()">Eliminar usuario❌</button>
+    <button type="button" class="btn btn-danger bg-gradient border-dark mt-2 buttonIng" data-bs-toggle="modal" data-bs-target="#revisarCredencial" (click)="eliminarCuenta()">Eliminar usuario❌</button>
     <br>
-    <button (click)="cerrar()" type="button" class="btn btn-secondary bg-gradient border-dark mt-2" data-bs-dismiss="offcanvas" aria-label="Close">Cerrar sesión🖐</button>
+    <button (click)="cerrar()" type="button" class="btn btn-secondary bg-gradient border-dark mt-2 buttonIng" data-bs-dismiss="offcanvas" aria-label="Close">Cerrar sesión🖐</button>
     <br><br>
     <h4 *ngIf="trabajadores.length!=0"><b>Vendedores:</b></h4>
 
     <div id="contenedorVendedores">
         <div *ngFor="let trabajador of trabajadores" class="card border border-dark ">
-          <img src="http://127.0.0.1:8000{{trabajador.icono}}" class="card-img-top mb-3 "> 
+          <img src="http://127.0.0.1:8000{{trabajador.icono}}" class="card-img-top mb-3"> 
           <p class="card-text ">{{trabajador.nombre}}</p>
-          <button type="button" (click)="desvincular(trabajador)" data-bs-toggle="modal" data-bs-target="#revisarCredencial">Desvincular</button>
+          <button type="button" (click)="desvincular(trabajador)" data-bs-toggle="modal" data-bs-target="#revisarCredencial" >Desvincular</button>
         </div>
 
     </div>
