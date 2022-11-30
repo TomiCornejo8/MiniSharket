@@ -11,18 +11,20 @@
         </div>
 
         <div class="modal-body">
+          <div *ngIf="flagPassUser">
             <label for="nombre" class="form-label" >Nombre</label>
-            <input id="nombre" type="text" class="form-control" value="{{datoUsuarioValor.nombre}}" #nombreUsuario>
+            <input [(ngModel)]="nombre" id="nombre" type="text" class="form-control" value="{{datoUsuarioValor.nombre}}">
             
             <label for="codigo" class="form-label" >Codigo de cuenta</label>
-            <input id="codigo" type="text" class="form-control" value="{{datoUsuarioValor.codigo}}" #codigoUsuario>
+            <input [(ngModel)]="codigo" id="codigo" type="text" class="form-control" value="{{datoUsuarioValor.codigo}}">
+          </div>
+           
 
-            <div *ngIf="flagPassUser==false"  >
+            <div *ngIf="!flagPassUser"  >
               
                   <label for="nombre" class="form-label sm"  triggers="mouseenter:mouseleave" placement="end"
-                  ngbPopover="Para Crear una nueva contraseña , 
-                  primero debe de ingresar su contraseña actual en el campo posterior,
-                  luego presionar el boton de comprobar">
+                  ngbPopover="Para editar a un usuario, es necesario ingresar
+                  la contraseña actual para verificar su identidad.">
                   <u><strong>Ingrese su clave actual </strong></u>
                 </label>
               
@@ -45,14 +47,16 @@
               <input id="claveNueva2" [(ngModel)]="passRep" type="password" class="form-control">
               <label *ngIf=" pass!=passRep && passRep!='' " class="form-label">Contraseñas distintas</label>
             </div>
-            <label for="icono" class="form-label">Icono</label>
-            <input id="icono" [(ngModel)]="valueImg" (change)="captureFile($event)" type="file" class="form-control" value="{{datoUsuarioValor.icono}}" >
-            <img *ngIf="img != ''" src="{{img}}" class="mb-1 w-25 h-25 rounded mx-auto d-block">
+            <div *ngIf="flagPassUser">
+              <label for="icono" class="form-label">Icono</label>
+              <input id="icono" [(ngModel)]="valueImg" (change)="captureFile($event)" type="file" class="form-control" value="{{datoUsuarioValor.icono}}" >
+              <img *ngIf="img != ''" src="{{img}}" class="mb-1 w-25 h-25 rounded mx-auto d-block">
+            </div>
         </div>
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary bg-gradient border border-dark" data-bs-dismiss="modal" (click)=" cerrar()">Cancelar</button>
-          <button [disabled]="!flagPassUser" type="button" class="btn btn-secondary bg-gradient border border-dark" (click)="editar(nombreUsuario.value,codigoUsuario.value)">Editar</button>
+          <button [disabled]="!flagPassUser" type="button" class="btn btn-secondary bg-gradient border border-dark" (click)="editar()">Editar</button>
         </div>
 
       </div>

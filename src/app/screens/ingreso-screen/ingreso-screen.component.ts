@@ -26,7 +26,11 @@ export class IngresoScreenComponent implements OnInit {
   ingresar(){
     this.usuarioService.get(this.nombre,this.clave).subscribe(data=>{
       if(data){
-        sessionStorage.setItem('usuario',JSON.stringify({"id":data.id,"nombre":data.nombre,"icono":data.icono,"tipo":data.tipo,"codigo":data.codigo}));
+        if(data.tipo == 1){
+          sessionStorage.setItem('usuario',JSON.stringify({"id":data.id,"nombre":data.nombre,"icono":data.icono,"tipo":data.tipo,"codigo":data.codigo}));
+        }else{
+          sessionStorage.setItem('usuario',JSON.stringify({"id":data.minimarket,"nombre":data.nombre,"icono":data.icono,"tipo":data.tipo,"codigo":data.codigo}));
+        }
         window.location.href="/inicio";
         this.verificacion = true;
       }else{

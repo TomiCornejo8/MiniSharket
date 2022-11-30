@@ -50,31 +50,19 @@ export class UsuarioService {
   opción 1 = Modificar img y contraseña
   opción 2 = Modificar img
   opción 3 = Modificar contraseña
+  opcion 4 = Modificar
   */
-  put(nombre:string,clave:string,usuario:Usuario,opcion:number){
+  put(nombre:string,clave:string,usuario:Usuario,opcion:boolean){
     let url = this.url + nombre + "/" + clave;
     let value;
-    if(opcion == 1){
+    if(opcion){
       value = {
         "nombre":usuario.nombre,
         "clave":usuario.clave,
         "icono":usuario.icono,
         "codigo":usuario.codigo
       }
-    }else if(opcion == 2){
-      value = {
-        "nombre":usuario.nombre,
-        "clave":usuario.clave,
-        "icono":usuario.icono,
-        "codigo":usuario.codigo
-      }
-    }else if(opcion == 3){
-      value = {
-        "nombre":usuario.nombre,
-        "clave":usuario.clave,
-        "codigo":usuario.codigo
-      }
-    }else if(opcion == 4){
+    }else{
       value = {
         "nombre":usuario.nombre,
         "clave":usuario.clave,

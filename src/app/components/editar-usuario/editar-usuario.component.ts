@@ -14,6 +14,8 @@ export class EditarUsuarioComponent implements OnInit {
   datoUsuarioValor:Usuario;
   datoUsuarioReferencia:Usuario;
   flagPassUser=false;
+  nombre:string = '';
+  codigo:string = '';
   pass:string='';
   passRep:string='';
   img:string='';
@@ -32,14 +34,14 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
 
-  editar(nombre:string,codigo:string){
+  editar(){
     let nombreXD = this.datoUsuarioReferencia.nombre;
 
-    if(nombre != ''){
-      this.datoUsuarioReferencia.nombre=nombre;
+    if(this.nombre != ''){
+      this.datoUsuarioReferencia.nombre=this.nombre;
     }
-    if(codigo != ''){
-      this.datoUsuarioReferencia.codigo=codigo;
+    if(this.codigo != ''){
+      this.datoUsuarioReferencia.codigo=this.codigo;
     }
     if(this.img !== ""){
       this.datoUsuarioReferencia.icono=this.img;
@@ -48,22 +50,28 @@ export class EditarUsuarioComponent implements OnInit {
     }
     if(this.pass.localeCompare(this.passRep)==0 && this.pass!='' && this.passRep!=''){
       this.datoUsuarioReferencia.clave=this.pass;
+    }else{
+      this.datoUsuarioReferencia.clave=this.comp;
     }
-    if(this.pass != '' && this.img !==""){
-      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,1).subscribe(data =>{
+
+    if(this.img !=""){
+      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,true).subscribe(data =>{
+        console.log(data);
         this.datoUsuarioReferencia.icono = (data as Usuario).icono;
-      });
-    }else if(this.img !==""){
-      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,2).subscribe(data =>{
-        this.datoUsuarioReferencia.icono = (data as Usuario).icono;
-      });
-    }else if(this.pass != ''){
-      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,3).subscribe(data =>{
       });
     }else{
-      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,4).subscribe(data =>{
-      });    
+      this.usuarioS.put(nombreXD,this.comp,this.datoUsuarioReferencia,false).subscribe(data =>{
+        console.log(data);
+      }); 
     }
+    this.nombre = this.codigo = '';
+    sessionStorage.clear();
+    if(this.datoUsuarioReferencia.tipo == "1"){
+      sessionStorage.setItem('usuario',JSON.stringify({"id":this.datoUsuarioReferencia.id,"nombre":this.datoUsuarioReferencia.nombre,"icono":this.datoUsuarioReferencia.icono,"tipo":this.datoUsuarioReferencia.tipo,"codigo":this.datoUsuarioReferencia.codigo}));
+    }else{
+      sessionStorage.setItem('usuario',JSON.stringify({"id":this.datoUsuarioReferencia.minimarket,"nombre":this.datoUsuarioReferencia.nombre,"icono":this.datoUsuarioReferencia.icono,"tipo":this.datoUsuarioReferencia.tipo,"codigo":this.datoUsuarioReferencia.codigo}));
+    }
+    window.location.href="/inicio";
     this.modalService.dismissAll(EditarUsuarioComponent);
     this.flagPassUser=false;
   }
