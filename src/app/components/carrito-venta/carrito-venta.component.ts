@@ -89,7 +89,7 @@ export class CarritoVentaComponent implements OnInit {
           this.carrito.lista[i].producto.banderaCarrito = false;
         }
 
-        this.productoService.putStock(this.carrito.lista[i].producto.stock, this.carrito.lista[i].producto.id).subscribe(data => {
+        this.productoService.putStock(this.carrito.lista[i].producto.stock, this.carrito.lista[i].producto.id,this.carrito.lista[i].producto.nVentas).subscribe(data => {
           console.log(data);
         });
 

@@ -35,7 +35,7 @@ export class EditarProveedorComponent implements OnInit {
       this.proveedorReferencia.nombre=nombre;
     }
 
-    if(this.proveedorActual.email.length!==0){
+
       this.proveedorActual.email.forEach(email =>{
         if(email.id == 0){
           this.emailService.post(email.email,this.proveedorActual.id).subscribe(data =>{
@@ -53,9 +53,8 @@ export class EditarProveedorComponent implements OnInit {
       });
 
       this.proveedorReferencia.email=this.proveedorActual.email;
-    }
 
-    if(this.proveedorActual.numero.length!==0){
+
       this.proveedorActual.numero.forEach(numero =>{
         if(numero.id == 0){
           this.telefonoService.post(numero.telefono,this.proveedorActual.id).subscribe(data =>{
@@ -75,7 +74,7 @@ export class EditarProveedorComponent implements OnInit {
       });
 
       this.proveedorReferencia.numero=this.proveedorActual.numero;
-    }
+
 
     this.modalService.dismissAll(EditarProveedorComponent);
     

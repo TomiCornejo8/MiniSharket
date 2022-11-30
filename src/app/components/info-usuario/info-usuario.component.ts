@@ -12,7 +12,7 @@ import { EditarUsuarioComponent } from '../editar-usuario/editar-usuario.compone
 export class InfoUsuarioComponent implements OnInit {
   user:Usuario;
   
-  trabajadores:Usuario[];
+  trabajadores:Usuario[]=[];
   idBorrar:number = 0;
   minimarket:number;
   banderaAlert:boolean = false;
