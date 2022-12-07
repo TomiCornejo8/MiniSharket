@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CrearGastoComponent } from 'src/app/components/crear-gasto/crear-gasto.component';
 import { EditarGastoComponent } from 'src/app/components/editar-gasto/editar-gasto.component';
-import { Producto } from 'src/app/models/producto.model';
-import { Proveedor } from 'src/app/models/proveedor.model';
 import { RegistroFinanciero } from 'src/app/models/registroFinanciero.model';
 import { RegistroProducto } from 'src/app/models/registroProducto.model';
 import { TipoRegistro } from 'src/app/models/tipoRegistro.model';
@@ -27,6 +25,8 @@ export class FinanzasScreenComponent implements OnInit {
   unidades:Unidad[];
   tipo:TipoRegistro[];
   tipoX:boolean;
+  total:number=0;
+  totalString:string=''
   
   constructor(private modalService: NgbModal,
     private registroFinanzasS:RegistroFinancieroService,
@@ -58,7 +58,6 @@ export class FinanzasScreenComponent implements OnInit {
 
             this.registroProductoS.get(this.registros[i].id).subscribe(data =>{
               this.registros[i].lista = (data as RegistroProducto[]);
-
               this.unidadS.list().subscribe(data =>{
                 this.unidades = (data as Unidad[]);
 
@@ -91,6 +90,7 @@ export class FinanzasScreenComponent implements OnInit {
       productos.forEach(producto =>{
         suma += producto.cantidad * producto.precio;
       });
+      this.total+=suma;
       return suma;
     }
     if(productos != undefined && tipo ==="Gasto" ){
@@ -98,6 +98,7 @@ export class FinanzasScreenComponent implements OnInit {
       productos.forEach(producto =>{
         suma += producto.precio;
       });
+      this.total+=suma;
       return suma;
     }
     return 0;

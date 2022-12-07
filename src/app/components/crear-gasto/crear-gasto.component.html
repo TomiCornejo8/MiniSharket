@@ -1,12 +1,12 @@
 <div class="modal-header m-auto bg-primary border-primary text-white" style="width: 100%;">
-    <h1 class="modal-title m-auto" style="width: 20rem;"> Agregar Costo</h1>
+    <h1 class="modal-title m-auto h1Text card-header" style="width: 20rem;"> Agregar Costo</h1>
 </div>
 <div class="modal-body bg-primary border-primary text-white">
-    <div class="mb-5">
-        <label for="proveedor" class="form-label">Fecha</label>
+    <div class="">
+        <label for="proveedor" class="form-label labeltitulos">Fecha</label>
         <form class="row row-cols-sm-auto m-auto my-3">
-            <div class="col-12">
-                <div class="input-group">
+            <div class="col-12 fecha">
+                <div class="input-group ">
                     <input
                         class="form-control"
                         placeholder="yyyy-mm-dd"
@@ -22,7 +22,7 @@
     </div>
             
         <div class="mb-3">
-            <label for="proveedor" class="form-label">Proveedor</label>
+            <label for="proveedor" class="form-label labeltitulos">Proveedor</label>
             <select [(ngModel)]="proveedor" (ngModelChange)="seleccionarProveedor(proveedor)" class="form-select" aria-label="Default select example">
             <option value="">Selecciona un provedor</option>
             <option *ngFor="let proveedori of proveedoresDP" [ngValue]="proveedori">{{proveedori.nombre}}</option>
@@ -30,14 +30,14 @@
         </div>
 
     <div class="mb-3">
-        <label for="proveedor" class="form-label">Productos</label>
+        <label for="proveedor" class="form-label labeltitulos">Productos</label>
         <select [(ngModel)]="productoT"  class="form-select" (ngModelChange)="seleccionarProducto()" Default select example>
         <option value="">Selecciona un producto</option>
         <option *ngFor="let producto of productosProveedoresDP" [ngValue]="producto">{{producto.nombre}}</option>
         </select>
     </div>
 
-    <div class="mb-3 bg-light" style="height: 20rem; overflow:auto">
+    <div class="mb-3 bg-light" style="height: 15rem; overflow:auto">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -71,13 +71,13 @@
         </table>
     </div>
 
-    <div class="mb-3">
-        <label for="" class="form-label">Monto total</label>
+    <div class="mb-3 labelMonto bg-primary  card-header border-secondar shadow-lg rounded">
+        <label for=""  >Monto total</label>
         <p>{{montoLocal}}</p>
     </div>
 </div>
 
 <div class="modal-footer bg-primary border-primary text-white">
-    <button type="button" class="btn btn-secondary bg-gradient border border-dark" (click)="cerrarModal()">Cancelar</button>
-    <button type="button" class="btn btn-dark bg-gradient border border-dark" (click)="crear()">Crear</button>
+    <button type="button" class="btn btn-secondary bg-gradient border border-dark buttonsGasto" (click)="cerrarModal()">Cancelar</button>
+    <button type="button" class="btn btn-dark bg-gradient border border-dark buttonsGasto" (click)="crear()">Crear</button>
 </div>

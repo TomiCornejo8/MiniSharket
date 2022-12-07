@@ -48,7 +48,13 @@ export class EditarGastoComponent implements OnInit {
     this.model.month=+time[1]
     this.model.day=+time[2]
     this.tablaProductos.lista.forEach(regis =>{
-    this.montoLocal+=regis.precio;
+      if(this.tablaProductos.tipo.localeCompare("Gasto")==0){
+        this.montoLocal+=regis.precio;
+      }
+      else{
+        this.montoLocal+=regis.precio *regis.cantidad;
+      }
+    
     }
     );
     let dataSesion = sessionStorage.getItem('usuario');
